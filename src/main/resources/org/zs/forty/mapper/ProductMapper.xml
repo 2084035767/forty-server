@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.zs.forty.mapper.ProductMapper">
+
+  <resultMap id="BaseResultMap" type="org.zs.forty.model.entity.Product">
+    <id property="id" column="id" jdbcType="BIGINT"/>
+    <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+    <result property="productInfo" column="product_info" jdbcType="VARCHAR"/>
+    <result property="productPrice" column="product_price" jdbcType="BIGINT"/>
+    <result property="productImg" column="product_img" jdbcType="VARCHAR"/>
+    <result property="category" column="category" jdbcType="VARCHAR"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="isDelete" column="is_delete" jdbcType="BOOLEAN"/>
+    <result property="createTime" column="create_time" jdbcType="DATE"/>
+    <result property="updateTime" column="update_time" jdbcType="DATE"/>
+
+    <!--一对多映射用这个  ofTyp是一对多的集合的所存放的实体类  javaType实体类的属性类型-->
+    <collection property="stories" ofType="org.zs.forty.model.entity.Story" column="id">
+      <id property="id" column="id" jdbcType="BIGINT"/>
+      <result property="userId" column="userId" jdbcType="BIGINT"/>
+      <result property="title" column="title" jdbcType="VARCHAR"/>
+      <result property="context" column="context" jdbcType="VARCHAR"/>
+      <result property="storyView" column="story_view" jdbcType="INTEGER"/>
+      <result property="storyLike" column="story_like" jdbcType="INTEGER"/>
+      <result property="isDelete" column="is_delete" jdbcType="BOOLEAN"/>
+      <result property="isOpen" column="is_open" jdbcType="BOOLEAN"/>
+      <result property="createTime" column="create_time" jdbcType="DATE"/>
+      <result property="updateTime" column="update_time" jdbcType="DATE"/>
+    </collection>
+  </resultMap>
+
+
+  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Product"
+      keyProperty="id">
+    INSERT INTO t_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productInfo != null">
+        product_info,
+      </if>
+      <if test="productPrice != null">
+        product_price,
+      </if>
+      <if test="productImg != null">
+        product_img,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        #{productName},
+      </if>
+      <if test="productInfo != null">
+        #{productInfo},
+      </if>
+      <if test="productPrice != null">
+        #{productPrice},
+      </if>
+      <if test="productImg != null">
+        #{productImg},
+      </if>
+      <if test="category != null">
+        #{category},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="update">
+    UPDATE t_product
+    <set>
+      <if test="productName != null">
+        product_name = #{productName},
+      </if>
+      <if test="productInfo != null">
+        product_info = #{productInfo},
+      </if>
+      <if test="phone != null">
+        phone = #{phone},
+      </if>
+      <if test="productPrice != null">
+        product_price = #{productPrice},
+      </if>
+      <if test="productImg != null">
+        product_img=#{productImg},
+      </if>
+      <if test="category != null">
+        category=#{category},
+      </if>
+    </set>
+    WHERE id = #{id}
+  </update>
+  <update id="deleteById">
+    UPDATE t_product SET is_delete = 1 WHERE id = #{id} AND is_delete = 0
+  </update>
+  <select id="selectById" resultMap="BaseResultMap">
+    select p.id, p.product_name, p.product_info, p.product_price, p.product_img, p.category,
+    s.user_id, s.title, s.context, s.story_view, s.story_like
+    from t_product p
+    LEFT JOIN t_relation r ON p.id = r.product_id
+    LEFT JOIN t_story s ON s.id = r.story_id
+    where p.id = #{id} AND p.is_delete = 0 AND s.is_delete = 0 AND s.is_open = 1
+
+  </select>
+  <select id="selectByName" resultType="org.zs.forty.model.entity.Product">
+    select
+    id,product_name,product_info,product_price,product_img,category,status from t_product where
+    product_name = #{productName}
+  </select>
+  <select id="selectByCategory" resultType="org.zs.forty.model.entity.Product">
+    select id,product_name,product_info,product_price,product_img,status from t_product
+    where category = #{category} AND is_delete = 0
+  </select>
+  <select id="selectList" resultType="org.zs.forty.model.entity.Product">
+    select id,product_name,product_info,product_price,product_img,category,status from
+    t_product where is_delete = 0
+  </select>
+  <select id="selectByStatus" resultType="org.zs.forty.model.entity.Product">
+    select id,product_name,product_info,product_price,product_img,category,status from
+    t_product where status =#{status} AND is_delete = 0
+  </select>
+  <select id="selectByStatusAndCategory" resultType="org.zs.forty.model.entity.Product">
+    select id,product_name,product_info,product_price,product_img from
+    t_product where status = #{status} AND category = #{category} AND is_delete = 0
+  </select>
+</mapper>

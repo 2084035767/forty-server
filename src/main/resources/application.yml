@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+
+  # email 配置
+#  mail:
+#    host: smtp.163.com
+#    username: jiangtdemail@163.com
+#    password: VHYBYJJPFDEUOWCG
+#    port: 465
+#    default-encoding: UTF-8
+#    protocol: smtp
+#    properties:
+#      "mail.smtp.connection timeout": 5000
+#      "mail.smtp.timeout": 3000
+#      "mail.smtp.write timeout": 5000
+#      "mail.smtp.auth": true
+#      "mail.smtp.starttls.enable": true
+#      "mail.smtp.starttls.required": true

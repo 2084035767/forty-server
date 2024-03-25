@@ -1,0 +1,28 @@
+package org.zs.forty.service;
+
+import java.util.List;
+import org.zs.forty.model.dto.PageDTO;
+import org.zs.forty.model.dto.StoryDTO;
+import org.zs.forty.model.vo.StoryVO;
+
+/**
+ * -*- coding: utf-8 -*-
+ *
+ * @Author: 子十
+ * @Date: 2024/2/20
+ * @Description:
+ **/
+
+public interface StoryService {
+  List<StoryVO> findAllStoryByList(PageDTO pageDTO);
+  
+  List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO);
+  
+  // List<Story> findStoryByProductId(Long productId);
+  
+  StoryVO addStory(StoryDTO storyDTO);
+  
+  Boolean deleteStory(Long createUser, Long storyId);
+  
+  Boolean updateStory(StoryDTO storyDTO);
+}

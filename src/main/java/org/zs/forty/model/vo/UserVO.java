@@ -1,0 +1,34 @@
+package org.zs.forty.model.vo;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * -*- coding: utf-8 -*-
+ *
+ * @Author: 子十
+ * @Date: 2024/1/13
+ * @Description: UserDTO
+ **/
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "用户响应")
+public class UserVO implements Serializable {
+  @Serial private static final long serialVersionUID = 1L;
+  private Long id;
+  @Schema(description = "用户名")
+  private String username;
+  @Schema(description = "昵称")
+  private String nickname;
+  @Schema(description = "邮件")
+  private String email;
+  @Schema(description = "状态")
+  private Integer status;
+}
