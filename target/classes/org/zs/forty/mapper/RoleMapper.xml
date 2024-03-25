@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.zs.forty.mapper.RoleMapper">
+  <resultMap id="BaseRoleMap" type="org.zs.forty.model.entity.Role">
+    <id property="roleId" column="role_id"/>
+    <result property="roleDesc" column="role_name"/>
+    <result property="roleDesc" column="role_desc"/>
+    <result property="isDelete" column="is_delete"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+    <collection property="menus" ofType="org.zs.forty.model.entity.Menu" javaType="ArrayList">
+      <id property="menuId" column="menu_id"/>
+      <result property="menuName" column="menu_name"/>
+      <result property="menuPath" column="menu_path"/>
+      <result property="menuMark" column="menu_mark"/>
+      <result property="isDelete" column="is_delete"/>
+      <result property="createTime" column="create_time"/>
+      <result property="updateTime" column="update_time"/>
+    </collection>
+  </resultMap>
+  <select id="selectRoleById" resultMap="BaseRoleMap">
+    SELECT
+    r.role_id, r.role_name, r.role_desc,
+    m.menu_id, m.menu_name, m.menu_path, m.menu_mark
+    FROM
+    t_role r
+    LEFT JOIN t_role_menu rm ON r.role_id = rm.role_id
+    LEFT JOIN t_menu m ON rm.menu_id = m.menu_id
+    WHERE r.is_delete = 0 AND m.is_delete = 0 AND r.role_id = #{roleId}
+  </select>
+</mapper>
