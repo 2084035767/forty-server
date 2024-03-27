@@ -2,6 +2,9 @@ package org.zs.forty.mapper;
 
 import java.util.List;
 import org.mapstruct.Mapper;
+import org.zs.forty.model.dto.EmailDTO;
+import org.zs.forty.model.dto.SignupDTO;
+import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.Comment;
 import org.zs.forty.model.entity.Menu;
 import org.zs.forty.model.entity.Product;
@@ -63,4 +66,8 @@ public interface MainMapper {
   MenuVO menu2VO(Menu po);
   
   List<MenuVO> menuList2VO(List<Menu> vo);
+  
+  UserDTO Signup2DTO(SignupDTO dto);
+  
+  EmailDTO email2DTO(SignupDTO dto);
 }

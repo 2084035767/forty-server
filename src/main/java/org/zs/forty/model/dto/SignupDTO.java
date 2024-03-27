@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -13,6 +14,7 @@ import lombok.Getter;
  * @description: 注册参数
  **/
 @Getter
+@Setter
 @Schema(description = "注册参数")
 public class SignupDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;

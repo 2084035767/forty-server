@@ -27,6 +27,14 @@ spring:
           max-idle: 8     # 最大空闲连接，默认8
           min-idle: 0     # 最小空闲连接，默认0
 
+  ############ 配置rabbitmq #################
+  rabbitmq:
+    host: 192.168.80.123
+    port: 5672
+    username: idea
+    password: 123456
+    virtual-host: /
+
   ############ jackson 配置 ###################
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
