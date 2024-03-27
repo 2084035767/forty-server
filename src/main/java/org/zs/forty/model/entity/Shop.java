@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description: 店铺实体类
  **/
 @Data
 @Builder

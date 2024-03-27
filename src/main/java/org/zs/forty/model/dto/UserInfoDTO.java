@@ -12,13 +12,13 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description:
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 用户信息参数
  **/
 
 @Getter
-@Schema(description = "用户参数")
+@Schema(description = "用户信息参数")
 public class UserInfoDTO implements Serializable {
   
   @Serial private static final long serialVersionUID = 1L;

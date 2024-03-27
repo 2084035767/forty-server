@@ -14,9 +14,9 @@ import static org.zs.forty.common.enums.StatusEnum.PERMISSION_NO_ACCESS;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/23
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/23
+ * @description: 权限不足处理类
  **/
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {

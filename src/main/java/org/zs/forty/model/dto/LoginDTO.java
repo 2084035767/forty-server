@@ -9,17 +9,17 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/14
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/14
+ * @description: 登录参数
  **/
 @Getter
 @Schema(description = "登录参数")
 public class LoginDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
-  @NotBlank(message = "用户名不能为空")
-  @Schema(description = "用户名")
-  private String username;
+  @NotBlank(message = "邮箱不能为空")
+  @Schema(description = "邮箱")
+  private String email;
   @NotBlank(message = "密码不能为空")
   @Schema(description = "密码")
   private String password;

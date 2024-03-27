@@ -16,9 +16,9 @@ import org.zs.forty.service.CommentService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description:
  **/
 @Slf4j
 @Service

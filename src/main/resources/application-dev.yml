@@ -35,6 +35,33 @@ spring:
       write-dates-as-timestamps: true
 
 
+  ############ email 配置 ###################
+  mail:
+    host: smtp.163.com #发送邮件服务器
+    username: jiangtdemail@163.com #发送邮件的邮箱地址
+    password: VHYBYJJPFDEUOWCG #客户端授权码
+    from: 系统管理员<jiangtdemail@163.com> #发送邮件的邮箱地址
+    protocol: smtp # 传输协议
+    default-encoding: UTF-8 # 编码方式
+    properties:
+      mail:
+        smtp:
+          port: 465 #端口号465或587
+          auth: true #是否开启权限验证
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+        starttls:
+          enable: true # 启用STARTTLS（安全传输层协议）
+  # 配置thymeleaf的相关信息
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML5
+    servlet:
+      content-type: text/html
 
 ############## MP 配置 #####################
 mybatis-plus:

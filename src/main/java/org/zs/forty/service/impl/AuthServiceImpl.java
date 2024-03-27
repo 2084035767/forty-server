@@ -25,9 +25,9 @@ import org.zs.forty.service.AuthService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @Slf4j
 @Service
@@ -40,15 +40,14 @@ public class AuthServiceImpl implements AuthService {
   private final MainMapper mainMapper;
   private final JwtUtil jwtUtil;
   
-  @Override public String login(String username, String password) {
+  @Override public String login(String email, String password) {
     UsernamePasswordAuthenticationToken auth =
-        new UsernamePasswordAuthenticationToken(username, password);
+        new UsernamePasswordAuthenticationToken(email, password);
     Authentication authentication;
-    
     try {
       authentication = authenticationManager.authenticate(auth);
     } catch (AuthenticationException e) {
-      throw new UsernameNotFoundException("用户名或密码错误");
+      throw new UsernameNotFoundException("邮箱或密码错误");
     }
     Map<String, Object> claims = getClaims(authentication);
     return jwtUtil.createToken(claims);
@@ -70,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
   private static Map<String, Object> getClaims(Authentication authentication) {
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     Map<String, Object> claims = new HashMap<>();
-    claims.put("username", userDetails.getUsername());
+    claims.put("email", userDetails.getUsername());
     return claims;
   }
 }

@@ -25,9 +25,9 @@ import org.zs.forty.handler.JwtLogoutSuccessHandler;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/22
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/22
+ * @description: Security 配置
  **/
 @Configuration
 @EnableWebSecurity
@@ -64,7 +64,7 @@ public class SecurityConfig {
   }
   
   /**
-   * @Description: 配置SecurityFilterChain过滤器链
+   * @description: 配置SecurityFilterChain过滤器链
    * @Param: HttpSecurity
    * @Return: SecurityFilterChain
    */

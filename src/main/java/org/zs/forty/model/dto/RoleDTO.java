@@ -8,9 +8,9 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/5
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/5
+ * @description: 角色参数
  **/
 
 @Getter

@@ -10,9 +10,9 @@ import org.zs.forty.model.entity.User;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @SpringBootTest
 class UserMapperTest {
@@ -37,7 +37,7 @@ class UserMapperTest {
   
   @Test
   void selectMenuByUsername() {
-    User user1 = userMapper.selectRoleByUsername("user1");
+    User user1 = userMapper.selectRoleByEmail("user1");
     System.out.println(user1);
   }
   

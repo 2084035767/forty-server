@@ -5,9 +5,9 @@ import org.zs.forty.model.entity.Role;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/14
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/14
+ * @description:
  **/
 
 public interface RoleService {

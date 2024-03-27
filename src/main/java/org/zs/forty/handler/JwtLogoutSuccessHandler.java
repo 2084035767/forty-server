@@ -14,9 +14,9 @@ import org.zs.forty.model.vo.ResultVO;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/22
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/22
+ * @description: 退出登录成功处理类
  **/
 @Slf4j
 @Component
@@ -25,7 +25,6 @@ public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
       Authentication authentication) throws IOException {
     response.setContentType("application/json;charset=utf-8");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-    
     // todo: 退出登录成功
     response.getWriter().write(
         new ObjectMapper().writeValueAsString(ResultVO.error(StatusEnum.PERMISSION_NO_ACCESS)));

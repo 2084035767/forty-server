@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>org.zs</groupId>
   <artifactId>forty</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>forty-server</name>
   <description>forty-server</description>
 
@@ -28,7 +28,6 @@
     <knife4j.version>4.4.0</knife4j.version>
     <jjwt.version>0.11.5</jjwt.version>
     <lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
-
   </properties>
 
   <dependencies>

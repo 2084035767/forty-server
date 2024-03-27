@@ -15,9 +15,9 @@ import org.zs.forty.model.entity.Menu;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/24
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/24
+ * @description: JWT权限管理器
  **/
 @Component
 public class JwtAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {

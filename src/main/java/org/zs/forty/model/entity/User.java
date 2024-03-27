@@ -17,9 +17,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description:
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 用户实体类
  **/
 @Data
 @Builder
@@ -47,7 +47,7 @@ public class User implements UserDetails {
   }
   
   @Override public String getUsername() {
-    return this.username;
+    return this.email;
   }
   
   @Override public String getPassword() {

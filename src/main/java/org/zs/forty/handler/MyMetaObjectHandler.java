@@ -9,26 +9,30 @@ import org.springframework.stereotype.Component;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description: 自定义填充策略
  **/
 @Slf4j
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
   
-  // 插入时的填充策略
+  /**
+   * 插入时的填充策略
+   */
   @Override
   public void insertFill(MetaObject metaObject) {
-    log.info("start insert fill.....");
+    log.info("创建时间自动填充");
     this.strictInsertFill(metaObject, "createTime", LocalDateTime::now, LocalDateTime.class);
     this.strictInsertFill(metaObject, "updateTime", LocalDateTime::now, LocalDateTime.class);
   }
   
-  // 更新时的填充策略
+  /**
+   * 更新时的填充策略
+   */
   @Override
   public void updateFill(MetaObject metaObject) {
-    log.info("start update fill.....");
+    log.info("更新时间自动填充");
     this.strictInsertFill(metaObject, "updateTime", LocalDateTime::now, LocalDateTime.class);
   }
 }

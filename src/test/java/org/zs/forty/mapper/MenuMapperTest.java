@@ -7,9 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @SpringBootTest
 class MenuMapperTest {

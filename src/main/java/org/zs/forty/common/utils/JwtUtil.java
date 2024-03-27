@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description: jwt工具类
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description: jwt工具类
  **/
 @Slf4j
 @Component
@@ -32,7 +32,6 @@ public class JwtUtil {
   private long EXPIRE_TIME;
   @Value("${jwt.issuer}")
   private String JWT_ISS;
-  private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
   
   /**
    * 创建JWT Token
@@ -84,6 +83,12 @@ public class JwtUtil {
     }
   }
   
+  /**
+   * 验证JWT Token是否过期
+   *
+   * @param token JWT Token
+   * @return 是否过期
+   */
   public boolean isTokenExpired(String token) {
     try {
       Claims claims = parseClaims(token);

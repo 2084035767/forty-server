@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.zs.forty.common.annotate.ResponseResult;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
@@ -23,15 +22,15 @@ import org.zs.forty.service.ProductService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description: 商品管理
  **/
 
 @Tag(name = "商品管理")
 @RequestMapping("/api/product")
 @RestController
-@ResponseResult
+
 public class ProductController {
   @Resource private ProductService productService;
   

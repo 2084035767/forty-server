@@ -11,9 +11,9 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description:
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 产品参数
  **/
 @Getter
 @Schema(description = "产品参数")

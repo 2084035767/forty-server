@@ -17,21 +17,23 @@ import org.zs.forty.model.vo.ResultVO;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/18
- * @Description: 全局异常处理
+ * @author: 子十
+ * @date: 2024/1/18
+ * @description: 全局异常处理
  **/
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
   
-  // 参数校验异常处理
+  /**
+   * 参数校验异常处理
+   */
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({MethodArgumentNotValidException.class, ValidationException.class,
       BindException.class})
   public ResultVO<Object> validExceptionHandler(Exception e) {
     String failMsg = null;
-    log.warn("Exception: {}", e.getMessage());
+    log.warn("参数异常: {}", e.getMessage());
     if (e instanceof MethodArgumentNotValidException) {
       failMsg = Objects.requireNonNull(((MethodArgumentNotValidException) e).getBindingResult()
               .getFieldError())
@@ -41,17 +43,21 @@ public class GlobalExceptionHandler {
         failMsg == null ? e.getMessage() : failMsg);
   }
   
+  /**
+   * 自定义异常处理
+   */
   @ExceptionHandler(BaseException.class)
   public ResultVO<Object> handlerBaseException(HttpServletResponse response, BaseException e) {
     log.error("请求异常：", e);
     return ResultVO.error(StatusEnum.SYSTEM_INNER_ERROR, e.getMessage());
   }
   
+  /**
+   * 其他异常处理
+   */
   @ExceptionHandler(Exception.class)
   public ResultVO<Object> exceptionHandler(Exception e) {
-    log.warn("Exception: {}", e.getMessage());
+    log.warn("其他异常: {}", e.getMessage());
     return ResultVO.error(StatusEnum.SYSTEM_INNER_ERROR, e.getMessage());
   }
-  
-  // 其他异常处理
 }

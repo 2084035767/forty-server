@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/23
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/23
+ * @description: Swagger3 配置
  **/
 @Configuration
 public class OpenApiConfig {

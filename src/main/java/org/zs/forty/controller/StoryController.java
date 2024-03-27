@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.zs.forty.common.annotate.ResponseResult;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.vo.StoryVO;
@@ -23,13 +22,13 @@ import org.zs.forty.service.StoryService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description: 故事管理
  **/
 @Tag(name = "故事管理")
 @RestController
-@ResponseResult
+
 @RequestMapping("/api/story")
 public class StoryController {
   @Resource private StoryService storyService;

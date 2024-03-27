@@ -10,9 +10,9 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description: 评论实体类
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 评论参数
  **/
 @Getter
 // @Setter

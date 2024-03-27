@@ -20,9 +20,9 @@ import org.zs.forty.common.utils.JwtUtil;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/5
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/5
+ * @description: JWT认证过滤器
  **/
 @Slf4j
 @Component
@@ -45,7 +45,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     if (authorization != null && authorization.startsWith("Bearer ")) {
       String token = authorization.substring(7);
       Claims claims = jwtUtil.parseClaims(token);
-      String username = claims.get("username", String.class);
+      String username = claims.get("email", String.class);
       UserDetails userDetails = userDetailsService.loadUserByUsername(username);
       UsernamePasswordAuthenticationToken authentication =
           new UsernamePasswordAuthenticationToken(

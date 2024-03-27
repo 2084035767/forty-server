@@ -9,9 +9,9 @@ import org.zs.forty.common.enums.StatusEnum;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/14
- * @Description: 统一响应结果
+ * @author: 子十
+ * @date: 2024/1/14
+ * @description: 统一响应结果
  **/
 @Data
 @Schema(description = "统一响应结果")

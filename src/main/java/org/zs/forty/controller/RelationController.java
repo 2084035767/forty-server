@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.zs.forty.common.annotate.ResponseResult;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.RelationDTO;
 import org.zs.forty.model.vo.RelationVO;
@@ -22,13 +21,13 @@ import org.zs.forty.service.RelationService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description: 关系管理
  **/
 @Tag(name = "关系管理")
 @RestController
-@ResponseResult
+
 @RequestMapping("/api/relation")
 public class RelationController {
   @Resource private RelationService relationService;
