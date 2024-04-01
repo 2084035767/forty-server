@@ -7,14 +7,12 @@
     <id property="id" column="id" jdbcType="BIGINT"/>
     <result property="productName" column="product_name" jdbcType="VARCHAR"/>
     <result property="productInfo" column="product_info" jdbcType="VARCHAR"/>
-    <result property="productPrice" column="product_price" jdbcType="BIGINT"/>
     <result property="productImg" column="product_img" jdbcType="VARCHAR"/>
     <result property="category" column="category" jdbcType="VARCHAR"/>
     <result property="status" column="status" jdbcType="INTEGER"/>
     <result property="isDelete" column="is_delete" jdbcType="BOOLEAN"/>
     <result property="createTime" column="create_time" jdbcType="DATE"/>
     <result property="updateTime" column="update_time" jdbcType="DATE"/>
-
     <!--一对多映射用这个  ofTyp是一对多的集合的所存放的实体类  javaType实体类的属性类型-->
     <collection property="stories" ofType="org.zs.forty.model.entity.Story" column="id">
       <id property="id" column="id" jdbcType="BIGINT"/>
@@ -30,6 +28,9 @@
     </collection>
   </resultMap>
 
+  <sql id="BaseProduct">
+    id, product_name, product_info, product_img,product_price, create_time, update_time,
+  </sql>
 
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Product"
       keyProperty="id">
@@ -40,9 +41,6 @@
       </if>
       <if test="productInfo != null">
         product_info,
-      </if>
-      <if test="productPrice != null">
-        product_price,
       </if>
       <if test="productImg != null">
         product_img,
@@ -63,9 +61,6 @@
       </if>
       <if test="productInfo != null">
         #{productInfo},
-      </if>
-      <if test="productPrice != null">
-        #{productPrice},
       </if>
       <if test="productImg != null">
         #{productImg},
@@ -90,12 +85,6 @@
       <if test="productInfo != null">
         product_info = #{productInfo},
       </if>
-      <if test="phone != null">
-        phone = #{phone},
-      </if>
-      <if test="productPrice != null">
-        product_price = #{productPrice},
-      </if>
       <if test="productImg != null">
         product_img=#{productImg},
       </if>
@@ -109,7 +98,7 @@
     UPDATE t_product SET is_delete = 1 WHERE id = #{id} AND is_delete = 0
   </update>
   <select id="selectById" resultMap="BaseResultMap">
-    select p.id, p.product_name, p.product_info, p.product_price, p.product_img, p.category,
+    select p.id, p.product_name, p.product_info, p.product_img, p.category,
     s.user_id, s.title, s.context, s.story_view, s.story_like
     from t_product p
     LEFT JOIN t_relation r ON p.id = r.product_id
@@ -119,23 +108,31 @@
   </select>
   <select id="selectByName" resultType="org.zs.forty.model.entity.Product">
     select
-    id,product_name,product_info,product_price,product_img,category,status from t_product where
+    <include refid="BaseProduct"/>
+    category,status from t_product where
     product_name = #{productName}
   </select>
   <select id="selectByCategory" resultType="org.zs.forty.model.entity.Product">
-    select id,product_name,product_info,product_price,product_img,status from t_product
+    select
+    <include refid="BaseProduct"/>
+    status from t_product
     where category = #{category} AND is_delete = 0
   </select>
   <select id="selectList" resultType="org.zs.forty.model.entity.Product">
-    select id,product_name,product_info,product_price,product_img,category,status from
+    select
+    <include refid="BaseProduct"/>
+    category,status from
     t_product where is_delete = 0
   </select>
   <select id="selectByStatus" resultType="org.zs.forty.model.entity.Product">
-    select id,product_name,product_info,product_price,product_img,category,status from
+    select
+    <include refid="BaseProduct"/>
+    category,status from
     t_product where status =#{status} AND is_delete = 0
   </select>
   <select id="selectByStatusAndCategory" resultType="org.zs.forty.model.entity.Product">
-    select id,product_name,product_info,product_price,product_img from
-    t_product where status = #{status} AND category = #{category} AND is_delete = 0
+    select
+    <include refid="BaseProduct"/>
+    from t_product where status = #{status} AND category = #{category} AND is_delete = 0
   </select>
 </mapper>

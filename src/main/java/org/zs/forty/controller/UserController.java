@@ -28,7 +28,6 @@ import org.zs.forty.service.UserService;
  **/
 @Tag(name = "用户管理")
 @RestController
-
 @RequestMapping("/api/user")
 public class UserController {
   

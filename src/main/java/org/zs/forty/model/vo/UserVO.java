@@ -29,6 +29,4 @@ public class UserVO implements Serializable {
   private String nickname;
   @Schema(description = "邮件")
   private String email;
-  @Schema(description = "状态")
-  private Integer status;
 }

@@ -47,8 +47,12 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override public UserVO addUser(UserDTO userDTO) {
-    return mainMapper.user2VO(userMapper.selectById(userMapper.insert(userDTO)));
+    return null;
   }
+  
+  // @Override public UserVO addUser(UserDTO userDTO) {
+  //   return mainMapper.user2VO(userMapper.selectById(userMapper.insert(SignupDTO)));
+  // }
   
   @Override public List<UserVO> allUserByList(PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());

@@ -7,16 +7,16 @@ import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.Comment;
 import org.zs.forty.model.entity.Menu;
+import org.zs.forty.model.entity.Order;
 import org.zs.forty.model.entity.Product;
-import org.zs.forty.model.entity.Relation;
 import org.zs.forty.model.entity.Role;
 import org.zs.forty.model.entity.Story;
 import org.zs.forty.model.entity.User;
 import org.zs.forty.model.entity.UserInfo;
 import org.zs.forty.model.vo.CommentVO;
 import org.zs.forty.model.vo.MenuVO;
+import org.zs.forty.model.vo.OrderVO;
 import org.zs.forty.model.vo.ProductVO;
-import org.zs.forty.model.vo.RelationVO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.model.vo.UserInfoVO;
@@ -59,9 +59,9 @@ public interface MainMapper {
   
   List<UserInfoVO> userInfoList2VO(List<UserInfo> vo);
   
-  RelationVO relation2VO(Relation po);
+  OrderVO relation2VO(Order po);
   
-  List<RelationVO> relationList2VO(List<Relation> vo);
+  List<OrderVO> relationList2VO(List<Order> vo);
   
   MenuVO menu2VO(Menu po);
   

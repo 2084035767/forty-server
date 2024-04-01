@@ -48,7 +48,7 @@ spring:
     host: smtp.163.com #发送邮件服务器
     username: jiangtdemail@163.com #发送邮件的邮箱地址
     password: VHYBYJJPFDEUOWCG #客户端授权码
-    from: 系统管理员<jiangtdemail@163.com> #发送邮件的邮箱地址
+    from: 肆拾杂货铺<jiangtdemail@163.com> #发送邮件的邮箱地址
     protocol: smtp # 传输协议
     default-encoding: UTF-8 # 编码方式
     properties:
@@ -108,7 +108,7 @@ jwt:
   # 为JWT基础信息加密和解密的密钥，长度需要大于等于43
   secret: oQZSeguYloAPAmKwvKqqnifiQatxMEPNOvtwPsCLasd
   # JWT令牌的有效时间，单位秒，默认2周
-  expiration: 14400
+  expiration: 7200
 
 # knife4j的增强配置，不需要增强可以不配
 springdoc:

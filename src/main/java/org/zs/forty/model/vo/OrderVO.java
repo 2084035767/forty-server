@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,14 +12,13 @@ import lombok.NoArgsConstructor;
  *
  * @author: 子十
  * @date: 2024/1/13
- * @description: 关系响应
+ * @description: 订单响应
  **/
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "关系响应")
-public class RelationVO implements Serializable {
+@Schema(description = "订单响应")
+public class OrderVO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
   private Long id;
   @Schema(description = "创建人")

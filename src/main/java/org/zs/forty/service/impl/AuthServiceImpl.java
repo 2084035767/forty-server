@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,16 +13,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zs.forty.common.annotate.MappingIgnore;
+import org.zs.forty.common.utils.AmqpUtil;
 import org.zs.forty.common.utils.JwtUtil;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.UserMapper;
 import org.zs.forty.model.dto.SignupDTO;
-import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
-import org.zs.forty.service.MailService;
 
 /**
  * -*- coding: utf-8 -*-
@@ -37,7 +38,7 @@ import org.zs.forty.service.MailService;
 public class AuthServiceImpl implements AuthService {
   private final AuthenticationManager authenticationManager;
   private final PasswordEncoder passwordEncoder;
-  private final MailService mailService;
+  private final AmqpUtil amqpUtil;
   private final UserMapper userMapper;
   private final MainMapper mainMapper;
   private final JwtUtil jwtUtil;
@@ -57,12 +58,16 @@ public class AuthServiceImpl implements AuthService {
     return jwtUtil.createToken(claims);
   }
   
+  @Transactional
   @Override public UserVO register(SignupDTO signupDTO) {
-    User user = userMapper.selectByUsername(signupDTO.getUsername());
-    if (user == null) {
+    User user = userMapper.selectByEmail(signupDTO.getEmail());
+    if (Objects.isNull(user)) {
       signupDTO.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
-      UserDTO userDTO = mainMapper.Signup2DTO(signupDTO);
-      return mainMapper.user2VO(userMapper.selectById(userMapper.insert(userDTO)));
+      userMapper.insert(signupDTO);
+      UserVO userVO = mainMapper.user2VO(userMapper.selectById(signupDTO.getId()));
+      log.info("注册成功{}", userVO);
+      amqpUtil.emailSend(mainMapper.email2DTO(signupDTO));
+      return userVO;
     } else {
       throw new RuntimeException("用户名已存在");
     }

@@ -7,11 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.MainMapper;
-import org.zs.forty.mapper.RelationMapper;
+import org.zs.forty.mapper.OrderMapper;
+import org.zs.forty.model.dto.OrderDTO;
 import org.zs.forty.model.dto.PageDTO;
-import org.zs.forty.model.dto.RelationDTO;
-import org.zs.forty.model.vo.RelationVO;
-import org.zs.forty.service.RelationService;
+import org.zs.forty.model.vo.OrderVO;
+import org.zs.forty.service.OrderService;
 
 /**
  * -*- coding: utf-8 -*-
@@ -20,27 +20,27 @@ import org.zs.forty.service.RelationService;
  * @date: 2024/2/20
  * @description:
  **/
-@Slf4j
-@Service
+@Slf4j //  log 日志
+@Service // 注册 service 类
 @MappingIgnore
-public class RelationServiceImpl implements RelationService {
-  @Resource private RelationMapper relationMapper;
+public class OrderServiceImpl implements OrderService {
+  @Resource private OrderMapper relationMapper;
   @Resource private MainMapper mainMapper;
   
-  @Override public List<RelationVO> findByProductId(Long productId) {
+  @Override public List<OrderVO> findByProductId(Long productId) {
     return mainMapper.relationList2VO(relationMapper.selectByProductId(productId));
   }
   
-  @Override public RelationVO findByStoryId(Long storyId) {
+  @Override public OrderVO findByStoryId(Long storyId) {
     return mainMapper.relation2VO(relationMapper.selectByStoryId(storyId));
   }
   
-  @Override public List<RelationVO> findByCreateUser(Long createUser, PageDTO pageDTO) {
+  @Override public List<OrderVO> findByCreateUser(Long createUser, PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.relationList2VO(relationMapper.selectByCreateUser(createUser));
   }
   
-  @Override public RelationVO insert(RelationDTO relationDTO) {
+  @Override public OrderVO insert(OrderDTO relationDTO) {
     return mainMapper.relation2VO(relationMapper.selectById(relationMapper.insert(relationDTO)));
   }
   
@@ -52,7 +52,7 @@ public class RelationServiceImpl implements RelationService {
     return relationMapper.deleteByCreateUser(createUser) > 0;
   }
   
-  @Override public Boolean updateById(RelationDTO relationDTO) {
+  @Override public Boolean updateById(OrderDTO relationDTO) {
     return relationMapper.updateById(relationDTO) > 0;
   }
 }

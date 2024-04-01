@@ -13,9 +13,9 @@ import lombok.Getter;
  * @date: 2024/1/13
  * @description: 订单参数
  **/
-@Getter
+@Getter // 生成getter函数
 @Schema(description = "订单参数")
-public class RelationDTO implements Serializable {
+public class OrderDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
   private Long id;
   @Schema(description = "用户id")

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.LoginDTO;
-import org.zs.forty.model.dto.UserDTO;
+import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
 
@@ -20,6 +20,7 @@ import org.zs.forty.service.AuthService;
  * @date: 2024/3/21
  * @description: 登录注册
  **/
+
 @Tag(name = "登录注册")
 @RestController
 @RequestMapping("/api/auth")
@@ -35,13 +36,13 @@ public class AuthController {
   
   @Operation(summary = "用户注册")
   @PostMapping("/register")
-  public UserVO userRegister(@Valid @RequestBody UserDTO userdto) {
-    return authService.register(userdto);
+  public UserVO userRegister(@Valid @RequestBody SignupDTO signupDTO) {
+    return authService.register(signupDTO);
   }
   
   @Operation(summary = "用户注销")
   @PostMapping("/logout")
-  public Boolean userLogout(@Valid @RequestBody UserDTO userdto) {
+  public Boolean userLogout() {
     return authService.logout();
   }
 }

@@ -3,6 +3,7 @@ package org.zs.forty.model.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
+@Builder
 @Schema(description = "注册参数")
 public class SignupDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
@@ -27,6 +29,4 @@ public class SignupDTO implements Serializable {
   private String password;
   @Schema(description = "邮箱")
   private String email;
-  @Schema(description = "状态")
-  private int status;
 }

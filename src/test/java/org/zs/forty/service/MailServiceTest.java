@@ -32,7 +32,6 @@ class MailServiceTest {
   @Test
   void sendModelMail() {
     EmailDTO emailDTO = new EmailDTO();
-    emailDTO.setNick("傻子");
     mailService.sendModelMail("2084035767@qq.com", "注册成功", emailDTO);
   }
 }

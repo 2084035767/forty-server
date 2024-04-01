@@ -2,6 +2,7 @@ package org.zs.forty.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
 
@@ -20,6 +21,8 @@ public interface UserMapper {
   
   User selectByUsername(String username);
   
+  User selectByEmail(String email);
+  
   User selectRoleByEmail(String email);
   
   List<User> selectList();
@@ -28,5 +31,5 @@ public interface UserMapper {
   
   int updateById(UserDTO userDTO, Long id);
   
-  Long insert(UserDTO userDTO);
+  Long insert(SignupDTO signupDTO);
 }

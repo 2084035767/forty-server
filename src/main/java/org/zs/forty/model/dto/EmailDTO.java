@@ -1,5 +1,7 @@
 package org.zs.forty.model.dto;
 
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -10,6 +12,8 @@ import lombok.Data;
  * @Description:
  **/
 @Data
-public class EmailDTO {
-  private String nick;// 用户昵称
+public class EmailDTO implements Serializable {
+  @Serial private static final long serialVersionUID = 1L;
+  private String nickname;// 用户昵称
+  private String email;// 收件人
 }

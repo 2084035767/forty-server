@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @description:
  **/
 @SpringBootTest
-class RelationMapperTest {
+class OrderMapperTest {
   
   @Test
   void selectById() {
