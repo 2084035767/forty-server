@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.StoryMapper">
+  <sql id="BaseStory">
+    id,title,context,story_view,story_like,is_open,is_delete,create_user,create_time,update_time
+  </sql>
+
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Story"
       keyProperty="id">
     INSERT INTO t_story
@@ -24,12 +28,6 @@
       <if test="is_open != null">
         is_open,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -49,12 +47,6 @@
       </if>
       <if test="is_open != null">
         #{is_open},
-      </if>
-      <if test="createTime != null">
-        #{createTime},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime},
       </if>
     </trim>
   </insert>
@@ -83,18 +75,26 @@
     update t_story set is_delete = 1 where id = #{id} and is_delete = 0
   </update>
   <select id="selectListByCreateUser" resultType="org.zs.forty.model.entity.Story">
-    select id,title,context,story_view,story_like,is_open from t_story where user_id =
+    select
+    <include refid="BaseStory"/>
+    from t_story where user_id =
     #{createUser} AND is_delete = 0
   </select>
   <select id="selectList" resultType="org.zs.forty.model.entity.Story">
-    select id,title,context,story_view,story_like,is_open from t_story where is_delete = 0
+    select
+    <include refid="BaseStory"/>
+    from t_story where is_delete = 0
   </select>
   <select id="selectById" resultType="org.zs.forty.model.entity.Story">
-    select id,title,context,story_view,story_like,is_open from t_story where id = #{id} AND
+    select
+    <include refid="BaseStory"/>
+    from t_story where id = #{id} AND
     is_delete = 0
   </select>
   <select id="selectOpenByList" resultType="org.zs.forty.model.entity.Story">
-    select id,title,context,story_view,story_like from t_story where is_delete = 0 and
+    select
+    <include refid="BaseStory"/>
+    from t_story where is_delete = 0 and
     is_open = 1
   </select>
 </mapper>

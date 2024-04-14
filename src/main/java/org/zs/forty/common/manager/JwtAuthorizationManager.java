@@ -27,6 +27,7 @@ public class JwtAuthorizationManager implements AuthorizationManager<RequestAuth
   @Override public AuthorizationDecision check(Supplier<Authentication> authentication,
       RequestAuthorizationContext object) {
     HttpServletRequest request = object.getRequest();
+    // todo: redis + jwt
     String requestURI = request.getRequestURI().replaceAll("/\\d+$", "");
     if (requestURI.contains("/api/auth/") || requestURI.contains("/error")) {
       return new AuthorizationDecision(true);

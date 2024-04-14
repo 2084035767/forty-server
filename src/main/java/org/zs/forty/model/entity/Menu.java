@@ -1,9 +1,7 @@
 package org.zs.forty.model.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,14 +20,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Menu {
-  @TableId(value = "menu_id", type = IdType.AUTO)
-  protected Long MenuId;
+  private Long MenuId;
   private String menuPath;
   private String menuName;
   private String menuMark;
   private Boolean isDelete;
   @TableField(value = "create_time", fill = FieldFill.INSERT)
-  protected LocalDateTime createTime;
+  private LocalDateTime createTime;
   @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-  protected LocalDateTime updateTime;
+  private LocalDateTime updateTime;
 }

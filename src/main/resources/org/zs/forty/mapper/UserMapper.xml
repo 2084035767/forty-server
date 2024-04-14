@@ -20,9 +20,11 @@
       <result property="createTime" column="create_time"/>
       <result property="updateTime" column="update_time"/>
     </collection>
-
   </resultMap>
 
+  <sql id="BaseUser">
+    id,username,password,nickname,email,status,is_delete,create_time,update_time
+  </sql>
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.User"
       keyProperty="id">
     INSERT INTO t_user
@@ -55,8 +57,6 @@
       </if>
     </trim>
   </insert>
-
-
   <update id="updateById">
     UPDATE t_user
     <set>
@@ -79,35 +79,65 @@
   <update id="deleteById">
     UPDATE t_user SET is_delete = 1 WHERE id = #{id} AND is_delete = 0
   </update>
-
   <select id="selectRoleByEmail" resultMap="BaseUserMap">
     SELECT
     u.id, u.username, u.password, u.nickname, u.email, u.status,
     r.role_id, r.role_name, r.role_desc
-    from t_user u
-    left join t_user_role ur on u.id = ur.user_id
-    left join t_role r on ur.role_id = r.role_id
-    where u.is_delete = 0 and r.is_delete = 0 and u.email = #{email}
+    FROM t_user u
+    LEFT JOIN t_user_role ur
+    ON u.id = ur.user_id
+    LEFT JOIN t_role r
+    ON ur.role_id = r.role_id
+    WHERE u.is_delete = 0
+    AND r.is_delete = 0
+    AND u.email = #{email}
 
   </select>
   <select id="selectById" resultType="org.zs.forty.model.entity.User">
-    SELECT id,username,password,nickname,email FROM t_user WHERE id = #{id} AND is_delete = 0
+    SELECT
+    <include refid="BaseUser"/>
+    FROM t_user
+    WHERE id = #{id}
+    AND is_delete = 0
   </select>
   <select id="selectByUsername" resultType="org.zs.forty.model.entity.User">
-    SELECT id,username,password,nickname,status FROM t_user WHERE username = #{username}
+    SELECT
+    <include refid="BaseUser"/>
+    FROM t_user
+    WHERE username = #{username}
     AND is_delete = 0
-
   </select>
   <select id="selectList" resultType="org.zs.forty.model.entity.User">
-    SELECT id,username,password,nickname,status FROM t_user WHERE is_delete = 0
-
+    SELECT
+    <include refid="BaseUser"/>
+    FROM t_user
+    WHERE is_delete = 0
   </select>
-
-
   <select id="selectByEmail" resultType="org.zs.forty.model.entity.User">
-    SELECT id,username,password,nickname,email,status
+    SELECT
+    <include refid="BaseUser"/>
     FROM t_user
     WHERE email = #{email}
     AND is_delete = 0
+  </select>
+  <select id="selectListByCondition" resultType="org.zs.forty.model.entity.User">
+    SELECT
+    <include refid="BaseUser"/>
+    FROM t_user
+    <where>
+      is_delete = 0
+      <if test="status!=null">
+        AND status = #{status}
+      </if>
+      <if test="username!=null and username!=''">
+        AND username like #{username}
+      </if>
+      <if test="nickname!=null and nickname!=''">
+        AND nickname like #{nickname}
+      </if>
+      <if test="email!=null and email!=''">
+        AND email like #{email}
+      </if>
+    </where>
   </select>
 </mapper>

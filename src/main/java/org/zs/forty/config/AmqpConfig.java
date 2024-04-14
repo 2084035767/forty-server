@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/4/1
- * @Description:
+ * @author: 子十
+ * @date: 2024/4/1
+ * @description:
  **/
 @Configuration
 public class AmqpConfig {

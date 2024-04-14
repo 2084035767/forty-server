@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override public Boolean updateUser(UserDTO userDTO) {
-    return userMapper.updateById(userDTO, userDTO.getId()) > 0;
+    return userMapper.updateById(userDTO) > 0;
   }
   
   @Override public Boolean deleteUser(Long id) {

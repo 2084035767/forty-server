@@ -23,10 +23,13 @@
     SELECT
     r.role_id, r.role_name, r.role_desc,
     m.menu_id, m.menu_name, m.menu_path, m.menu_mark
-    FROM
-    t_role r
-    LEFT JOIN t_role_menu rm ON r.role_id = rm.role_id
-    LEFT JOIN t_menu m ON rm.menu_id = m.menu_id
-    WHERE r.is_delete = 0 AND m.is_delete = 0 AND r.role_id = #{roleId}
+    FROM t_role r
+    LEFT JOIN t_role_menu rm
+    ON r.role_id = rm.role_id
+    LEFT JOIN t_menu m
+    ON rm.menu_id = m.menu_id
+    WHERE r.is_delete = 0
+    AND m.is_delete = 0
+    AND r.role_id = #{roleId}
   </select>
 </mapper>
