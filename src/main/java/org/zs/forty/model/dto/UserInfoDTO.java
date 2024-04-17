@@ -34,12 +34,13 @@ public class UserInfoDTO implements Serializable {
   @Schema(name = "email")
   @Email(message = "email格式错误，请重新填写")
   private String email;
-  
+  @NotBlank(message = "realName为必传参数")
+  @SchemaProperty(name = "addr")
   private String addr;
-  
+  @Schema(description = "用户性别")
   private int sex;
-  
+  @Schema(description = "用户年龄")
   private Integer age;
-  
+  @Schema(description = "用户头像")
   private String userImg;
 }

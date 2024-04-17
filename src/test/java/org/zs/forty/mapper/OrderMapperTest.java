@@ -1,5 +1,6 @@
 package org.zs.forty.mapper;
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  **/
 @SpringBootTest
 class OrderMapperTest {
-  
   @Test
   void selectById() {
   }

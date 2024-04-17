@@ -10,8 +10,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.80.123:3306/test?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
-    username: idea
+    url: jdbc:mysql://localhost/zhahuopu?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+    username: root
     password: 123456
   ########### redis配置 ################
   data:

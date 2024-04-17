@@ -3,24 +3,11 @@ package org.zs.forty.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.zs.forty.model.dto.EmailDTO;
+import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
-import org.zs.forty.model.entity.Comment;
-import org.zs.forty.model.entity.Menu;
-import org.zs.forty.model.entity.Order;
-import org.zs.forty.model.entity.Product;
-import org.zs.forty.model.entity.Role;
-import org.zs.forty.model.entity.Story;
-import org.zs.forty.model.entity.User;
-import org.zs.forty.model.entity.UserInfo;
-import org.zs.forty.model.vo.CommentVO;
-import org.zs.forty.model.vo.MenuVO;
-import org.zs.forty.model.vo.OrderVO;
-import org.zs.forty.model.vo.ProductVO;
-import org.zs.forty.model.vo.RoleVO;
-import org.zs.forty.model.vo.StoryVO;
-import org.zs.forty.model.vo.UserInfoVO;
-import org.zs.forty.model.vo.UserVO;
+import org.zs.forty.model.entity.*;
+import org.zs.forty.model.vo.*;
 
 /**
  * -*- coding: utf-8 -*-
@@ -49,7 +36,7 @@ public interface MainMapper {
   
   RoleVO role2VO(Role po);
   
-  List<RoleVO> roleList2VO(List<Role> vo);
+  List<RoleVO> roleList2VO(Long vo);
   
   StoryVO story2VO(Story po);
   
@@ -70,4 +57,21 @@ public interface MainMapper {
   UserDTO Signup2DTO(SignupDTO dto);
   
   EmailDTO email2DTO(SignupDTO dto);
+  
+
+  LikeVO likeList2VO(List<Like> likes);
+
+  List<LikeVO> likeList2VO(List<Like> likes, PageDTO pageDTO);
+
+  List<RoleVO> roleList2VO(Role role);
+
+  RoleVO roleList2VO(Long insert);
+
+  Boolean roleList2VO(int delete);
+
+  List<UserInfoVO> userInfoList2VO(UserInfo userInfo);
+
+  UserInfoVO userInfoList2VO(Long insert);
+
+  Boolean userInfoList2VO(int delete);
 }
