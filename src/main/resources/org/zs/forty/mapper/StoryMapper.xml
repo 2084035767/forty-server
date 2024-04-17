@@ -83,8 +83,8 @@
     update t_story set is_delete = 1 where id = #{id} and is_delete = 0
   </update>
   <select id="selectListByCreateUser" resultType="org.zs.forty.model.entity.Story">
-    select id,title,context,story_view,story_like,is_open from t_story where user_id =
-    #{createUser} AND is_delete = 0
+    select id,title,context,story_view,story_like,is_open from t_story where create_user =
+           #{create_user} AND is_delete = 0
   </select>
   <select id="selectList" resultType="org.zs.forty.model.entity.Story">
     select id,title,context,story_view,story_like,is_open from t_story where is_delete = 0

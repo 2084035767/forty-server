@@ -16,7 +16,7 @@
     <!--一对多映射用这个  ofTyp是一对多的集合的所存放的实体类  javaType实体类的属性类型-->
     <collection property="stories" ofType="org.zs.forty.model.entity.Story" column="id">
       <id property="id" column="id" jdbcType="BIGINT"/>
-      <result property="userId" column="userId" jdbcType="BIGINT"/>
+      <result property="createUser" column="create_user" jdbcType="BIGINT"/>
       <result property="title" column="title" jdbcType="VARCHAR"/>
       <result property="context" column="context" jdbcType="VARCHAR"/>
       <result property="storyView" column="story_view" jdbcType="INTEGER"/>
@@ -99,9 +99,9 @@
   </update>
   <select id="selectById" resultMap="BaseResultMap">
     select p.id, p.product_name, p.product_info, p.product_img, p.category,
-    s.user_id, s.title, s.context, s.story_view, s.story_like
+    s.create_user, s.title, s.context, s.story_view, s.story_like
     from t_product p
-    LEFT JOIN t_relation r ON p.id = r.product_id
+    LEFT JOIN t_order r ON p.id = r.product_id
     LEFT JOIN t_story s ON s.id = r.story_id
     where p.id = #{id} AND p.is_delete = 0 AND s.is_delete = 0 AND s.is_open = 1
 

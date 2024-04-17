@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,8 @@ import org.zs.forty.service.UserService;
 @RequestMapping("/api/user")
 public class UserController {
   
-  @Resource private UserService userService;
+  @Resource
+  private UserService userService;
   
   @GetMapping("/info/{id}")
   @Operation(summary = "获取用户信息")
