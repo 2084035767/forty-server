@@ -29,13 +29,13 @@ class ProductMapperTest {
   
   @Test
   void selectByName() {
-    List<Product> product = productMapper.selectByName("商品1");
+    List<Product> product = productMapper.selectByName("苹果手机");
     assert product != null;
   }
   
   @Test
   void selectByCategory() {
-    List<Product> category = productMapper.selectByCategory("分类1");
+    List<Product> category = productMapper.selectByCategory("数码");
     assert !category.isEmpty();
   }
   

@@ -20,7 +20,7 @@ class StoryMapperTest {
   
   @Test
   void selectListByUserId() {
-    List<Story> stories = storyMapper.selectListByCreateUser(1L);
+    List<Story> stories = storyMapper.selectListByCreateUser(3L);
     assert !stories.isEmpty();
   }
   

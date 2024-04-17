@@ -3,7 +3,7 @@ package org.zs.forty.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.zs.forty.model.dto.EmailDTO;
-import org.zs.forty.model.dto.PageDTO;
+import org.zs.forty.model.dto.LogDTO;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.*;
@@ -36,7 +36,7 @@ public interface MainMapper {
   
   RoleVO role2VO(Role po);
   
-  List<RoleVO> roleList2VO(Long vo);
+  List<RoleVO> roleList2VO(List<Role> vo);
   
   StoryVO story2VO(Story po);
   
@@ -57,21 +57,10 @@ public interface MainMapper {
   UserDTO Signup2DTO(SignupDTO dto);
   
   EmailDTO email2DTO(SignupDTO dto);
-  
-
-  LikeVO likeList2VO(List<Like> likes);
-
-  List<LikeVO> likeList2VO(List<Like> likes, PageDTO pageDTO);
-
-  List<RoleVO> roleList2VO(Role role);
-
-  RoleVO roleList2VO(Long insert);
-
-  Boolean roleList2VO(int delete);
-
-  List<UserInfoVO> userInfoList2VO(UserInfo userInfo);
-
-  UserInfoVO userInfoList2VO(Long insert);
-
-  Boolean userInfoList2VO(int delete);
+  LogVO log2VO(Log po);
+  List<LogVO> logList2VO(List<Log> vo);
+  MsgVO msg2VO(Msg po);
+  List<MsgVO> msgList2VO(List<Msg> vo);
+  RankVO rank2VO(Rank po);
+  List<RankVO> rankList2VO(List<Rank> vo);
 }
