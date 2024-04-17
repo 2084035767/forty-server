@@ -1,4 +1,4 @@
-package org.zs.forty.common.filter;
+package org.zs.forty.security;
 
 import io.jsonwebtoken.Claims;
 import jakarta.annotation.Resource;

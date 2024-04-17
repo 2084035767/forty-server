@@ -1,4 +1,4 @@
-package org.zs.forty.common.manager;
+package org.zs.forty.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import jakarta.annotation.Resource;

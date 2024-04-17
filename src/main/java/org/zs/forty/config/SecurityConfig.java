@@ -16,11 +16,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.zs.forty.common.filter.JwtAuthTokenFilter;
-import org.zs.forty.common.manager.JwtAuthorizationManager;
-import org.zs.forty.handler.JwtAccessDeniedHandler;
-import org.zs.forty.handler.JwtAuthenticationEntryPoint;
-import org.zs.forty.handler.JwtLogoutSuccessHandler;
+import org.zs.forty.security.JwtAccessDeniedHandler;
+import org.zs.forty.security.JwtAuthTokenFilter;
+import org.zs.forty.security.JwtAuthenticationEntryPoint;
+import org.zs.forty.security.JwtAuthorizationManager;
+import org.zs.forty.security.JwtLogoutSuccessHandler;
 
 /**
  * -*- coding: utf-8 -*-
