@@ -7,11 +7,8 @@ import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.MenuMapper;
 import org.zs.forty.model.dto.MenuDTO;
-import org.zs.forty.model.entity.Menu;
 import org.zs.forty.model.vo.MenuVO;
 import org.zs.forty.service.MenuService;
-
-import java.util.List;
 @Slf4j
 @Service
 @MappingIgnore
@@ -21,14 +18,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuVO selectMenuById(Long menuId) {
-        Menu menu = menuMapper.selectMenuById(menuId);
-        return mainMapper.menu2VO(menu);
+        return menuMapper.selectMenuById(menuId);
     }
 
-    @Override
-    public List<MenuVO> selectAllMenus() {
-        return null;
-    }
+//    @Override
+//    public List<MenuVO> selectAllMenus() {
+//        return null;
+//    }
 
     @Override
     public Boolean update(MenuDTO menuDTO) {

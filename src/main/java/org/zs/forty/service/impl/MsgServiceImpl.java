@@ -7,11 +7,8 @@ import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.MsgMapper;
 import org.zs.forty.model.dto.MsgDTO;
-import org.zs.forty.model.entity.Msg;
 import org.zs.forty.model.vo.MsgVO;
 import org.zs.forty.service.MsgService;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -20,9 +17,8 @@ public class MsgServiceImpl implements MsgService {
     @Resource private MainMapper mainMapper;
     @Resource private MsgMapper msgMapper;
     @Override
-    public List<Msg> selectMsgById(Long msgid) {
-        Msg msg = msgMapper.selectMsgById(msgid);
-        return (List<Msg>) mainMapper.msg2VO(msg);
+    public MsgVO selectMsgById(Long msgId) {
+        return  msgMapper.selectMsgById(msgId);
     }
 
     @Override
@@ -36,7 +32,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public Boolean deleteMsgById(Long msgid) {
-        return msgMapper.deleteMsgById(msgid) > 0;
+    public Boolean deleteMsgById(Long msgId) {
+        return msgMapper.deleteMsgById(msgId) > 0;
     }
 }

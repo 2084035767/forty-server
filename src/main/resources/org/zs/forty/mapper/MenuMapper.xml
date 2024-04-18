@@ -53,13 +53,12 @@
     <update id="delete">
         UPDATE t_menu SET is_delete = 1 WHERE menu_id = #{menu_id} AND is_delete = 0
     </update>
-
-    <select id="selectMenuById" resultType="org.zs.forty.model.entity.Menu">
+    <select id="selectMenuById" resultType="org.zs.forty.model.vo.MenuVO">
         SELECT * FROM t_menu WHERE menu_id = #{menuId} and is_delete = 0
     </select>
 
-    <select id="selectAllMenus" resultType="org.zs.forty.model.entity.Menu">
-        SELECT * FROM t_menu
-    </select>
+    <!--    <select id="selectAllMenus" resultType="org.zs.forty.model.entity.Menu">-->
+<!--        SELECT * FROM t_menu-->
+<!--    </select>-->
 
 </mapper>
