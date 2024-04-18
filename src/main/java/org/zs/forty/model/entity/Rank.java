@@ -10,39 +10,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rank {
-    @TableId(value = "id", type = IdType.AUTO)
-    /**
-     * 是否删除
-     */
-    private long isDelete;
-    /**
-     * 商品ID
-     */
-    private long productid;
-    private long rankid;
-    /**
-     * 排行名
-     */
+    @TableId(value = "rank_id", type = IdType.AUTO)
+    private Long rankId;
+    private Boolean isDelete;
+    private Long productId;
     private String rankName;
-    /**
-     * 排名
-     */
-    private long rankPosition;
-    /**
-     * 分数
-     */
-    private long rankScore;
-    /**
-     * 用户ID
-     */
-    private long userid;
+    private Long rankPosition;
+    private Long rankScore;
+    private Long  userId;
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     protected LocalDateTime createTime;
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)

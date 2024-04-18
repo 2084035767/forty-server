@@ -17,45 +17,24 @@ import java.time.LocalDateTime;
 public class MsgDTO implements Serializable {
         @Schema(description = "通知id")
         @NotNull(message = "通知id不能为空")
-        private long msgid;
-        /**
-         * 发送者
-         */
+        private Long msgId;
         @Schema(description = "发送者")
         @NotNull(message = "发送者不能为空")
-        private long senderid;
-        /**
-         * 接收者
-         */
+        private Long senderId;
         @Schema(description = "接受者")
         @NotNull(message = "接受者不能为空")
-        private long receiverid;
-        /**
-         * 消息内容
-         */
+        private Long receiverId;
         @Schema(description = "消息内容")
         @NotNull(message = "消息内容不能为空")
         private String msgContent;
-        /**
-         * 消息的类型 0系统通知，1私信
-         */
         @Schema(description = "消息类型")
-        private long msgType;
-        /**
-         * 是否已读=0否 1是
-         */
+        private Long msgType;
         @Schema(description = "是否已读")
-        private long isRead;
-        /**
-         * 是否归档=0否 1是
-         */
+        private Boolean isRead;
         @Schema(description = "是否归档")
-        private long isArchive;
-        /**
-         * 是否删除=0否 1是
-         */
+        private Boolean isArchive;
         @Schema(description = "是否删除")
-        private long isDelete;
+        private Boolean isDelete;
 
     }
 

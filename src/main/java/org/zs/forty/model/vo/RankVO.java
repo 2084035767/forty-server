@@ -14,15 +14,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Schema(description = "排行榜响应")
 public class RankVO implements Serializable {
-    private long rankid;
+    private Long rankId;
     @Schema(description = "商品ID")
-    private long productid;
+    private Long productId;
     @Schema(description = "排行名")
     private String rankName;
     @Schema(description = "排名")
-    private long rankPosition;
+    private Long rankPosition;
     @Schema(description = "分数")
-    private long rankScore;
+    private Long rankScore;
     @Schema(description = "用户ID")
-    private long userid;
+    private Long userId;
 }
