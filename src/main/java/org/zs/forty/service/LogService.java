@@ -4,8 +4,8 @@ import org.zs.forty.model.dto.LogDTO;
 import org.zs.forty.model.vo.LogVO;
 
 public interface LogService {
-    LogVO findByLogId(Long logid);
+    LogVO findByLogId(Long logId);
     LogVO addLog(LogDTO logDTO);
     Boolean updateLog(LogDTO logDTO);
-    Boolean deletealog(Long logid);
+    Boolean deletelog(Long logId);
 }

@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.MenuDTO;
 import org.zs.forty.model.entity.Menu;
-
-import java.util.List;
+import org.zs.forty.model.vo.MenuVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -16,8 +15,8 @@ import java.util.List;
  **/
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
-   Menu selectMenuById(Long menuId);
-   List<Menu> selectAllMenus();
+   MenuVO selectMenuById(Long menuId);
+//   List<Menu> selectAllMenus();
    int update(MenuDTO menuDTO);
    Long add(MenuDTO menuDTO);
    int delete(Long menuId);

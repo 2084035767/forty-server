@@ -7,7 +7,6 @@ import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.RankMapper;
 import org.zs.forty.model.dto.RankDTO;
-import org.zs.forty.model.entity.Rank;
 import org.zs.forty.model.vo.RankVO;
 import org.zs.forty.service.RankService;
 
@@ -19,8 +18,8 @@ public class RankServiceImpl implements RankService {
     @Resource private RankMapper rankMapper;
 
     @Override
-    public Boolean delete(Long rankid) {
-        return rankMapper.delete(rankid) >0;
+    public Boolean delete(Long rankId) {
+        return rankMapper.delete(rankId) >0;
     }
 
     @Override
@@ -34,8 +33,7 @@ public class RankServiceImpl implements RankService {
     }
 
     @Override
-    public RankVO selectByRankId(Long rankid) {
-        Rank rank = rankMapper.selectByRankId(rankid);
-        return mainMapper.rank2VO(rank);
+    public RankVO selectByRankId(Long rankId) {
+        return rankMapper.selectByRankId(rankId);
     }
 }
