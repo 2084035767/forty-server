@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.zs.forty.common.annotate.ResponseResult;
 import org.zs.forty.model.dto.CommentDTO;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.CommentVO;
@@ -23,14 +22,14 @@ import org.zs.forty.service.CommentService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description: 评论管理
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description: 评论管理
  **/
 @Tag(name = "评论管理")
 @RequestMapping("/api/comment")
 @RestController
-@ResponseResult
+
 public class CommentController {
   @Resource
   private CommentService commentService;

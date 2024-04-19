@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description: UserDTO
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 用户响应
  **/
 @Data
 @Builder
@@ -29,6 +29,6 @@ public class UserVO implements Serializable {
   private String nickname;
   @Schema(description = "邮件")
   private String email;
-  @Schema(description = "状态")
+  @Schema(defaultValue = "状态")
   private Integer status;
 }

@@ -10,9 +10,9 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/23
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/23
+ * @description: Redis 配置
  **/
 @EnableCaching
 @Configuration

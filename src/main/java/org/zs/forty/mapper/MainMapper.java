@@ -2,29 +2,19 @@ package org.zs.forty.mapper;
 
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.zs.forty.model.entity.Comment;
-import org.zs.forty.model.entity.Menu;
-import org.zs.forty.model.entity.Product;
-import org.zs.forty.model.entity.Relation;
-import org.zs.forty.model.entity.Role;
-import org.zs.forty.model.entity.Story;
-import org.zs.forty.model.entity.User;
-import org.zs.forty.model.entity.UserInfo;
-import org.zs.forty.model.vo.CommentVO;
-import org.zs.forty.model.vo.MenuVO;
-import org.zs.forty.model.vo.ProductVO;
-import org.zs.forty.model.vo.RelationVO;
-import org.zs.forty.model.vo.RoleVO;
-import org.zs.forty.model.vo.StoryVO;
-import org.zs.forty.model.vo.UserInfoVO;
-import org.zs.forty.model.vo.UserVO;
+import org.zs.forty.model.dto.EmailDTO;
+import org.zs.forty.model.dto.LogDTO;
+import org.zs.forty.model.dto.SignupDTO;
+import org.zs.forty.model.dto.UserDTO;
+import org.zs.forty.model.entity.*;
+import org.zs.forty.model.vo.*;
 
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @Mapper(componentModel = "spring")
 public interface MainMapper {
@@ -56,11 +46,21 @@ public interface MainMapper {
   
   List<UserInfoVO> userInfoList2VO(List<UserInfo> vo);
   
-  RelationVO relation2VO(Relation po);
+  OrderVO relation2VO(Order po);
   
-  List<RelationVO> relationList2VO(List<Relation> vo);
+  List<OrderVO> relationList2VO(List<Order> vo);
   
   MenuVO menu2VO(Menu po);
   
   List<MenuVO> menuList2VO(List<Menu> vo);
+  
+  UserDTO Signup2DTO(SignupDTO dto);
+  
+  EmailDTO email2DTO(SignupDTO dto);
+  LogVO log2VO(Log po);
+  List<LogVO> logList2VO(List<Log> vo);
+  MsgVO msg2VO(Msg po);
+  List<MsgVO> msgList2VO(List<Msg> vo);
+  RankVO rank2VO(Rank po);
+  List<RankVO> rankList2VO(List<Rank> vo);
 }

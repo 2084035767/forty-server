@@ -9,9 +9,9 @@ import org.zs.forty.model.entity.Comment;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 
 @SpringBootTest
@@ -52,7 +52,8 @@ class CommentMapperTest {
   @Test
   void update() {
     // Long test = (long) commentMapper.update(
-    //     CommentDTO.builder()
+    //
+    //    CommentDTO.builder()
     //         .id(1L)
     //         .context("test1")
     //         .build());

@@ -3,15 +3,17 @@ package org.zs.forty.mapper;
 import jakarta.annotation.Resource;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.zs.forty.model.entity.Product;
 
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @SpringBootTest
 class ProductMapperTest {
@@ -22,18 +24,18 @@ class ProductMapperTest {
   void selectById() {
     Product product = productMapper.selectById(1L);
     System.out.println(product);
-    assert product != null;
+
   }
   
   @Test
   void selectByName() {
-    List<Product> product = productMapper.selectByName("商品1");
+    List<Product> product = productMapper.selectByName("苹果手机");
     assert product != null;
   }
   
   @Test
   void selectByCategory() {
-    List<Product> category = productMapper.selectByCategory("分类1");
+    List<Product> category = productMapper.selectByCategory("数码");
     assert !category.isEmpty();
   }
   

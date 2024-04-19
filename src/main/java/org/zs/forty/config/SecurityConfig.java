@@ -16,18 +16,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.zs.forty.common.filter.JwtAuthTokenFilter;
-import org.zs.forty.common.manager.JwtAuthorizationManager;
-import org.zs.forty.handler.JwtAccessDeniedHandler;
-import org.zs.forty.handler.JwtAuthenticationEntryPoint;
-import org.zs.forty.handler.JwtLogoutSuccessHandler;
+import org.zs.forty.security.JwtAccessDeniedHandler;
+import org.zs.forty.security.JwtAuthTokenFilter;
+import org.zs.forty.security.JwtAuthenticationEntryPoint;
+import org.zs.forty.security.JwtAuthorizationManager;
+import org.zs.forty.security.JwtLogoutSuccessHandler;
 
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/22
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/22
+ * @description: Security 配置
  **/
 @Configuration
 @EnableWebSecurity
@@ -64,7 +64,7 @@ public class SecurityConfig {
   }
   
   /**
-   * @Description: 配置SecurityFilterChain过滤器链
+   * @description: 配置SecurityFilterChain过滤器链
    * @Param: HttpSecurity
    * @Return: SecurityFilterChain
    */

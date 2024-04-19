@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zs.forty.mapper.RankMapper">
+    <update id="delete">
+        UPDATE t_rank SET is_deleted = 1 WHERE rank_id = #{rankid} and is_deleted = 0
+    </update>
+
+    <update id="update">
+     update t_rank
+     <set>
+<!--         <if test="rankid != null and rankid != ''">-->
+<!--             rank_id=#{rankid}-->
+<!--         </if>-->
+         <if test="userid != null and userid != ''">
+             user_id = #{userid}
+         </if>
+         <if test="productid != null and productid != ''">
+             product_id = #{productid}
+         </if>
+         <if test="rankName != null and rankName != ''">
+             rank_name = #{rankName}
+         </if>
+         <if test="rankScore != null and rankScore != ''">
+             rank_score = #{rankScore}
+         </if>
+         <if test="rankPosition != null and rankPosition != ''">
+             rank_position = #{rankPosition}
+         </if>
+     </set>
+        WHERE rank_id = #{rankid}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="org.zs.forty.model.entity.Rank">
+        INSERT INTO t_rank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null and userid != ''">
+                user_id,
+            </if>
+            <if test="rankScore != null and rankScore != ''">
+                rank_score,
+            </if>
+            <if test="rankName != null and rankName != ''">
+                rank_name,
+            </if>
+            <if test="rankPosition != null and rankPosition != ''">
+                rank_position,
+            </if>
+            <if test="productid != null and productid != ''">
+                product_id,
+            </if>
+
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="userid != null and userid != ''">
+                #{userid}
+            </if>
+            <if test="rankScore != null and rankScore != ''">
+                #{rankScore}
+            </if>
+            <if test="rankName != null and rankName != ''">
+                #{rankName}
+            </if>
+            <if test="rankPosition != null and rankPosition != ''">
+                #{rankPosition}
+            </if>
+            <if test="productid != null and productid != ''">
+                #{productid}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByRankId" resultType="org.zs.forty.model.entity.Rank">
+        select * from t_rank where rank_id = #{rank_id} and is_delete = 0
+    </select>
+</mapper>

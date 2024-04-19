@@ -12,6 +12,10 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
   </resultMap>
+
+  <sql id="BaseComment">
+    id, from_uid, to_uid, story_id, context, create_time, update_time
+  </sql>
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Comment"
       keyProperty="id">
     INSERT INTO t_comment
@@ -28,12 +32,6 @@
       <if test="context != null">
         context,
       </if>
-      <!--      <if test="createTime != null">-->
-      <!--        create_time,-->
-      <!--      </if>-->
-      <!--      <if test="updateTime != null">-->
-      <!--        update_time,-->
-      <!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="fromUid != null">
@@ -48,12 +46,6 @@
       <if test="context != null">
         #{context},
       </if>
-      <!--      <if test="createTime != null">-->
-      <!--        #{createTime},-->
-      <!--      </if>-->
-      <!--      <if test="updateTime != null">-->
-      <!--        #{updateTime},-->
-      <!--      </if>-->
     </trim>
   </insert>
   <update id="update">
@@ -85,15 +77,28 @@
   <update id="delete">
     UPDATE t_comment SET is_deleted = 1 WHERE id = #{id}
   </update>
-  <delete id="deleteByStoryId"></delete>
-  <delete id="deleteByFromUid"></delete>
+  <delete id="deleteByStoryId">
+    UPDATE t_comment SET is_deleted = 1 WHERE story_id = #{storyId}
+  </delete>
+  <delete id="deleteByFromUid">
+    UPDATE t_comment SET is_deleted = 1 WHERE from_uid = #{fromUid}
+  </delete>
   <select id="selectById" resultMap="BaseResultMap">
-    SELECT * FROM t_comment WHERE id = #{id}
+    SELECT
+    <include refid="BaseComment"/>
+    FROM t_comment
+    WHERE id = #{id}
   </select>
   <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Comment">
-    SELECT * FROM t_comment WHERE story_id = #{storyId}
+    SELECT
+    <include refid="BaseComment"/>
+    FROM t_comment
+    WHERE story_id = #{storyId}
   </select>
   <select id="selectByFromUid" resultType="org.zs.forty.model.entity.Comment">
-    SELECT * FROM t_comment WHERE from_uid = #{fromUid}
+    SELECT
+    <include refid="BaseComment"/>
+    FROM t_comment
+    WHERE from_uid = #{fromUid}
   </select>
 </mapper>

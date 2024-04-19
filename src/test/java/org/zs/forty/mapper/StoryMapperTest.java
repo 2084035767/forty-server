@@ -9,9 +9,9 @@ import org.zs.forty.model.entity.Story;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/21
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/21
+ * @description:
  **/
 @SpringBootTest
 class StoryMapperTest {
@@ -20,7 +20,7 @@ class StoryMapperTest {
   
   @Test
   void selectListByUserId() {
-    List<Story> stories = storyMapper.selectListByCreateUser(1L);
+    List<Story> stories = storyMapper.selectListByCreateUser(3L);
     assert !stories.isEmpty();
   }
   

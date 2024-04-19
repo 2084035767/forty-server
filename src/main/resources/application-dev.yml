@@ -10,8 +10,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.80.123:3306/test?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
-    username: idea
+    url: jdbc:mysql://localhost/zhahuopu?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+    username: root
     password: 123456
   ########### redis配置 ################
   data:
@@ -27,6 +27,14 @@ spring:
           max-idle: 8     # 最大空闲连接，默认8
           min-idle: 0     # 最小空闲连接，默认0
 
+  ############ 配置rabbitmq #################
+  rabbitmq:
+    host: 192.168.80.123
+    port: 5672
+    username: idea
+    password: 123456
+    virtual-host: /
+
   ############ jackson 配置 ###################
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -35,6 +43,33 @@ spring:
       write-dates-as-timestamps: true
 
 
+  ############ email 配置 ###################
+  mail:
+    host: smtp.163.com #发送邮件服务器
+    username: jiangtdemail@163.com #发送邮件的邮箱地址
+    password: VHYBYJJPFDEUOWCG #客户端授权码
+    from: 肆拾杂货铺<jiangtdemail@163.com> #发送邮件的邮箱地址
+    protocol: smtp # 传输协议
+    default-encoding: UTF-8 # 编码方式
+    properties:
+      mail:
+        smtp:
+          port: 465 #端口号465或587
+          auth: true #是否开启权限验证
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+        starttls:
+          enable: true # 启用STARTTLS（安全传输层协议）
+  # 配置thymeleaf的相关信息
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML5
+    servlet:
+      content-type: text/html
 
 ############## MP 配置 #####################
 mybatis-plus:
@@ -73,7 +108,7 @@ jwt:
   # 为JWT基础信息加密和解密的密钥，长度需要大于等于43
   secret: oQZSeguYloAPAmKwvKqqnifiQatxMEPNOvtwPsCLasd
   # JWT令牌的有效时间，单位秒，默认2周
-  expiration: 14400
+  expiration: 7200
 
 # knife4j的增强配置，不需要增强可以不配
 springdoc:

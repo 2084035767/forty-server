@@ -2,16 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.MenuMapper">
-  <select id="selectMenuByRoleId" resultType="org.zs.forty.model.entity.Menu">
-    SELECT
-    m.id,
-    m.menu_name,
-    m.menu_path
-    m.menu_mark
-    FROM
-    t_menu m
-    LEFT JOIN t_role_menu rm
-    ON m.id = rm.menu_id
-    WHERE rm.role_id = #{roleId}
-  </select>
+    <insert id="add">
+        INSERT INTO t_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+<!--            <if test="MenuId != null and MenuId != ''">-->
+<!--                menu_id,-->
+<!--            </if>-->
+            <if test="menuName != null and menuName != ''">
+                menu_name,
+            </if>
+            <if test="menuMark != null and menuMark != ''">
+                menu_mark,
+            </if>
+            <if test="menuPath != null and menuPath != ''">
+                menu_path,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">
+                #{menuName},
+            </if>
+            <if test="menuMark != null and menuMark != ''">
+                #{menuMark},
+            </if>
+            <if test="menuPath != null and menuPath != ''">
+                #{menuPath},
+            </if>
+        </trim>
+
+    </insert>
+    <update id="update">
+        update t_menu
+        <set>
+<!--            <if test="MenuId != null and MenuId != ''">-->
+<!--                menu_id=#{MenuId}-->
+<!--            </if>-->
+            <if test="menuName != null and menuName != ''">
+                menu_name = #{menuName}
+            </if>
+            <if test="menuMark != null and menuMark != ''">
+                menu_mark = #{menuMark}
+            </if>
+            <if test="menuPath != null and menuPath != ''">
+                menu_path = #{menuPath}
+            </if>
+        </set>
+        WHERE menu_id = #{MenuId}
+    </update>
+
+    <update id="delete">
+        UPDATE t_menu SET is_delete = 1 WHERE menu_id = #{menu_id} AND is_delete = 0
+    </update>
+
+    <select id="selectMenuById" resultType="org.zs.forty.model.entity.Menu">
+        SELECT * FROM t_menu WHERE menu_id = #{menuId} and is_delete = 0
+    </select>
+
+    <select id="selectAllMenus" resultType="org.zs.forty.model.entity.Menu">
+        SELECT * FROM t_menu
+    </select>
+
 </mapper>

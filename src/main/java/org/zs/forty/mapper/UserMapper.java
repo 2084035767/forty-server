@@ -2,16 +2,16 @@ package org.zs.forty.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
 
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/14
- * @Description: UserMapper
+ * @author: 子十
+ * @date: 2024/1/14
+ * @description: UserMapper
  **/
 
 @Mapper
@@ -21,13 +21,18 @@ public interface UserMapper {
   
   User selectByUsername(String username);
   
-  User selectRoleByUsername(@Param("username") String username);
+  User selectByEmail(String email);
+  
+  User selectRoleByEmail(String email);
   
   List<User> selectList();
   
+  // todo；条件查询
+  List<User> selectListByCondition(UserDTO userDTO);
+  
+  Long insert(SignupDTO signupDTO);
+  
+  int updateById(UserDTO userDTO);
+  
   int deleteById(Long id);
-  
-  int updateById(UserDTO userDTO, Long id);
-  
-  Long insert(UserDTO userDTO);
 }

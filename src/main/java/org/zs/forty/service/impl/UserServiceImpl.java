@@ -17,9 +17,9 @@ import org.zs.forty.service.UserService;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description:
  **/
 @Slf4j
 @Service
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override public Boolean updateUser(UserDTO userDTO) {
-    return userMapper.updateById(userDTO, userDTO.getId()) > 0;
+    return userMapper.updateById(userDTO) > 0;
   }
   
   @Override public Boolean deleteUser(Long id) {
@@ -47,8 +47,12 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override public UserVO addUser(UserDTO userDTO) {
-    return mainMapper.user2VO(userMapper.selectById(userMapper.insert(userDTO)));
+    return null;
   }
+  
+  // @Override public UserVO addUser(UserDTO userDTO) {
+  //   return mainMapper.user2VO(userMapper.selectById(userMapper.insert(SignupDTO)));
+  // }
   
   @Override public List<UserVO> allUserByList(PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());

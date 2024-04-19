@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/13
- * @Description:
+ * @author: 子十
+ * @date: 2024/1/13
+ * @description: 产品实体类
  **/
 @Data
 @Builder
@@ -24,11 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
   @TableId(value = "id", type = IdType.AUTO)
-  protected Long id;
+  private Long id;
   private Long shopId;
   private String productName;
   private String productInfo;
-  private Long productPrice;
+  private Double productPrice;
   private String productImg;
   private String category;
   private Integer status;
@@ -36,7 +36,7 @@ public class Product {
   @TableField(exist = false)
   private List<Story> stories;
   @TableField(value = "create_time", fill = FieldFill.INSERT)
-  protected LocalDateTime createTime;
+  private LocalDateTime createTime;
   @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-  protected LocalDateTime updateTime;
+  private LocalDateTime updateTime;
 }

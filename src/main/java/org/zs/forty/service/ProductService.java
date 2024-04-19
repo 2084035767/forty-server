@@ -8,9 +8,9 @@ import org.zs.forty.model.vo.ProductVO;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/2/20
- * @Description:
+ * @author: 子十
+ * @date: 2024/2/20
+ * @description:
  **/
 public interface ProductService {
   // void findById(Integer id);

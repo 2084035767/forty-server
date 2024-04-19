@@ -5,9 +5,9 @@ import lombok.Getter;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/14
- * @Description: 状态码枚举
+ * @author: 子十
+ * @date: 2024/1/14
+ * @description: 状态码枚举
  **/
 @Getter
 public enum StatusEnum {

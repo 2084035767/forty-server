@@ -8,9 +8,9 @@ import org.zs.forty.model.entity.Comment;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/1/14
- * @Description:
+ * @author: 子十
+ * @date: 2024/1/14
+ * @description:
  **/
 @Mapper
 public interface CommentMapper {
