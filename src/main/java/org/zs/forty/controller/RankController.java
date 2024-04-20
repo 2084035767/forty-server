@@ -16,8 +16,8 @@ import org.zs.forty.service.RankService;
 public class RankController {
     @Resource private RankService rankService;
     @Operation(summary = "删除排行榜信息")
-    @DeleteMapping
-    public Boolean delete(@Valid @NotNull  Long rankId) {
+    @DeleteMapping("/{rankId}")
+    public Boolean delete(@Valid @NotNull @PathVariable Long rankId) {
         return rankService.delete(rankId);
     }
     @Operation(summary = "更新排行榜")
@@ -31,7 +31,7 @@ public class RankController {
         return rankService.insert(rankDTO);
     }
     @Operation(summary = "获取排行榜列表")
-    @PostMapping("/selectByRankId/{rankId}")
+    @PostMapping("/{rankId}")
     public RankVO selectByRankId(@Valid @NotNull @PathVariable("rankId") Long rankId) {
         return rankService.selectByRankId(rankId);
     }

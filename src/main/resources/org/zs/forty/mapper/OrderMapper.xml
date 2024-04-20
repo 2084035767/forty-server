@@ -2,11 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.OrderMapper">
-  <sql id="BaseOrder">
-    id, create_user, story_id, product_id, status, create_time, update_time
-  </sql>
 
-  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Order"
+
+  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.dto.UserDTO"
       keyProperty="id">
     INSERT INTO t_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -22,6 +20,12 @@
       <if test="createUser != null">
         create_user,
       </if>
+<!--      <if test="createTime != null">-->
+<!--        create_time,-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        update_time,-->
+<!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="storyId != null">
@@ -33,6 +37,15 @@
       <if test="status != null">
         #{status},
       </if>
+      <if test="createUser != null">
+        #{createUser},
+      </if>
+<!--      <if test="createTime != null">-->
+<!--        #{createTime},-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        #{updateTime},-->
+<!--      </if>-->
     </trim>
   </insert>
   <update id="updateById">
@@ -47,39 +60,38 @@
       <if test="status != null">
         status = #{status},
       </if>
+<!--      <if test="createTime != null">-->
+<!--        create_time = #{createTime},-->
+<!--      </if>-->
+<!--      <if test="UpdateTime != null">-->
+<!--        update_time = #{UpdateTime},-->
+<!--      </if>-->
+      <if test="createUser != null">
+        create_user = #{createUser},
+      </if>
     </set>
-    WHERE create_user = #{createUser}
+    where id = #{id}
   </update>
   <update id="deleteById">
-    update t_order set status = 0 WHERE id = #{id}
+    update t_order set status = 0 where id = #{id}
   </update>
   <delete id="deleteByCreateUser">
 
-    <!--    delete FROM t_order WHERE create_user = #{createUser}-->
+    <!--    delete from t_relation where create_user = #{createUser}-->
     <!-- todo-->
   </delete>
   <select id="selectById" resultType="org.zs.forty.model.entity.Order">
-    SELECT
-    <include refid="BaseOrder"/>
-    FROM t_order
-    WHERE id = #{id}
+    select * from t_order where id = #{id}
   </select>
   <select id="selectByProductId" resultType="org.zs.forty.model.entity.Order">
-    SELECT
-    <include refid="BaseOrder"/>
-    FROM t_order
-    WHERE product_id = #{productId}
+    select * from t_order where product_id = #{productId}
   </select>
   <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Order">
-    SELECT
-    <include refid="BaseOrder"/>
-    FROM t_order
-    WHERE story_id = #{storyId}
+    select * from t_order where story_id = #{storyId}
   </select>
   <select id="selectByCreateUser" resultType="org.zs.forty.model.entity.Order">
-    SELECT
-    <include refid="BaseOrder"/>
-    FROM t_order
-    WHERE create_user = #{createUser}
+    select * from t_order where create_user = #{createUser}
   </select>
+
+
 </mapper>

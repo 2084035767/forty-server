@@ -3,31 +3,40 @@ package org.zs.forty.mapper;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zs.forty.model.dto.MenuDTO;
 
-/**
- * -*- coding: utf-8 -*-
- *
- * @author: 子十
- * @date: 2024/3/21
- * @description:
- **/
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MenuMapperTest {
-  @Resource
-  private MenuMapper menuMapper;
-  
-  @Test
-  void selectList() {
-    // Set<Integer> = menuMapper.selectList();
-  }
-  
-  @Test
-  void selectMenuByRoleId() {
-    // List<Menu> menu = menuMapper.selectMenuByRoleId(1L);
-    // Set<String> menus = new HashSet<>();
-    // menus.add(menu.get(0).getMenuPath());
-    // menus.add("/user/info");
-    // menus.add("/user");
-    // System.out.println(menus.toString());
-  }
+   @Resource private MenuMapper menuMapper;
+    @Test
+    void selectMenuById() {
+        menuMapper.selectMenuById(2L);
+    }
+
+    @Test
+    void update() {
+        menuMapper.update(
+                MenuDTO.builder()
+                        .menuId(1L)
+                        .menuName("用户接口1")
+                        .build()
+        );
+    }
+
+    @Test
+    void add() {
+        Long test = menuMapper.add(
+                MenuDTO.builder()
+                        .menuName("111")
+                        .menuMark("222")
+                        .menuPath("555")
+                        .build()
+        );
+    }
+
+    @Test
+    void delete() {
+        menuMapper.delete(5L);
+    }
 }

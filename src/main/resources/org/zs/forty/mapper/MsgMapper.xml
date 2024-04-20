@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.MsgMapper">
-  <insert id="add" useGeneratedKeys="true" keyProperty="msgId"
-      parameterType="org.zs.forty.model.entity.Msg">
-    insert into t_msg
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="senderId != null ">
-        sender_id,
-      </if>
-      <if test="receiverId != null">
-        receiver_id,
-      </if>
-      <if test="msgContent != null and msgContent != ''">
-        msg_content,
-      </if>
-      <if test="msgType != null and msgType != ''">
-        msg_type,
-      </if>
-    </trim>
-    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-      <if test="senderId != null ">
-        #{senderId},
-      </if>
-      <if test="receiverId != null ">
-        #{receiverId},
-      </if>
-      <if test="msgContent != null ">
-        #{msgContent},
-      </if>
-      <if test="msgType != null and msgType != ''">
-        #{msgType},
-      </if>
-    </trim>
-  </insert>
-  <update id="update">
-    update t_msg
-    <set>
-      <if test="senderId != null ">
-        send_id = #{senderId},
-      </if>
-      <if test="receiverId != null ">
-        receiver_id = #{receiverId},
-      </if>
-      <if test="msgContent != null and msgContent != ''">
-        msg_content = #{msgContent},
-      </if>
-      <if test="msgType != null">
-        msg_type = #{msgType},
-      </if>
-    </set>
-    where msg_id = #{msgId}
-    and is_delete=0
-  </update>
-  <update id="deleteMsgById">
-    UPDATE t_msg SET is_delete = 1 WHERE msg_id = #{msg_id} AND is_delete = 0
-  </update>
+    <insert id="add" useGeneratedKeys="true" keyProperty="msgId"
+            parameterType="org.zs.forty.model.entity.Msg">
+        insert into t_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="senderId != null and senderId != ''">
+                sender_id,
+            </if>
+            <if test="receiverId != null and receiverId != ''">
+                receiver_id,
+            </if>
+            <if test="msgContent != null and msgContent != ''">
+                msg_content,
+            </if>
+            <if test="msgType != null and msgType != ''">
+                msg_type,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="senderId != null and senderId != ''">
+                #{senderId},
+            </if>
+            <if test="receiverId != null and receiverId != ''">
+                #{receiverId},
+            </if>
+            <if test="msgContent != null and msgContent != ''">
+                #{msgContent},
+            </if>
+            <if test="msgType != null and msgType != ''">
+                #{msgType},
+            </if>
+        </trim>
+    </insert>
+    <update id="update">
+        update t_msg
+        <set>
+            <if test="senderId != null">
+               send_id = #{senderId},
+            </if>
+            <if test="receiverId != null">
+               receiver_id = #{receiverId},
+            </if>
+            <if test="msgContent != null and msgContent != ''">
+                msg_content = #{msgContent},
+            </if>
+            <if test="msgType != null ">
+                msg_type = #{msgType},
+            </if>
+        </set>
+        WHERE msg_id = #{msgId}
+        AND is_delete= 0
+    </update>
+    <update id="deleteMsgById">
+        UPDATE t_msg SET is_delete = 1 WHERE msg_id = #{msg_id} AND is_delete = 0
+    </update>
 
-  <select id="selectMsgById" resultType="org.zs.forty.model.vo.MsgVO">
-    select * from t_msg where msg_id = #{msg_id} and is_delete = 0
-  </select>
+    <select id="selectMsgById" resultType="org.zs.forty.model.vo.MsgVO">
+        select * from t_msg where msg_id = #{msg_id} and is_delete = 0
+    </select>
 
 </mapper>

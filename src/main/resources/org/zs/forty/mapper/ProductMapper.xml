@@ -29,7 +29,7 @@
   </resultMap>
 
   <sql id="BaseProduct">
-    id, product_name, product_info, product_img,product_price, create_time, update_time,
+    id, product_name, product_info, product_img,product_price, create_time, update_time
   </sql>
 
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Product"
@@ -45,15 +45,21 @@
       <if test="productImg != null">
         product_img,
       </if>
+      <if test="productPrice != null">
+        product_price,
+      </if>
       <if test="category != null">
         category,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="status != null">
+        status,
       </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+<!--      <if test="createTime != null">-->
+<!--        create_time,-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        update_time,-->
+<!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="productName != null">
@@ -65,15 +71,21 @@
       <if test="productImg != null">
         #{productImg},
       </if>
+      <if test="productPrice != null">
+        #{productPrice},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
       <if test="category != null">
         #{category},
       </if>
-      <if test="createTime != null">
-        #{createTime},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime},
-      </if>
+<!--      <if test="createTime != null">-->
+<!--        #{createTime},-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        #{updateTime},-->
+<!--      </if>-->
     </trim>
   </insert>
   <update id="update">
@@ -87,6 +99,12 @@
       </if>
       <if test="productImg != null">
         product_img=#{productImg},
+      </if>
+      <if test="productPrice != null">
+        product_price = #{productPrice},
+      </if>
+      <if test="status != null">
+        status = #{status},
       </if>
       <if test="category != null">
         category=#{category},
