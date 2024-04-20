@@ -2,11 +2,12 @@ package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -17,7 +18,7 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 @Schema(description = "用户参数")
 public class UserDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;

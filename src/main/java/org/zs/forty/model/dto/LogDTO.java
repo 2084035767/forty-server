@@ -18,7 +18,7 @@ public class LogDTO implements Serializable {
     @Schema(description = "日志id")
     private Long logId;
     @Schema(description = "日志等级")
-    private Boolean logLevel;
+    private int logLevel;
     @Schema(description = "日志名称")
     @NotNull(message = "日志名称不能为空")
     private String logName;
@@ -27,7 +27,7 @@ public class LogDTO implements Serializable {
     private String message;
     @Schema(description = "用户id")
     @NotNull(message = "用户id不能为空")
-    private long userId;
+    private Long userId;
     @Schema(description = "是否删除")
     private Boolean isDelete;
 }

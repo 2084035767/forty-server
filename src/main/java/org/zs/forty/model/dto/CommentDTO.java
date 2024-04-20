@@ -3,9 +3,12 @@ package org.zs.forty.model.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Getter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -15,8 +18,8 @@ import lombok.Getter;
  * @description: 评论参数
  **/
 @Getter
-// @Setter
-// @Builder
+ @Setter
+ @Builder
 @Schema(description = "评论参数")
 public class CommentDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;

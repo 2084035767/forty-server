@@ -3,12 +3,10 @@ package org.zs.forty.model.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,7 +26,7 @@ public class MsgDTO implements Serializable {
         @NotNull(message = "消息内容不能为空")
         private String msgContent;
         @Schema(description = "消息类型")
-        private Long msgType;
+        private int msgType;
         @Schema(description = "是否已读")
         private Boolean isRead;
         @Schema(description = "是否归档")

@@ -72,6 +72,9 @@
       <if test="status != null">
         status = #{status},
       </if>
+      <if test="email != null">
+        email = #{email},
+      </if>
     </set>
     WHERE id = #{id}
     AND is_delete = 0

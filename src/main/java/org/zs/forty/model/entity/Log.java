@@ -20,7 +20,7 @@ public class Log {
     private Long logId;
     private String ipAdd;
     private Boolean isDelete;
-    private Long logLevel;
+    private int logLevel;
     private String logName;
     private String message;
     private Long userId;

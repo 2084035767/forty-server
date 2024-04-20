@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +26,7 @@ public class MsgVO implements Serializable {
         @Schema(description = "消息内容")
         private String msgContent;
         @Schema(description = "消息类型")
-        private Long msgType;
+        private int msgType;
         @Schema(description = "接收者")
         private Long receiverId;
         @Schema(description = "发送者")

@@ -17,17 +17,8 @@ class RoleMapperTest {
   private RoleMapper roleMapper;
   
   @Test
-  void selectListByUserId() {
-    // List<Role> roles = roleMapper.selectRoleById(1L);
-    // for (Role role : roles) {
-    //   List<Menu> menus = role.getMenus();
-    //   assert menus.size() > 1;
-    // }
-    
-    System.out.println(roleMapper.selectRoleById(1L));
-  }
-  
-  @Test
-  void selectRoleByName() {
+  void selectRoleById(){
+    roleMapper.selectRoleById(1L);
+
   }
 }

@@ -16,8 +16,8 @@ import org.zs.forty.service.LogService;
 public class LogController {
     @Resource private LogService logService;
     @Operation(summary = "获取日志列表")
-    @PostMapping("/findByLogId/{logId}")
-    public LogVO findByLogId(@Valid @NotNull @PathVariable("logId") Long logId){
+    @GetMapping("/{logId}")
+    public LogVO findByLogId(@PathVariable("logId") Long logId){
         return logService.findByLogId(logId);
     }
     @Operation(summary = "添加日志信息")
@@ -31,8 +31,8 @@ public class LogController {
         return logService.updateLog(logDTO);
     }
     @Operation(summary = "删除日志信息")
-    @DeleteMapping
-    public Boolean deleteLog(@Valid @NotNull  Long logId) {
+    @DeleteMapping("/{logId}")
+    public Boolean deleteLog(@Valid @NotNull @PathVariable Long logId) {
         return logService.deletelog(logId);
     }
 

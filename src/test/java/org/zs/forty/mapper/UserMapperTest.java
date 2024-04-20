@@ -1,13 +1,14 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.zs.forty.common.utils.AmqpUtil;
 import org.zs.forty.model.entity.User;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -35,14 +36,14 @@ class UserMapperTest {
   
   @Test
   void selectByUsername() {
-    User user1 = userMapper.selectByUsername("user1");
+    User user1 = userMapper.selectByUsername("2452730037");
     System.out.println(user1);
     assert user1 != null;
   }
   
   @Test
   void selectMenuByUsername() {
-    User user1 = userMapper.selectRoleByEmail("user1");
+    User user1 = userMapper.selectRoleByEmail("2452730037@qq.com");
     System.out.println(user1);
   }
   
@@ -54,15 +55,26 @@ class UserMapperTest {
   
   @Test
   void deleteById() {
+    userMapper.deleteById(4L);
   }
   
   @Test
   void updateById() {
+
   }
   
   @Test
   @Transactional
   void insert() {
+//    Long test = userMapper.insert(
+//            UserDTO.builder()
+//                    .nickname("hao")
+//                    .email("555")
+//                    .username("sss")
+//                    .password(passwordEncoder.encode("566")
+//
+//    );
+
     // SignupDTO signupDTO =
     //     SignupDTO.builder()
     //         .username("user1")
@@ -83,5 +95,6 @@ class UserMapperTest {
     //     .email("2084035767@qq.com")
     //     .build();
     // userMapper.insert(userDTO);
-  }
+
+   }
 }

@@ -4,69 +4,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.RankMapper">
     <update id="delete">
-        UPDATE t_rank SET is_deleted = 1 WHERE rank_id = #{rankId} and is_deleted = 0
+        UPDATE t_rank SET is_delete = 1 WHERE rank_id = #{rankId} and is_delete = 0
     </update>
 
     <update id="update">
      update t_rank
      <set>
-<!--         <if test="rankid != null and rankid != ''">-->
-<!--             rank_id=#{rankid}-->
-<!--         </if>-->
-         <if test="userId != null and userId != ''">
+         <if test="userId != null">
              user_id = #{userId}
          </if>
-         <if test="productId != null and productId != ''">
+         <if test="productId != null ">
              product_id = #{productId}
          </if>
          <if test="rankName != null and rankName != ''">
              rank_name = #{rankName}
          </if>
-         <if test="rankScore != null and rankScore != ''">
+         <if test="rankScore != null ">
              rank_score = #{rankScore}
          </if>
-         <if test="rankPosition != null and rankPosition != ''">
+         <if test="rankPosition != null">
              rank_position = #{rankPosition}
+         </if>
+         <if test="storyIds != null">
+             story_ids = #{storyIds}
          </if>
      </set>
         WHERE rank_id = #{rankId}
+        AND is_delete= 0
     </update>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="org.zs.forty.model.entity.Rank">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="rankId" parameterType="org.zs.forty.model.entity.Rank">
         INSERT INTO t_rank
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null and userId != ''">
+            <if test="userId != null">
                 user_id,
             </if>
-            <if test="rankScore != null and rankScore != ''">
+            <if test="rankScore != null">
                 rank_score,
             </if>
             <if test="rankName != null and rankName != ''">
                 rank_name,
             </if>
-            <if test="rankPosition != null and rankPosition != ''">
+            <if test="rankPosition != null">
                 rank_position,
             </if>
-            <if test="productId != null and productId != ''">
+            <if test="productId != null">
                 product_id,
+            </if>
+            <if test="storyIds != null">
+                story_ids,
             </if>
 
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-            <if test="userId != null and userId != ''">
-                #{userId}
+            <if test="userId != null">
+                #{userId},
             </if>
-            <if test="rankScore != null and rankScore != ''">
-                #{rankScore}
+            <if test="rankScore != null">
+                #{rankScore},
             </if>
             <if test="rankName != null and rankName != ''">
-                #{rankName}
+                #{rankName},
             </if>
-            <if test="rankPosition != null and rankPosition != ''">
-                #{rankPosition}
+            <if test="rankPosition != null">
+                #{rankPosition},
             </if>
-            <if test="productId != null and productId != ''">
-                #{productId}
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="storyIds != null">
+                #{storyIds},
             </if>
         </trim>
     </insert>

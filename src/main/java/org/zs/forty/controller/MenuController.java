@@ -19,7 +19,7 @@ public class MenuController {
      * 根据菜单ID查询菜单信息
      */
     @Operation(summary = "根据菜单ID查询菜单信息")
-    @PostMapping("/selectMenuById/{menuId}")
+    @PostMapping("/{menuId}")
     public MenuVO selectMenuById(@Valid @NotNull @PathVariable("menuId") Long menuId) {
         return menuService.selectMenuById(menuId);
     }
@@ -55,8 +55,8 @@ public class MenuController {
      * 删除菜单信息
      */
     @Operation(summary = "删除菜单信息")
-    @DeleteMapping
-    public Boolean delete(@NotNull @Valid  Long menuId) {
+    @DeleteMapping("/{menuId}")
+    public Boolean delete(@NotNull @Valid @PathVariable Long menuId) {
         return menuService.delete(menuId);
     }
 }

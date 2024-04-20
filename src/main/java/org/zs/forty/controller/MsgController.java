@@ -16,7 +16,7 @@ import org.zs.forty.service.MsgService;
 public class MsgController {
     @Resource private MsgService msgService;
     @Operation(summary = "获取通知列表")
-    @PostMapping("/selectMsgById/{msgId}")
+    @PostMapping("/{msgId}")
     public MsgVO selectMsgById(@Valid  @NotNull @PathVariable("msgId") Long msgId) {
         return (MsgVO) msgService.selectMsgById(msgId);
     }
@@ -31,8 +31,8 @@ public class MsgController {
         return msgService.updateMsg(msgDTO);
     }
     @Operation(summary = "删除通知")
-    @DeleteMapping
-    public Boolean deleteMsgById( @Valid @NotNull Long msgId) {
+    @DeleteMapping("/{msgId}")
+    public Boolean deleteMsgById( @Valid @NotNull @PathVariable Long msgId) {
         return msgService.deleteMsgById(msgId);
     }
 }

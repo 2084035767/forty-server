@@ -22,7 +22,7 @@ public class LogVO implements Serializable {
         @Schema(description = "日志id")
         private Long logId;
         @Schema(description = "日志等级")
-        private Long logLevel;
+        private int logLevel;
         @Schema(description = "日志名称")
         private String logName;
         @Schema(description = "日志信息")

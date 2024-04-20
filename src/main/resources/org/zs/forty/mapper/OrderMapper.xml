@@ -6,7 +6,7 @@
 
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.dto.UserDTO"
       keyProperty="id">
-    INSERT INTO t_relation
+    INSERT INTO t_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="storyId != null">
         story_id,
@@ -20,12 +20,12 @@
       <if test="createUser != null">
         create_user,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+<!--      <if test="createTime != null">-->
+<!--        create_time,-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        update_time,-->
+<!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="storyId != null">
@@ -40,16 +40,16 @@
       <if test="createUser != null">
         #{createUser},
       </if>
-      <if test="createTime != null">
-        #{createTime},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime},
-      </if>
+<!--      <if test="createTime != null">-->
+<!--        #{createTime},-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        #{updateTime},-->
+<!--      </if>-->
     </trim>
   </insert>
   <update id="updateById">
-    update t_relation
+    update t_order
     <set>
       <if test="storyId != null">
         story_id = #{storyId},
@@ -57,23 +57,23 @@
       <if test="productId != null">
         product_id = #{productId},
       </if>
-      <if test="Status != null">
-        status = #{Status},
+      <if test="status != null">
+        status = #{status},
       </if>
-      <if test="CreateTime != null">
-        create_time = #{CreateTime},
-      </if>
-      <if test="UpdateTime != null">
-        update_time = #{UpdateTime},
-      </if>
-      <if test="CreateUser != null">
-        create_user = #{CreateUser},
+<!--      <if test="createTime != null">-->
+<!--        create_time = #{createTime},-->
+<!--      </if>-->
+<!--      <if test="UpdateTime != null">-->
+<!--        update_time = #{UpdateTime},-->
+<!--      </if>-->
+      <if test="createUser != null">
+        create_user = #{createUser},
       </if>
     </set>
-    where create_user = #{createUser}
+    where id = #{id}
   </update>
   <update id="deleteById">
-    update t_relation set status = 0 where id = #{id}
+    update t_order set status = 0 where id = #{id}
   </update>
   <delete id="deleteByCreateUser">
 
@@ -81,16 +81,16 @@
     <!-- todo-->
   </delete>
   <select id="selectById" resultType="org.zs.forty.model.entity.Order">
-    select * from t_relation where id = #{id}
+    select * from t_order where id = #{id}
   </select>
   <select id="selectByProductId" resultType="org.zs.forty.model.entity.Order">
-    select * from t_relation where product_id = #{productId}
+    select * from t_order where product_id = #{productId}
   </select>
   <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Order">
-    select * from t_relation where story_id = #{storyId}
+    select * from t_order where story_id = #{storyId}
   </select>
   <select id="selectByCreateUser" resultType="org.zs.forty.model.entity.Order">
-    select * from t_relation where create_user = #{createUser}
+    select * from t_order where create_user = #{createUser}
   </select>
 
 

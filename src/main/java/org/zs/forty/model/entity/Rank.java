@@ -24,6 +24,7 @@ public class Rank {
     private Long rankPosition;
     private Long rankScore;
     private Long  userId;
+    private String storyIds;
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     protected LocalDateTime createTime;
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)

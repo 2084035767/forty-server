@@ -1,9 +1,11 @@
 package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Getter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Getter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -14,6 +16,7 @@ import lombok.Getter;
  **/
 
 @Getter
+@Builder
 @Schema(description = "角色参数")
 public class RoleDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;

@@ -22,7 +22,7 @@
     </select>
 
 
-    <insert id="add" keyProperty="log_id"  parameterType="org.zs.forty.model.entity.Log"
+    <insert id="add" keyProperty="logId"  parameterType="org.zs.forty.model.entity.Log"
         useGeneratedKeys="true">
      insert into t_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -38,12 +38,6 @@
             <if test="userId != null">
                 user_id,
             </if>
-<!--            <if test="createTime != null">-->
-<!--                create_time,-->
-<!--            </if>-->
-<!--            <if test="updateTime != null">-->
-<!--                update_time,-->
-<!--            </if>-->
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
            <if test="logLevel != null">
@@ -56,24 +50,15 @@
                 #{message},
             </if>
             <if test="userId != null">
-                #{userid},
+                #{userId},
             </if>
-<!--            <if test="createTime != null">-->
-<!--                #{create_time},-->
-<!--            </if>-->
-<!--            <if test="updateTime != null">-->
-<!--                #{update_time},-->
-<!--            </if>-->
         </trim>
     </insert>
 
     <update id="update">
         UPDATE t_log
         <set>
-<!--            <if test="logid != null and logid != ''">-->
-<!--                log_id = #{logid},-->
-<!--            </if>-->
-            <if test="logLevel != null and logLevel != ''">
+            <if test="logLevel != null ">
                 log_level = #{logLevel},
             </if>
             <if test="logName != null and logName != ''">
@@ -82,15 +67,16 @@
             <if test="message != null and message != ''">
                 message = #{message},
             </if>
-            <if test="userId != null and userId != ''">
+            <if test="userId != null ">
                 user_id=#{userId},
             </if>
         </set>
         WHERE log_id = #{logId}
+        AND is_delete= 0
     </update>
 
     <update id="delete">
-        UPDATE t_log SET is_deleted = 1 WHERE log_id = #{log_id} and is_deleted = 0
+        UPDATE t_log SET is_delete = 1 WHERE log_id = #{log_id} and is_delete = 0
     </update>
 
 

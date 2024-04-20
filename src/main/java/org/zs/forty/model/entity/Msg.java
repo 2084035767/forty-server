@@ -22,7 +22,7 @@ public class Msg {
         private Boolean isDelete;
         private Boolean isRead;
         private String msgContent;
-        private Long msgType;
+        private int msgType;
         private Long receiverId;
         private Long senderId;
         @TableField(value = "create_time", fill = FieldFill.INSERT)

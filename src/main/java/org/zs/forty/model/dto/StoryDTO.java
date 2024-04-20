@@ -4,9 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Getter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -16,6 +19,8 @@ import lombok.Getter;
  * @description: 故事参数
  **/
 @Getter
+@Setter
+@Builder
 @Schema(description = "故事参数")
 public class StoryDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;

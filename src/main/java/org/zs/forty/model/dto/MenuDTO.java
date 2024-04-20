@@ -1,12 +1,12 @@
 package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.io.Serializable;
-
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-
@@ -20,7 +20,7 @@ import lombok.Getter;
 @Schema(description = "菜单参数")
 public class MenuDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
-  private Long id;
+  private Long menuId;
   @Schema(description = "菜单路径")
   @NotNull(message = "menuPath不能为空")
   private String menuPath;

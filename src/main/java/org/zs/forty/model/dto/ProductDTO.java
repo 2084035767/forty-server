@@ -4,9 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Getter;
 
 /**
  * -*- coding: utf-8 -*-
@@ -16,6 +19,8 @@ import lombok.Getter;
  * @description: 产品参数
  **/
 @Getter
+@Builder
+@Setter
 @Schema(description = "产品参数")
 public class ProductDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
