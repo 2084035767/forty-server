@@ -1,98 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.LogMapper">
-    <resultMap id="LogResultMap" type="org.zs.forty.model.entity.Log">
-        <result column="log_id" property="logId"/>
-        <result column="log_level" property="logLevel"/>
-        <result column="log_name" property="logName"/>
-        <result column="message" property="message"/>
-        <result column="user_id" property="userId"/>
-        <result column="ip_add" property="ipAdd"/>
-        <result column="is_delete" property="isDelete"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+  <resultMap id="LogResultMap" type="org.zs.forty.model.entity.Log">
+    <result column="log_id" property="logId"/>
+    <result column="log_level" property="logLevel"/>
+    <result column="log_name" property="logName"/>
+    <result column="message" property="message"/>
+    <result column="user_id" property="userId"/>
+    <result column="ip_add" property="ipAdd"/>
+    <result column="is_delete" property="isDelete"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
 
-    </resultMap>
+  </resultMap>
 
-    <select id="selectByLogId"  resultMap="LogResultMap" resultType="org.zs.forty.model.entity.Log">
-        select * from t_log where log_id =#{log_id} AND
-        is_delete=0
-    </select>
+  <select id="selectByLogId" resultMap="LogResultMap" resultType="org.zs.forty.model.entity.Log">
+    select * from t_log where log_id =#{log_id} AND
+    is_delete=0
+  </select>
 
 
-    <insert id="add" keyProperty="log_id"  parameterType="org.zs.forty.model.entity.Log"
-        useGeneratedKeys="true">
-     insert into t_log
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="logLevel != null">
-                log_level,
-            </if>
-            <if test="logName != null">
-                log_name,
-            </if>
-            <if test="message != null">
-                message,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-<!--            <if test="createTime != null">-->
-<!--                create_time,-->
-<!--            </if>-->
-<!--            <if test="updateTime != null">-->
-<!--                update_time,-->
-<!--            </if>-->
-        </trim>
-        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-           <if test="logLevel != null">
-                #{logLevel},
-            </if>
-            <if test="logName != null">
-                #{logName},
-            </if>
-            <if test="message != null">
-                #{message},
-            </if>
-            <if test="userId != null">
-                #{userid},
-            </if>
-<!--            <if test="createTime != null">-->
-<!--                #{create_time},-->
-<!--            </if>-->
-<!--            <if test="updateTime != null">-->
-<!--                #{update_time},-->
-<!--            </if>-->
-        </trim>
-    </insert>
+  <insert id="add" keyProperty="logId" parameterType="org.zs.forty.model.entity.Log"
+      useGeneratedKeys="true">
+    INSERT INTO t_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logLevel != null">
+        log_level,
+      </if>
+      <if test="logName != null">
+        log_name,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+      <if test="logLevel != null">
+        #{logLevel},
+      </if>
+      <if test="logName != null">
+        #{logName},
+      </if>
+      <if test="message != null">
+        #{message},
+      </if>
+      <if test="userId != null">
+        #{userId},
+      </if>
+    </trim>
+  </insert>
 
-    <update id="update">
-        UPDATE t_log
-        <set>
-<!--            <if test="logid != null and logid != ''">-->
-<!--                log_id = #{logid},-->
-<!--            </if>-->
-            <if test="logLevel != null and logLevel != ''">
-                log_level = #{logLevel},
-            </if>
-            <if test="logName != null and logName != ''">
-                log_name = #{logName},
-            </if>
-            <if test="message != null and message != ''">
-                message = #{message},
-            </if>
-            <if test="userId != null and userId != ''">
-                user_id=#{userId},
-            </if>
-        </set>
-        WHERE log_id = #{logId}
-    </update>
+  <update id="update">
+    UPDATE t_log
+    <set>
+      <!--            <if test="logid != null and logid != ''">-->
+      <!--                log_id = #{logid},-->
+      <!--            </if>-->
+      <if test="logLevel != null and logLevel != ''">
+        log_level = #{logLevel},
+      </if>
+      <if test="logName != null and logName != ''">
+        log_name = #{logName},
+      </if>
+      <if test="message != null and message != ''">
+        message = #{message},
+      </if>
+      <if test="userId != null and userId != ''">
+        user_id=#{userId},
+      </if>
+    </set>
+    WHERE log_id = #{logId}
+  </update>
 
-    <update id="delete">
-        UPDATE t_log SET is_deleted = 1 WHERE log_id = #{log_id} and is_deleted = 0
-    </update>
-
+  <update id="delete">
+    UPDATE t_log SET is_deleted = 1 WHERE log_id = #{log_id} and is_deleted = 0
+  </update>
 
 
 </mapper>

@@ -75,6 +75,10 @@ public class ResultVO<T> implements Serializable {
     return new ResultVO<T>(statusEnum);
   }
   
+  public static <T> ResultVO<T> error() {
+    return new ResultVO<>(StatusEnum.SYSTEM_INNER_ERROR);
+  }
+  
   /**
    * 封装error的响应  可自定义错误信息
    *

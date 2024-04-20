@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.CommentDTO;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.CommentVO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.service.CommentService;
 
 /**
@@ -56,13 +56,13 @@ public class CommentController {
   
   @Operation(summary = "修改评论")
   @PutMapping
-  public Boolean UpdateComment(@Valid @RequestBody CommentDTO commentDTO) {
-    return commentService.updateComment(commentDTO);
+  public ResultVO UpdateComment(@Valid @RequestBody CommentDTO commentDTO) {
+    return commentService.updateComment(commentDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除评论")
-  @DeleteMapping
-  public Boolean DeleteComment(@Valid @NotNull @RequestParam Long id) {
-    return commentService.deleteComment(id);
+  @DeleteMapping("/{id}")
+  public ResultVO DeleteComment(@Valid @NotNull @PathVariable Long id) {
+    return commentService.deleteComment(id) ? ResultVO.success() : ResultVO.error();
   }
 }

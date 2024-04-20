@@ -19,10 +19,13 @@
       <result property="updateTime" column="update_time"/>
     </collection>
   </resultMap>
-   <sql id="BaseRoleMap">
-     id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId, menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark, menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
-   </sql>
-  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.mapper.RoleMapper" keyProperty="id">
+  <sql id="BaseRoleMap">
+    id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId,
+    menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark,
+    menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
+  </sql>
+  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.mapper.RoleMapper"
+      keyProperty="id">
     INSERT INTO t_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">
@@ -31,44 +34,44 @@
       <if test="roleDesc !=null">
         role_desc,
       </if>
-      <if test="createTime !=null">
-        create_time,
-      </if>
-      <if test="updateTime!=null">
-        update_time,
-      </if>
+      <!--      <if test="createTime !=null">-->
+      <!--        create_time,-->
+      <!--      </if>-->
+      <!--      <if test="updateTime!=null">-->
+      <!--        update_time,-->
+      <!--      </if>-->
     </trim>
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">
-         #{roleName},
+        #{roleName},
       </if>
       <if test="roleDesc !=null">
         #{roleDesc},
       </if>
-      <if test="createTime !=null">
-        #{createTime},
-      </if>
-      <if test="updateTime!=null">
-        #{updateTime},
-      </if>
+      <!--      <if test="createTime !=null">-->
+      <!--        #{createTime},-->
+      <!--      </if>-->
+      <!--      <if test="updateTime!=null">-->
+      <!--        #{updateTime},-->
+      <!--      </if>-->
     </trim>
   </insert>
   <update id="update">
     UPDATE t_role
-   <set>
-     <if test="roleName !=null">
+    <set>
+      <if test="roleName !=null">
         role_name = #{roleName},
       </if>
       <if test="roleDesc !=null">
         role_desc = #{roleDesc},
       </if>
-      <if test="updateTime!=null">
-        update_time = #{updateTime},
-      </if>
+      <!--      <if test="updateTime!=null">-->
+      <!--        update_time = #{updateTime},-->
+      <!--      </if>-->
       <if test="isDelete !=null">
         is_delete = #{isDelete},
       </if>
-   </set>
+    </set>
   </update>
   <delete id="delete">
     DELETE FROM t_role WHERE role_id = #{roleId}
@@ -87,10 +90,10 @@
     AND r.role_id = #{roleId}
   </select>
   <select id="selectByName" resultType="org.zs.forty.mapper.RoleMapper">
-    select  * from role where role_name = #{roleName} and is_delete = 0;
+    select * from role where role_name = #{roleName} and is_delete = 0;
 
   </select>
   <select id="selectByDesc" resultType="org.zs.forty.mapper.RoleMapper">
-    select  * from role where role_desc = #{roleDesc} and is_delete = 0;
+    select * from role where role_desc = #{roleDesc} and is_delete = 0;
   </select>
 </mapper>

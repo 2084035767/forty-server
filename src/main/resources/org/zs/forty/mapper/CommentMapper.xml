@@ -71,6 +71,7 @@
       <if test="fromUid != null">
         AND from_uid = #{fromUid}
       </if>
+
     </trim>
 
   </update>

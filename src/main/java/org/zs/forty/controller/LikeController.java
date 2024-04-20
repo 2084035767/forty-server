@@ -24,9 +24,9 @@ public class LikeController {
   
   @Operation(summary = "获取点赞列表")
   @PostMapping("/list")
-  public PageInfo<LikeVO> AllLike(@Valid @PathVariable Long LikeService,
+  public PageInfo<LikeVO> AllLike(@Valid @PathVariable Long likeId,
       @Valid @RequestBody PageDTO pageDTO) {
-    return new PageInfo<>(relationService.findByLikeId(LikeService, pageDTO));
+    return new PageInfo<>(relationService.findByLikeId(likeId, pageDTO));
   }
   
   @Operation(summary = "添加点赞")
