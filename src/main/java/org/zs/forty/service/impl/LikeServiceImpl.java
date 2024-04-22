@@ -14,39 +14,39 @@ import org.zs.forty.service.LikeService;
 @Service
 @MappingIgnore
 public class LikeServiceImpl implements LikeService {
+  
+  @Resource private LikeMapper likeMapper;
+  
+  @Override
+  public LikeVO findById(Long likeId) {
+    return likeMapper.selectByLikeId(likeId);
+  }
+  
+  @Override
+  public List<LikeVO> findByUserId(Long userId) {
     
-    @Resource private LikeMapper likeMapper;
+    return likeMapper.selectByUserId(userId);
+  }
+  
+  @Override
+  public List<LikeVO> findByStoryId(Long storyId) {
     
-    @Override
-    public LikeVO findById(Long likeId) {
-        return likeMapper.selectByLikeId(likeId);
-    }
+    return likeMapper.selectByStoryId(storyId);
+  }
+  
+  @Override
+  public Boolean deleteById(Long likeId) {
+    return likeMapper.deleteById(likeId) > 0;
+  }
+  
+  @Override
+  public LikeVO insert(LikeDTO likeDTO) {
     
-    @Override
-    public List<LikeVO> findByUserId(Long userId) {
-        
-        return likeMapper.selectByUserId(userId);
-    }
-    
-    @Override
-    public List<LikeVO> findByStoryId(Long storyId) {
-        
-        return likeMapper.selectByStoryId(storyId);
-    }
-    
-    @Override
-    public Boolean deleteById(Long likeId) {
-        return likeMapper.deleteById(likeId) > 0;
-    }
-    
-    @Override
-    public LikeVO insert(LikeDTO likeDTO) {
-        
-        return likeMapper.selectByLikeId(likeMapper.insert(likeDTO));
-    }
-    
-    @Override
-    public Boolean update(LikeDTO likeDTO) {
-        return likeMapper.update(likeDTO) > 0;
-    }
+    return likeMapper.selectByLikeId(likeMapper.insert(likeDTO));
+  }
+  
+  @Override
+  public Boolean update(LikeDTO likeDTO) {
+    return likeMapper.update(likeDTO) > 0;
+  }
 }
