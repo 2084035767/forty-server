@@ -73,9 +73,6 @@
     </update>
 
     <!-- 查询操作 -->
-    <select id="getLikeById" resultMap="LikeResultMap">
-        SELECT * FROM like WHERE like_id = #{likeId}
-    </select>
     <select id="selectAll" resultType="org.zs.forty.model.vo.LikeVO">
         select *  from t_like where is_delete = 0;
     </select>

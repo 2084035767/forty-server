@@ -7,7 +7,6 @@ import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
-import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.RoleDTO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.service.RoleService;
@@ -19,8 +18,8 @@ public class RoleController {
     @Resource private RoleService roleService;
     @Operation(summary="获取角色列表")
    @PostMapping("/list")
-    public PageInfo<RoleVO> AllRole(@Valid @RequestBody PageDTO pageDTO){
-        return new PageInfo<>(roleService.findAllRoles(pageDTO)) ;
+    public PageInfo<RoleVO> selectRoleId(@Valid@PathVariable@NotNull Long roleId){
+        return new PageInfo<>(roleService.findRoleId(roleId));
     }
     @Operation(summary = "添加角色")
     @PostMapping()

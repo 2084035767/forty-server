@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
-import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.UserInfoDTO;
 import org.zs.forty.model.vo.UserInfoVO;
 import org.zs.forty.service.UserInfoService;
@@ -19,8 +19,8 @@ public class UserInfoController {
 
     @Operation(summary = "获取用户信息列表")
     @PostMapping("/getUserInfoList")
-    public PageInfo<UserInfoVO> AllUserInfo (@Valid@RequestBody PageDTO pageDTO){
-        return new PageInfo<>(userInfoService.findAll(pageDTO));
+    public PageInfo<UserInfoVO> selectUserInfo (@Valid@RequestBody@NotNull Long id){
+        return new PageInfo<>(userInfoService.findByUserInfo(id));
 
     }
     @Operation(summary = "添加用户信息")
