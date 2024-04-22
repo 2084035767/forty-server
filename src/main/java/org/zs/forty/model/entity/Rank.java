@@ -23,9 +23,9 @@ public class Rank {
   private Long rankScore;
   private Long userId;
   private String storyIds;
+  private Boolean isDelete;
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   protected LocalDateTime createTime;
   @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
   protected LocalDateTime updateTime;
-  private Boolean isDelete;
 }

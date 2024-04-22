@@ -38,13 +38,13 @@ public class MsgController {
   
   @Operation(summary = "更新通知")
   @PutMapping
-  public ResultVO updateMsg(@Valid @RequestBody MsgDTO msgDTO) {
+  public ResultVO<Object> updateMsg(@Valid @RequestBody MsgDTO msgDTO) {
     return msgService.updateMsg(msgDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除通知")
   @DeleteMapping("/{msgId}")
-  public ResultVO deleteMsgById(@Valid @NotNull @PathVariable Long msgId) {
+  public ResultVO<Object> deleteMsgById(@Valid @NotNull @PathVariable Long msgId) {
     return msgService.deleteMsgById(msgId) ? ResultVO.success() : ResultVO.error();
   }
 }

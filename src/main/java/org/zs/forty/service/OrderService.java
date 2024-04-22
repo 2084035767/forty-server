@@ -19,11 +19,11 @@ public interface OrderService {
   
   List<OrderVO> findByCreateUser(Long createUser, PageDTO pageDTO);
   
-  OrderVO insert(OrderDTO relationDTO);
+  OrderVO insert(OrderDTO orderDTO);
   
   Boolean deleteById(Long id);
   
   Boolean deleteByUserId(Long createUser);
   
-  Boolean updateById(OrderDTO relationDTO);
+  Boolean updateById(OrderDTO orderDTO);
 }

@@ -24,6 +24,10 @@
     menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark,
     menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
   </sql>
+
+  <sql id="BadeRole">
+    id, role_name, role_desc, create_time, update_time
+  </sql>
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Role"
       keyProperty="id">
     INSERT INTO t_role
@@ -62,19 +66,22 @@
     AND is_delete = 0
   </update>
   <select id="selectByName" resultType="org.zs.forty.model.vo.RoleVO">
-    SELECT *
+    SELECT
+    <include refid="BadeRole"/>
     FROM role
     WHERE role_name = #{roleName}
     AND is_delete = 0;
   </select>
   <select id="selectRoleById" resultType="org.zs.forty.model.vo.RoleVO">
-    SELECT *
+    SELECT
+    <include refid="BadeRole"/>
     FROM role
     WHERE role_id = #{roleId}
     AND is_delete = 0;
   </select>
   <select id="selectAllRole" resultType="org.zs.forty.model.vo.RoleVO">
-    SELECT *
+    SELECT
+    <include refid="BadeRole"/>
     FROM role
     WHERE is_delete = 0;
   </select>

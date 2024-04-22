@@ -56,13 +56,13 @@ public class CommentController {
   
   @Operation(summary = "修改评论")
   @PutMapping
-  public ResultVO UpdateComment(@Valid @RequestBody CommentDTO commentDTO) {
+  public ResultVO<Object> UpdateComment(@Valid @RequestBody CommentDTO commentDTO) {
     return commentService.updateComment(commentDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除评论")
   @DeleteMapping("/{id}")
-  public ResultVO DeleteComment(@Valid @NotNull @PathVariable Long id) {
+  public ResultVO<Object> DeleteComment(@Valid @NotNull @PathVariable Long id) {
     return commentService.deleteComment(id) ? ResultVO.success() : ResultVO.error();
   }
 }

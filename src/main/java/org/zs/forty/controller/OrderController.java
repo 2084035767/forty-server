@@ -48,13 +48,13 @@ public class OrderController {
   
   @Operation(summary = "更新订单")
   @PutMapping
-  public ResultVO update(@Valid @RequestBody OrderDTO relationDTO) {
+  public ResultVO<Object> update(@Valid @RequestBody OrderDTO relationDTO) {
     return relationService.updateById(relationDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除订单")
   @DeleteMapping
-  public ResultVO delete(@Valid @RequestParam Long createUser) {
+  public ResultVO<Object> delete(@Valid @RequestParam Long createUser) {
     return relationService.deleteById(createUser) ? ResultVO.success() : ResultVO.error();
   }
 }

@@ -26,13 +26,13 @@ public class RankController {
   
   @Operation(summary = "删除排行榜信息")
   @DeleteMapping("/{rankId}")
-  public ResultVO delete(@Valid @NotNull @PathVariable Long rankId) {
+  public ResultVO<Object> delete(@Valid @NotNull @PathVariable Long rankId) {
     return rankService.delete(rankId) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "更新排行榜")
   @PutMapping
-  public ResultVO update(@Valid @RequestBody RankDTO rankDTO) {
+  public ResultVO<Object> update(@Valid @RequestBody RankDTO rankDTO) {
     return rankService.update(rankDTO) ? ResultVO.success() : ResultVO.error();
   }
   

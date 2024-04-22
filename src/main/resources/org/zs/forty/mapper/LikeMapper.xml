@@ -1,86 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.LikeMapper">
-    <sql id="BaseLike">
-        like_id,user_id,story_id，create_time, update_time
-    </sql>
+  <sql id="BaseLike">
+    like_id,user_id,story_id
+  </sql>
 
-    <resultMap id="LikeResultMap" type="org.zs.forty.mapper.LikeMapper">
-    </resultMap>
-    <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Like" keyProperty="likeId">
-        INSERT INTO t_like
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="likeId !=null">
-                like_id,
-            </if>
-            <if test="userid !=null">
-                user_id,
-            </if>
-            <if test="storyId !=null">
-                story_id,
-            </if>
-        </trim>
-        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-            <if test="likeId !=null">
-               #{ likeId},
-            </if>
-            <if test="userid !=null">
-                #{userId},
-            </if>
-            <if test="storyId !=null">
-                #{storyId},
-            </if>
-        </trim>
-    </insert>
-    <update id="update">
-        UPDATE t_like
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="likeId !=null">
-                like_id = #{likeId},
-            </if>
-            <if test="userid !=null">
-                user_id = #{userId},
-            </if>
-            <if test="storyId !=null">
-                story_id = #{storyId},
-            </if>
+  <resultMap id="LikeResultMap" type="org.zs.forty.mapper.LikeMapper">
+  </resultMap>
+  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Like"
+      keyProperty="likeId">
+    INSERT INTO t_like
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId !=null">
+        user_id,
+      </if>
+      <if test="storyId !=null">
+        story_id,
+      </if>
+    </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+      <if test="userId !=null">
+        #{userId},
+      </if>
+      <if test="storyId !=null">
+        #{storyId},
+      </if>
+    </trim>
+  </insert>
+  <update id="update">
+    UPDATE t_like
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId !=null">
+        user_id = #{userId},
+      </if>
+      <if test="storyId !=null">
+        story_id = #{storyId},
+      </if>
+    </trim>
+    WHERE like_id = #{likeId}
+    AND is_delete = 0
+  </update>
+  <update id="deleteById">
+    UPDATE t_like
+    SET is_delete = 1
+    WHERE id = #{id}
+    AND is_delete = 0
+  </update>
+  <!-- 查询操作 -->
+  <select id="selectAll" resultType="org.zs.forty.model.vo.LikeVO">
+    SELECT
+    <include refid="BaseLike"/>
+    FROM t_like
+    WHERE is_delete = 0;
+  </select>
+  <select id="selectByLikeId" resultType="org.zs.forty.model.vo.LikeVO">
+    SELECT
+    <include refid="BaseLike"/>
+    FROM t_like
+    WHERE like_id = #{likeId};
+  </select>
 
-        </trim>
-    </update>
-    <update id="updateById">
-        UPDATE t_like
-        SET is_delete = 1
-        WHERE id = #{id}
-        AND is_delete = 0
-    </update>
-    <delete id="deleteById">
-        UPDATE t_like
-        SET is_delete = 1
-        WHERE id = #{id}
-        AND is_delete = 0
-    </delete>
-    <!-- 查询操作 -->
-    <select id="selectAll" resultType="org.zs.forty.model.vo.LikeVO">
-        SELECT *
-        FROM t_like
-        WHERE is_delete = 0;
-    </select>
-    <select id="selectByLikeId" resultType="org.zs.forty.model.vo.LikeVO">
-        SELECT *
-        FROM t_like
-        WHERE like_id = #{likeId};
-    </select>
-
-    <select id="selectByUserId" resultType="org.zs.forty.model.vo.LikeVO">
-        SELECT *
-        FROM t_like
-        WHERE user_id = #{userId};
-    </select>
-    <select id="selectByStoryId" resultType="org.zs.forty.model.vo.LikeVO">
-        SELECT *
-        FROM t_like
-        WHERE story_id = #{storyId};
-    </select>
+  <select id="selectByUserId" resultType="org.zs.forty.model.vo.LikeVO">
+    SELECT
+    <include refid="BaseLike"/>
+    FROM t_like
+    WHERE user_id = #{userId};
+  </select>
+  <select id="selectByStoryId" resultType="org.zs.forty.model.vo.LikeVO">
+    SELECT
+    <include refid="BaseLike"/>
+    FROM t_like
+    WHERE story_id = #{storyId};
+  </select>
 
 </mapper>

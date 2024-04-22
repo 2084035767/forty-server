@@ -3,11 +3,30 @@ package org.zs.forty.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.zs.forty.model.dto.EmailDTO;
-import org.zs.forty.model.dto.LogDTO;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
-import org.zs.forty.model.entity.*;
-import org.zs.forty.model.vo.*;
+import org.zs.forty.model.entity.Comment;
+import org.zs.forty.model.entity.Log;
+import org.zs.forty.model.entity.Menu;
+import org.zs.forty.model.entity.Msg;
+import org.zs.forty.model.entity.Order;
+import org.zs.forty.model.entity.Product;
+import org.zs.forty.model.entity.Rank;
+import org.zs.forty.model.entity.Role;
+import org.zs.forty.model.entity.Story;
+import org.zs.forty.model.entity.User;
+import org.zs.forty.model.entity.UserInfo;
+import org.zs.forty.model.vo.CommentVO;
+import org.zs.forty.model.vo.LogVO;
+import org.zs.forty.model.vo.MenuVO;
+import org.zs.forty.model.vo.MsgVO;
+import org.zs.forty.model.vo.OrderVO;
+import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.RankVO;
+import org.zs.forty.model.vo.RoleVO;
+import org.zs.forty.model.vo.StoryVO;
+import org.zs.forty.model.vo.UserInfoVO;
+import org.zs.forty.model.vo.UserVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -46,9 +65,9 @@ public interface MainMapper {
   
   List<UserInfoVO> userInfoList2VO(List<UserInfo> vo);
   
-  OrderVO relation2VO(Order po);
+  OrderVO order2VO(Order po);
   
-  List<OrderVO> relationList2VO(List<Order> vo);
+  List<OrderVO> orderList2VO(List<Order> vo);
   
   MenuVO menu2VO(Menu po);
   
@@ -57,10 +76,16 @@ public interface MainMapper {
   UserDTO Signup2DTO(SignupDTO dto);
   
   EmailDTO email2DTO(SignupDTO dto);
+  
   LogVO log2VO(Log po);
+  
   List<LogVO> logList2VO(List<Log> vo);
+  
   MsgVO msg2VO(Msg po);
+  
   List<MsgVO> msgList2VO(List<Msg> vo);
+  
   RankVO rank2VO(Rank po);
+  
   List<RankVO> rankList2VO(List<Rank> vo);
 }
