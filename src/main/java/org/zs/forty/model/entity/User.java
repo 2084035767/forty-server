@@ -31,14 +31,14 @@ public class User implements UserDetails {
   private String email;
   private Integer status;
   private Boolean isDelete;
-  @TableField(value = "create_time", fill = FieldFill.INSERT)
-  private LocalDateTime createTime;
-  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-  private LocalDateTime updateTime;
   @TableField(exist = false)
   private List<Role> roles;
   @TableField(exist = false)
   private Collection<? extends GrantedAuthority> authorities;
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
+  private LocalDateTime createTime;
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+  private LocalDateTime updateTime;
   
   @Override public Collection<? extends GrantedAuthority> getAuthorities() {
     return this.authorities;
