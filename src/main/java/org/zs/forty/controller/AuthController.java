@@ -43,7 +43,7 @@ public class AuthController {
   
   @Operation(summary = "用户注销")
   @PostMapping("/logout")
-  public ResultVO userLogout() {
+  public ResultVO<Object> userLogout() {
     return authService.logout() ? ResultVO.success() : ResultVO.error();
   }
 }

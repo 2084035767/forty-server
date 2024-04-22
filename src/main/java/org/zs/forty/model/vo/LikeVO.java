@@ -18,7 +18,7 @@ public class LikeVO implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
     private Long likeId;
     @Schema(description = "用户id")
-    private Long userid;
+    private Long userId;
     @Schema(description = "故事id")
     private Long storyId;
 

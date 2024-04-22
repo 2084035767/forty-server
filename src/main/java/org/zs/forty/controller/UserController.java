@@ -43,14 +43,15 @@ public class UserController {
   
   @PutMapping("/info/{id}")
   @Operation(summary = "更新用户信息")
-  public ResultVO UpdateUserInfo(@PathVariable Long id, @Valid @RequestBody UserDTO userdto) {
+  public ResultVO<Object> UpdateUserInfo(@PathVariable Long id,
+      @Valid @RequestBody UserDTO userdto) {
     userdto.setId(id);
     return userService.updateUser(userdto) ? ResultVO.success() : ResultVO.error();
   }
   
   @DeleteMapping
   @Operation(summary = "删除用户")
-  public ResultVO DeleteUser(@RequestParam Long id) {
+  public ResultVO<Object> DeleteUser(@RequestParam Long id) {
     return userService.deleteUser(id) ? ResultVO.success() : ResultVO.error();
   }
   

@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "菜单响应")
 public class MenuVO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
-  private Long id;
+  private Long menuId;
   @Schema(description = "菜单路径")
   private String menuPath;
   @Schema(description = "菜单名称")

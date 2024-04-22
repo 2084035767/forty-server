@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.RoleDTO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.service.RoleService;
 
@@ -29,20 +30,20 @@ public class RoleController {
   }
   
   @Operation(summary = "添加角色")
-  @PostMapping()
+  @PostMapping
   public RoleVO AddRole(@Valid @RequestBody RoleDTO roleDTO) {
     return roleService.insert(roleDTO);
   }
   
   @Operation(summary = "删除角色")
   @DeleteMapping("/{roleId}")
-  public Boolean DeleteRole(@Valid @PathVariable @NotNull Long roleId) {
-    return roleService.deleteById(roleId);
+  public ResultVO<Object> DeleteRole(@Valid @PathVariable @NotNull Long roleId) {
+    return roleService.deleteById(roleId) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "更新角色")
-  @PutMapping()
-  public Boolean UpdateRole(@Valid @RequestBody RoleDTO roleDTO) {
-    return roleService.update(roleDTO);
+  @PutMapping
+  public ResultVO<Object> UpdateRole(@Valid @RequestBody RoleDTO roleDTO) {
+    return roleService.update(roleDTO) ? ResultVO.success() : ResultVO.error();
   }
 }

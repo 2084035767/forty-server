@@ -61,14 +61,14 @@ public class StoryController {
   
   @Operation(summary = "删除故事")
   @DeleteMapping
-  public ResultVO DeleteStory(@RequestParam Long createUser,
+  public ResultVO<Object> DeleteStory(@RequestParam Long createUser,
       @RequestParam Long storyId) {
     return storyService.deleteStory(createUser, storyId) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "更新故事")
   @PutMapping
-  public ResultVO UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
+  public ResultVO<Object> UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
     return storyService.updateStory(storyDTO) ? ResultVO.success() : ResultVO.error();
   }
 }
