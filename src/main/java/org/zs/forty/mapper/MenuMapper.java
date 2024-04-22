@@ -16,14 +16,14 @@ import org.zs.forty.model.vo.MenuVO;
  **/
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
-   MenuVO selectMenuById(Long menuId);
-   
-   //   List<Menu> selectAllMenus();
-   int update(MenuDTO menuDTO);
-   
-   Long add(MenuDTO menuDTO);
-   
-   int delete(Long menuId);
-   
-   List<MenuVO> selectAllMenus();
+  MenuVO selectMenuById(Long menuId);
+  
+  //   List<Menu> selectAllMenus();
+  int update(MenuDTO menuDTO);
+  
+  Long add(MenuDTO menuDTO);
+  
+  int delete(Long menuId);
+  
+  List<MenuVO> selectAllMenus();
 }
