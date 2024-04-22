@@ -5,10 +5,11 @@ import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import java.io.Serial;
-import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-

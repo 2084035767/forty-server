@@ -1,8 +1,9 @@
 package org.zs.forty.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.RoleDTO;
-import org.zs.forty.model.entity.Role;
+import org.zs.forty.model.vo.RoleVO;
 
 import java.util.List;
 
@@ -15,17 +16,18 @@ import java.util.List;
  **/
 @Mapper
 public interface RoleMapper {
-  Role selectRoleById(Long id);
+  List<RoleVO> selectRoleById(Long id);
+  List<RoleVO> selectRoleById(PageDTO pageDTO);
+  List<RoleVO> selectByName(String roleName);
 
-  List<RoleMapper> selectByName(String roleName);
+  List<RoleVO> selectByDesc(String roleDesc);
 
-  List<RoleMapper> selectByDesc(String roleDesc);
+  RoleVO insert(RoleDTO roleDTO);
 
-  Long insert(RoleDTO roleDTO);
+  Boolean update(RoleDTO roleDTO);
 
-  int update(RoleDTO roleDTO);
+  Boolean delete(Long id);
 
-  int delete(Long id);
 
 
 }
