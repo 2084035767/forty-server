@@ -12,13 +12,13 @@ import java.io.Serializable;
 public class LikeDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private Long like_id;
+    private Long likeId;
     @Schema(description = "用户id")
     @NotNull(message = "userid不能为空")
-    private Long user_id;
+    private Long userId;
     @Schema(description = "故事id")
     @NotNull(message = "story_id不能为空")
-    private Long story_id;
+    private Long storyId;
 
 
 

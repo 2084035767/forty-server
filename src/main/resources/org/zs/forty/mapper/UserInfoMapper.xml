@@ -17,24 +17,22 @@
             <if test="email != null">email,</if>
             <if test="address != null">address,</if>
             <if test="user_add != null">user_add,</if>
-            <if test="create_time != null">create_time,</if>
-            <if test="update_time != null">update_time,</if>
+
         </trim>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
-            <if test="user_name != null">user_name,</if>
+            <if test="user_name != null">user_Name,</if>
             <if test="age != null">age,</if>
             <if test="sex != null">sex,</if>
             <if test="phone != null">phone,</if>
             <if test="email != null">email,</if>
             <if test="address != null">address,</if>
-            <if test="user_add != null">user_add,</if>
-            <if test="create_time != null">create_time,</if>
-            <if test="update_time != null">update_time,</if>
+            <if test="user_add != null">user_Add,</if>
+
         </trim>
     </insert>
-    <update id="update" parameterType="org.zs.forty.model.vo.UserInfoVO">
-        UPDATE t_userinfo
+    <update id="update" >
+        UPDATE t_user_info
       <set>
           <if test="id != null">id=#{id},</if>
           <if test="user_name != null">user_name=#{userName},</if>
@@ -46,17 +44,26 @@
           <if test="user_add != null">user_add=#{useradd},</if>
       </set>
     </update>
+    <update id="deleteById">
+        UPDATE t_user_info
+        SET is_delete = 1
+        WHERE id = #{id}
+        AND is_delete = 0
+    </update>
     <select id="selectById" resultType="org.zs.forty.model.vo.UserInfoVO">
-        select * from user_info where id = #{id}
+        SELECT *
+        FROM user_info
+        WHERE id = #{id}
     </select>
     <select id="selectByUserId" resultType="org.zs.forty.model.vo.UserInfoVO">
-        select * from user_info where id = #{userid}
+        SELECT *
+        FROM user_info
+        WHERE id = #{userId}
     </select>
     <select id="selectByUseradd" resultType="org.zs.forty.model.vo.UserInfoVO">
-        select * from user_info where user_add = #{useradd}
+        SELECT *
+        FROM user_info
+        WHERE user_add = #{userAdd}
     </select>
-    <delete id="deleteById">
-        delete from user_info where id = #{id}
-    </delete>
 
 </mapper>

@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
   
   @Override
   public RoleVO findRoleId(Long roleId) {
-    return roleMapper.selectRoleId(roleId);
+    return roleMapper.selectRoleById(roleId);
   }
   
   @Override
@@ -35,11 +35,11 @@ public class RoleServiceImpl implements RoleService {
   
   @Override
   public Boolean deleteById(Long id) {
-    return roleMapper.deleteById(id);
+    return roleMapper.deleteById(id) >0;
   }
   
   @Override
   public Boolean update(RoleDTO roleDTO) {
-    return roleMapper.update(roleDTO);
+    return roleMapper.update(roleDTO) >0;
   }
 }

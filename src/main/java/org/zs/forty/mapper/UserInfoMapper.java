@@ -9,13 +9,13 @@ import java.util.List;
 @Mapper
 public interface UserInfoMapper {
 
-    List<UserInfoVO> selectById(Long id);
+    UserInfoVO selectById(Long id);
     List<UserInfoVO> selectByUserId(Long userId);
     List<UserInfoVO> selectByUseradd(String useradd);
     UserInfoVO insert (UserInfoDTO userInfoDTO);
-    Boolean update(UserInfoDTO userInfoDTO);
+    int update(UserInfoDTO userInfoDTO);
 
-    Boolean deleteById(Long id);
+    int deleteById(Long id);
 
 
 

@@ -1,7 +1,6 @@
 package org.zs.forty.service.impl;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import org.zs.forty.mapper.UserInfoMapper;
 import org.zs.forty.model.dto.UserInfoDTO;
@@ -14,7 +13,7 @@ public class UserInfoServiceImpl implements UserInfoService {
   @Resource private UserInfoMapper userInfoMapper;
   
   @Override
-  public List<UserInfoVO> findByUserInfo(Long id) {
+  public UserInfoVO findByUserInfo(Long id) {
     return userInfoMapper.selectById(id);
   }
   
@@ -25,11 +24,11 @@ public class UserInfoServiceImpl implements UserInfoService {
   
   @Override
   public Boolean update(UserInfoDTO userInfoDTO) {
-    return userInfoMapper.update(userInfoDTO);
+    return userInfoMapper.update(userInfoDTO) >0;
   }
   
   @Override
   public Boolean deleteById(Long id) {
-    return userInfoMapper.deleteById(id);
+    return userInfoMapper.deleteById(id)>0;
   }
 }
