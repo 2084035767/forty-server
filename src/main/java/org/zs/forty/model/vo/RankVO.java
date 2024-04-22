@@ -25,4 +25,6 @@ public class RankVO implements Serializable {
     private Long rankScore;
     @Schema(description = "用户ID")
     private Long userId;
+    @Schema(description = "故事ID数组")
+    private String storyIds;
 }

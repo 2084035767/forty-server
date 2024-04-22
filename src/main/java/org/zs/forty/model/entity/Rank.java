@@ -15,16 +15,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rank {
-    @TableId(value = "rank_id", type = IdType.AUTO)
-    private Long rankId;
-    private Boolean isDelete;
-    private Long productId;
-    private String rankName;
-    private Long rankPosition;
-    private Long rankScore;
-    private Long userId;
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    protected LocalDateTime createTime;
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    protected LocalDateTime updateTime;
+  @TableId(value = "rank_id", type = IdType.AUTO)
+  private Long rankId;
+  private Long productId;
+  private String rankName;
+  private Long rankPosition;
+  private Long rankScore;
+  private Long userId;
+  private String storyIds;
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
+  protected LocalDateTime createTime;
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+  protected LocalDateTime updateTime;
+  private Boolean isDelete;
 }

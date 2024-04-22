@@ -2,15 +2,15 @@ package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
 @Getter
 @Setter
-// @Builder
+@Builder
 @Schema(description = "排行榜参数")
 public class RankDTO implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
@@ -31,4 +31,7 @@ public class RankDTO implements Serializable {
     @Schema(description = "用户ID")
     @NotNull(message = "用户ID不能为空")
     private Long userId;
+    @Schema(description = "故事ID数组")
+    @NotNull(message = "故事ID数组不能为空")
+    private String storyIds;
 }

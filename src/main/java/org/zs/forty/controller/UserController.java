@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.UserDTO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.UserService;
 
@@ -43,15 +43,15 @@ public class UserController {
   
   @PutMapping("/info/{id}")
   @Operation(summary = "更新用户信息")
-  public Boolean UpdateUserInfo(@PathVariable Long id, @Valid @RequestBody UserDTO userdto) {
+  public ResultVO UpdateUserInfo(@PathVariable Long id, @Valid @RequestBody UserDTO userdto) {
     userdto.setId(id);
-    return userService.updateUser(userdto);
+    return userService.updateUser(userdto) ? ResultVO.success() : ResultVO.error();
   }
   
   @DeleteMapping
   @Operation(summary = "删除用户")
-  public Boolean DeleteUser(@RequestParam Long id) {
-    return userService.deleteUser(id);
+  public ResultVO DeleteUser(@RequestParam Long id) {
+    return userService.deleteUser(id) ? ResultVO.success() : ResultVO.error();
   }
   
   @PostMapping("/list")

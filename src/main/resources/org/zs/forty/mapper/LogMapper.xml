@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.LogMapper">
-  <resultMap id="LogResultMap" type="org.zs.forty.model.entity.Log">
+  <resultMap id="LogBaseMap" type="org.zs.forty.model.entity.Log">
     <result column="log_id" property="logId"/>
     <result column="log_level" property="logLevel"/>
     <result column="log_name" property="logName"/>
@@ -13,16 +13,16 @@
     <result column="is_delete" property="isDelete"/>
     <result column="create_time" property="createTime"/>
     <result column="update_time" property="updateTime"/>
-
   </resultMap>
 
-  <select id="selectByLogId" resultMap="LogResultMap" resultType="org.zs.forty.model.entity.Log">
-    select * from t_log where log_id =#{log_id} AND
-    is_delete=0
+  <select id="selectByLogId" resultMap="LogBaseMap">
+    SELECT * from t_log
+    WHERE log_id =#{logId}
+    AND is_delete=0
   </select>
 
 
-  <insert id="add" keyProperty="logId" parameterType="org.zs.forty.model.entity.Log"
+  <insert id="add" keyProperty="logId" parameterType="org.zs.forty.model.dto.LogDTO"
       useGeneratedKeys="true">
     INSERT INTO t_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -38,6 +38,9 @@
       <if test="userId != null">
         user_id,
       </if>
+      <if test="ipAdd != null">
+        ip_add,
+      </if>
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="logLevel != null">
@@ -52,16 +55,16 @@
       <if test="userId != null">
         #{userId},
       </if>
+      <if test="ipAdd != null">
+        ipAdd,
+      </if>
     </trim>
   </insert>
 
   <update id="update">
     UPDATE t_log
     <set>
-      <!--            <if test="logid != null and logid != ''">-->
-      <!--                log_id = #{logid},-->
-      <!--            </if>-->
-      <if test="logLevel != null and logLevel != ''">
+      <if test="logLevel != null ">
         log_level = #{logLevel},
       </if>
       <if test="logName != null and logName != ''">
@@ -70,16 +73,21 @@
       <if test="message != null and message != ''">
         message = #{message},
       </if>
-      <if test="userId != null and userId != ''">
+      <if test="userId != null ">
         user_id=#{userId},
+      </if>
+      <if test="ipAdd != null">
+        ip_add = #{ipAdd},
       </if>
     </set>
     WHERE log_id = #{logId}
+    AND is_delete= 0
   </update>
 
   <update id="delete">
-    UPDATE t_log SET is_deleted = 1 WHERE log_id = #{log_id} and is_deleted = 0
+    UPDATE t_log
+    SET is_delete = 1
+    WHERE log_id = #{logId}
+    AND is_delete = 0
   </update>
-
-
 </mapper>

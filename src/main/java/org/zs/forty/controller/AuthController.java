@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.LoginDTO;
 import org.zs.forty.model.dto.SignupDTO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
 
@@ -42,7 +43,7 @@ public class AuthController {
   
   @Operation(summary = "用户注销")
   @PostMapping("/logout")
-  public Boolean userLogout() {
-    return authService.logout();
+  public ResultVO userLogout() {
+    return authService.logout() ? ResultVO.success() : ResultVO.error();
   }
 }

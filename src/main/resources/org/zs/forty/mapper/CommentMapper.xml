@@ -76,7 +76,7 @@
 
   </update>
   <update id="delete">
-    UPDATE t_comment SET is_deleted = 1 WHERE id = #{id}
+    UPDATE t_comment SET is_delete = 1 WHERE id = #{id}
   </update>
   <delete id="deleteByStoryId">
     UPDATE t_comment SET is_deleted = 1 WHERE story_id = #{storyId}
