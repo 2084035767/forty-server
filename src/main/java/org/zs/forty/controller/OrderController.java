@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.OrderDTO;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.OrderVO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.service.OrderService;
 
 /**
@@ -36,7 +37,7 @@ public class OrderController {
   @PostMapping("/user/{createUser}/list")
   public PageInfo<OrderVO> userOrder(@Valid @PathVariable Long createUser,
       @Valid @RequestBody PageDTO pageDTO) {
-    return new PageInfo<>(relationService.findByCreateUser(createUser,pageDTO));
+    return new PageInfo<>(relationService.findByCreateUser(createUser, pageDTO));
   }
   
   @Operation(summary = "添加订单")
@@ -47,13 +48,13 @@ public class OrderController {
   
   @Operation(summary = "更新订单")
   @PutMapping
-  public Boolean update(@Valid @RequestBody OrderDTO relationDTO) {
-    return relationService.updateById(relationDTO);
+  public ResultVO update(@Valid @RequestBody OrderDTO relationDTO) {
+    return relationService.updateById(relationDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除订单")
   @DeleteMapping
-  public Boolean delete(@Valid @RequestParam Long createUser) {
-    return relationService.deleteById(createUser);
+  public ResultVO delete(@Valid @RequestParam Long createUser) {
+    return relationService.deleteById(createUser) ? ResultVO.success() : ResultVO.error();
   }
 }

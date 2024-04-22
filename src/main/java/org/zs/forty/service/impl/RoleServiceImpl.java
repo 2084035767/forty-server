@@ -9,8 +9,6 @@ import org.zs.forty.model.dto.RoleDTO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.service.RoleService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -24,27 +22,24 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
   @Resource
   private RoleMapper roleMapper;
-
+  
   @Override
-  public List<RoleVO> findRoleId(Long roleId) {
-    return roleMapper.selectRoleById(roleId);
+  public RoleVO findRoleId(Long roleId) {
+    return roleMapper.selectRoleId(roleId);
   }
-
-
+  
   @Override
   public RoleVO insert(RoleDTO roleDTO) {
     return roleMapper.insert(roleDTO);
   }
-
+  
   @Override
   public Boolean deleteById(Long id) {
-    return roleMapper.delete(id);
+    return roleMapper.deleteById(id);
   }
-
+  
   @Override
   public Boolean update(RoleDTO roleDTO) {
     return roleMapper.update(roleDTO);
   }
-
-
 }

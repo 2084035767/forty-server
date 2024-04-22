@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.LikeMapper">
+    <sql id="BaseLike">
+        like_id,user_id,story_id，create_time, update_time
+    </sql>
     <resultMap id="LikeResultMap" type="org.zs.forty.mapper.LikeMapper">
-
     </resultMap>
-    <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.mapper.LikeMapper" keyProperty="likeid">
+    <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Like" keyProperty="likeId">
         INSERT INTO t_like
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="likeId !=null">
@@ -17,52 +19,74 @@
             <if test="storyId !=null">
                 story_id,
             </if>
-
-       <if test="isDelete != null">
-            is_delete,
-        </if>
-        <if test="createTime != null">
-            create_time,
-        </if>
-        <if test="updateTime != null">
-            update_time,
-        </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
         </trim>
-        <if test="isDelete != null">
-            VALUES (#{likeId}, #{userid}, #{storyId}, #{isDelete}, #{createTime}, #{updateTime})
-        </if>
-        <if test="isDelete != null and isDelete == 0">
-            ON DUPLICATE KEY UPDATE
-                like_id = VALUES(like_id),
-                user_id = VALUES(user_id),
-                story_id = VALUES(story_id),
-                is_delete = VALUES(is_delete),
-                create_time = VALUES(create_time),
-                update_time = VALUES(update_time)
-        </if>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="likeId !=null">
+               #{ likeId},
+            </if>
+            <if test="userid !=null">
+                #{userId},
+            </if>
+            <if test="storyId !=null">
+                #{storyId},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
     </insert>
+    <update id="updateById">
+        UPDATE t_like
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="likeId !=null">
+                like_id = #{likeId},
+            </if>
+            <if test="userid !=null">
+                user_id = #{userid},
+            </if>
+            <if test="storyId !=null">
+                story_id = #{storyId},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        WHERE id = #{id} AND is_delete = 0;
+    </update>
 
     <!-- 查询操作 -->
-    <select id="getLikeById" resultMap="LikeResultMap">
-        SELECT * FROM like WHERE like_id = #{likeId}
+    <select id="selectAll" resultType="org.zs.forty.model.vo.LikeVO">
+        select *  from t_like where is_delete = 0;
     </select>
-    <select id="selectAll" resultType="org.zs.forty.model.entity.Like">
-        select
-        like_id as likeId,user_id as userid,story_id as storyId,is_delete as isDelete;
-        from t_like;
-    </select>
-    <select id="selectByLikeId" resultType="org.zs.forty.model.entity.Like">
+    <select id="selectByLikeId" resultType="org.zs.forty.model.vo.LikeVO">
         select * from t_like where like_id = #{likeId};
     </select>
 
-    <select id="selectByUserId" resultType="org.zs.forty.model.entity.Like">
-         select * from t_like  where user_id = #{userId};
+    <select id="selectByUserId" resultType="org.zs.forty.model.vo.LikeVO">
+        select * from t_like  where user_id = #{userId};
     </select>
-    <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Like">
+    <select id="selectByStoryId" resultType="org.zs.forty.model.vo.LikeVO">
         select *  from t_like where story_id = #{storyId};
     </select>
     <delete id="deleteById">
         UPDATE t_like SET is_delete = 1 WHERE id = #{id} AND is_delete = 0
-
     </delete>
 </mapper>

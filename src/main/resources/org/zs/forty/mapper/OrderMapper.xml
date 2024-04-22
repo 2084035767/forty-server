@@ -20,12 +20,12 @@
       <if test="createUser != null">
         create_user,
       </if>
-<!--      <if test="createTime != null">-->
-<!--        create_time,-->
-<!--      </if>-->
-<!--      <if test="updateTime != null">-->
-<!--        update_time,-->
-<!--      </if>-->
+      <!--      <if test="createTime != null">-->
+      <!--        create_time,-->
+      <!--      </if>-->
+      <!--      <if test="updateTime != null">-->
+      <!--        update_time,-->
+      <!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="storyId != null">
@@ -40,12 +40,12 @@
       <if test="createUser != null">
         #{createUser},
       </if>
-<!--      <if test="createTime != null">-->
-<!--        #{createTime},-->
-<!--      </if>-->
-<!--      <if test="updateTime != null">-->
-<!--        #{updateTime},-->
-<!--      </if>-->
+      <!--      <if test="createTime != null">-->
+      <!--        #{createTime},-->
+      <!--      </if>-->
+      <!--      <if test="updateTime != null">-->
+      <!--        #{updateTime},-->
+      <!--      </if>-->
     </trim>
   </insert>
   <update id="updateById">
@@ -60,37 +60,47 @@
       <if test="status != null">
         status = #{status},
       </if>
-<!--      <if test="createTime != null">-->
-<!--        create_time = #{createTime},-->
-<!--      </if>-->
-<!--      <if test="UpdateTime != null">-->
-<!--        update_time = #{UpdateTime},-->
-<!--      </if>-->
+      <!--      <if test="createTime != null">-->
+      <!--        create_time = #{createTime},-->
+      <!--      </if>-->
+      <!--      <if test="UpdateTime != null">-->
+      <!--        update_time = #{UpdateTime},-->
+      <!--      </if>-->
       <if test="createUser != null">
         create_user = #{createUser},
       </if>
     </set>
-    where id = #{id}
+    WHERE id = #{id}
   </update>
   <update id="deleteById">
-    update t_order set status = 0 where id = #{id}
+    UPDATE t_order
+    SET status = 0
+    WHERE id = #{id}
   </update>
   <delete id="deleteByCreateUser">
 
-    <!--    delete from t_relation where create_user = #{createUser}-->
+    <!--    delete FROM t_relation WHERE create_user = #{createUser}-->
     <!-- todo-->
   </delete>
   <select id="selectById" resultType="org.zs.forty.model.entity.Order">
-    select * from t_order where id = #{id}
+    SELECT *
+    FROM t_order
+    WHERE id = #{id}
   </select>
   <select id="selectByProductId" resultType="org.zs.forty.model.entity.Order">
-    select * from t_order where product_id = #{productId}
+    SELECT *
+    FROM t_order
+    WHERE product_id = #{productId}
   </select>
   <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Order">
-    select * from t_order where story_id = #{storyId}
+    SELECT *
+    FROM t_order
+    WHERE story_id = #{storyId}
   </select>
   <select id="selectByCreateUser" resultType="org.zs.forty.model.entity.Order">
-    select * from t_order where create_user = #{createUser}
+    SELECT *
+    FROM t_order
+    WHERE create_user = #{createUser}
   </select>
 
 

@@ -19,10 +19,13 @@
       <result property="updateTime" column="update_time"/>
     </collection>
   </resultMap>
-   <sql id="BaseRoleMap">
-     id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId, menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark, menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
-   </sql>
-  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Role" keyProperty="id">
+  <sql id="BaseRoleMap">
+    id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId,
+    menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark,
+    menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
+  </sql>
+  <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Role"
+      keyProperty="id">
     INSERT INTO t_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">
@@ -40,7 +43,7 @@
     </trim>
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">
-         #{roleName},
+        #{roleName},
       </if>
       <if test="roleDesc !=null">
         #{roleDesc},
@@ -55,8 +58,8 @@
   </insert>
   <update id="update">
     UPDATE t_role
-   <set>
-     <if test="roleName !=null">
+    <set>
+      <if test="roleName !=null">
         role_name = #{roleName},
       </if>
       <if test="roleDesc !=null">
@@ -68,15 +71,18 @@
       <if test="isDelete !=null">
         is_delete = #{isDelete},
       </if>
-   </set>
+    </set>
   </update>
   <update id="deleteById">
-    DELETE FROM t_role WHERE role_id = #{roleId}
+    UPDATE t_role SET is_delete = 1 WHERE role_id = #{roleId}
   </update>
   <select id="selectByName" resultType="org.zs.forty.model.vo.RoleVO">
-    select  * from role where role_name = #{roleName} and is_delete = 0;
+    select * from role where role_name = #{roleName} and is_delete = 0;
   </select>
-  <select id="selectRoleById" resultType="org.zs.forty.model.vo.RoleVO">
-   select * from role where role_id = #{roleId} and is_delete = 0;
+  <select id="selectRoleById" resultType="org.zs.forty.model.entity.Role">
+    select * from role where role_id = #{roleId} and is_delete = 0;
+  </select>
+  <select id="selectAllRole" resultType="org.zs.forty.model.vo.RoleVO">
+    select * from role where is_delete = 0;
   </select>
 </mapper>

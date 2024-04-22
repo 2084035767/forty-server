@@ -31,8 +31,9 @@ import org.zs.forty.security.JwtLogoutSuccessHandler;
  **/
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
   
   public static final String API_AUTH = "/api/auth/**";

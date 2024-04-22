@@ -8,17 +8,23 @@ import org.zs.forty.model.dto.EmailDTO;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.Comment;
+import org.zs.forty.model.entity.Log;
 import org.zs.forty.model.entity.Menu;
+import org.zs.forty.model.entity.Msg;
 import org.zs.forty.model.entity.Order;
 import org.zs.forty.model.entity.Product;
+import org.zs.forty.model.entity.Rank;
 import org.zs.forty.model.entity.Role;
 import org.zs.forty.model.entity.Story;
 import org.zs.forty.model.entity.User;
 import org.zs.forty.model.entity.UserInfo;
 import org.zs.forty.model.vo.CommentVO;
+import org.zs.forty.model.vo.LogVO;
 import org.zs.forty.model.vo.MenuVO;
+import org.zs.forty.model.vo.MsgVO;
 import org.zs.forty.model.vo.OrderVO;
 import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.RankVO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.model.vo.UserInfoVO;
@@ -26,8 +32,8 @@ import org.zs.forty.model.vo.UserVO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T22:53:06+0800",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-04-22T11:20:16+0800",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
 public class MainMapperImpl implements MainMapper {
@@ -44,6 +50,7 @@ public class MainMapperImpl implements MainMapper {
         userVO.username( po.getUsername() );
         userVO.nickname( po.getNickname() );
         userVO.email( po.getEmail() );
+        userVO.status( po.getStatus() );
 
         return userVO.build();
     }
@@ -143,7 +150,7 @@ public class MainMapperImpl implements MainMapper {
     }
 
     @Override
-    public List<RoleVO> roleList2VO(Long vo) {
+    public List<RoleVO> roleList2VO(List<Role> vo) {
         if ( vo == null ) {
             return null;
         }
@@ -199,6 +206,11 @@ public class MainMapperImpl implements MainMapper {
 
         userInfoVO.id( po.getId() );
         userInfoVO.userId( po.getUserId() );
+        userInfoVO.userAdd( po.getUserAdd() );
+        userInfoVO.userPhone( po.getUserPhone() );
+        userInfoVO.userEmail( po.getUserEmail() );
+        userInfoVO.userSex( po.getUserSex() );
+        userInfoVO.userAge( po.getUserAge() );
         userInfoVO.userImg( po.getUserImg() );
 
         return userInfoVO.build();
@@ -284,15 +296,15 @@ public class MainMapperImpl implements MainMapper {
             return null;
         }
 
-        UserDTO userDTO = new UserDTO();
+        UserDTO.UserDTOBuilder userDTO = UserDTO.builder();
 
-        userDTO.setId( dto.getId() );
-        userDTO.setUsername( dto.getUsername() );
-        userDTO.setNickname( dto.getNickname() );
-        userDTO.setPassword( dto.getPassword() );
-        userDTO.setEmail( dto.getEmail() );
+        userDTO.id( dto.getId() );
+        userDTO.username( dto.getUsername() );
+        userDTO.nickname( dto.getNickname() );
+        userDTO.password( dto.getPassword() );
+        userDTO.email( dto.getEmail() );
 
-        return userDTO;
+        return userDTO.build();
     }
 
     @Override
@@ -307,5 +319,104 @@ public class MainMapperImpl implements MainMapper {
         emailDTO.setEmail( dto.getEmail() );
 
         return emailDTO;
+    }
+
+    @Override
+    public LogVO log2VO(Log po) {
+        if ( po == null ) {
+            return null;
+        }
+
+        LogVO.LogVOBuilder logVO = LogVO.builder();
+
+        logVO.ipAdd( po.getIpAdd() );
+        logVO.logId( po.getLogId() );
+        logVO.logLevel( po.getLogLevel() );
+        logVO.logName( po.getLogName() );
+        logVO.message( po.getMessage() );
+        logVO.userId( po.getUserId() );
+
+        return logVO.build();
+    }
+
+    @Override
+    public List<LogVO> logList2VO(List<Log> vo) {
+        if ( vo == null ) {
+            return null;
+        }
+
+        List<LogVO> list = new ArrayList<LogVO>( vo.size() );
+        for ( Log log : vo ) {
+            list.add( log2VO( log ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public MsgVO msg2VO(Msg po) {
+        if ( po == null ) {
+            return null;
+        }
+
+        MsgVO.MsgVOBuilder msgVO = MsgVO.builder();
+
+        msgVO.isArchive( po.getIsArchive() );
+        msgVO.isDelete( po.getIsDelete() );
+        msgVO.isRead( po.getIsRead() );
+        msgVO.msgId( po.getMsgId() );
+        msgVO.msgContent( po.getMsgContent() );
+        msgVO.msgType( po.getMsgType() );
+        msgVO.receiverId( po.getReceiverId() );
+        msgVO.senderId( po.getSenderId() );
+
+        return msgVO.build();
+    }
+
+    @Override
+    public List<MsgVO> msgList2VO(List<Msg> vo) {
+        if ( vo == null ) {
+            return null;
+        }
+
+        List<MsgVO> list = new ArrayList<MsgVO>( vo.size() );
+        for ( Msg msg : vo ) {
+            list.add( msg2VO( msg ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public RankVO rank2VO(Rank po) {
+        if ( po == null ) {
+            return null;
+        }
+
+        RankVO.RankVOBuilder rankVO = RankVO.builder();
+
+        rankVO.rankId( po.getRankId() );
+        rankVO.productId( po.getProductId() );
+        rankVO.rankName( po.getRankName() );
+        rankVO.rankPosition( po.getRankPosition() );
+        rankVO.rankScore( po.getRankScore() );
+        rankVO.userId( po.getUserId() );
+        rankVO.storyIds( po.getStoryIds() );
+
+        return rankVO.build();
+    }
+
+    @Override
+    public List<RankVO> rankList2VO(List<Rank> vo) {
+        if ( vo == null ) {
+            return null;
+        }
+
+        List<RankVO> list = new ArrayList<RankVO>( vo.size() );
+        for ( Rank rank : vo ) {
+            list.add( rank2VO( rank ) );
+        }
+
+        return list;
     }
 }
