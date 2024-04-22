@@ -9,6 +9,8 @@ import org.zs.forty.model.dto.LikeDTO;
 import org.zs.forty.model.vo.LikeVO;
 import org.zs.forty.service.LikeService;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @MappingIgnore
@@ -24,30 +26,30 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public LikeVO findByUserId(Long userId) {
+    public List<LikeVO> findByUserId(Long userId) {
 
         return likeMapper.selectByUserId(userId);
     }
 
     @Override
-    public LikeVO findByStoryId(Long storyId) {
+    public List<LikeVO> findByStoryId(Long storyId) {
 
         return likeMapper.selectByStoryId(storyId);
     }
 
     @Override
     public Boolean deleteById(Long likeId) {
-        return likeMapper.deleteById(likeId);
+        return likeMapper.deleteById(likeId) >0;
     }
 
     @Override
     public LikeVO insert(LikeDTO likeDTO) {
 
-        return likeMapper.insert(likeDTO);
+        return likeMapper.selectByLikeId(likeMapper.insert(likeDTO));
     }
 
     @Override
     public Boolean update(LikeDTO likeDTO) {
-        return likeMapper.updateById(likeDTO);
+        return likeMapper.update(likeDTO)>0;
     }
 }

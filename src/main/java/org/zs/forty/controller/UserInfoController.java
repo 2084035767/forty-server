@@ -18,9 +18,9 @@ public class UserInfoController {
     @Resource private UserInfoService userInfoService;
 
     @Operation(summary = "获取用户信息列表")
-    @PostMapping("/getUserInfoList")
+    @PostMapping("/{UserInfo}/List")
     public PageInfo<UserInfoVO> selectUserInfo (@Valid@RequestBody@NotNull Long id){
-        return new PageInfo<>(userInfoService.findByUserInfo(id));
+        return new PageInfo<>();
 
     }
     @Operation(summary = "添加用户信息")
@@ -29,8 +29,8 @@ public class UserInfoController {
         return userInfoService.insert(userInfoDTO);
     }
     @Operation(summary = "删除用户信息")
-    @DeleteMapping("/id")
-    public Boolean  deleteUserInfo(@Valid @RequestBody Long id){
+    @DeleteMapping("/ {id}")
+    public Boolean  deleteUserInfo(@Valid @RequestBody@PathVariable Long id){
         return userInfoService.deleteById(id);
     }
     @Operation(summary = "更新用户信息")
