@@ -30,7 +30,8 @@ public class RoleServiceImpl implements RoleService {
   
   @Override
   public RoleVO insert(RoleDTO roleDTO) {
-    return roleMapper.insert(roleDTO);
+
+    return roleMapper.selectRoleById(roleMapper.insert(roleDTO));
   }
   
   @Override

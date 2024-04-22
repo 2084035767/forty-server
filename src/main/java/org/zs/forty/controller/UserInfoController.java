@@ -1,6 +1,5 @@
 package org.zs.forty.controller;
 
-import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -19,13 +18,13 @@ public class UserInfoController {
 
     @Operation(summary = "获取用户信息列表")
     @PostMapping("/{UserInfo}/List")
-    public PageInfo<UserInfoVO> selectUserInfo (@Valid@RequestBody@NotNull Long id){
-        return new PageInfo<>();
+    public UserInfoVO selectUserInfo (@Valid@RequestBody@NotNull Long id){
+        return userInfoService.findByUserInfo(id);
 
     }
     @Operation(summary = "添加用户信息")
     @PostMapping()
-    public UserInfoVO addUserInfo(@Valid @RequestBody UserInfoDTO userInfoDTO){
+    public UserInfoVO insert(@Valid @RequestBody UserInfoDTO userInfoDTO){
         return userInfoService.insert(userInfoDTO);
     }
     @Operation(summary = "删除用户信息")

@@ -12,7 +12,7 @@ public interface UserInfoMapper {
     UserInfoVO selectById(Long id);
     List<UserInfoVO> selectByUserId(Long userId);
     List<UserInfoVO> selectByUseradd(String useradd);
-    UserInfoVO insert (UserInfoDTO userInfoDTO);
+    Long insert (UserInfoDTO userInfoDTO);
     int update(UserInfoDTO userInfoDTO);
 
     int deleteById(Long id);

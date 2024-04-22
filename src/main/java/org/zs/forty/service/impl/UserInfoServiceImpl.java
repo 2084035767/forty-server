@@ -19,7 +19,7 @@ public class UserInfoServiceImpl implements UserInfoService {
   
   @Override
   public UserInfoVO insert(UserInfoDTO userInfoDTO) {
-    return userInfoMapper.insert(userInfoDTO);
+    return userInfoMapper.selectById(userInfoMapper.insert(userInfoDTO));
   }
   
   @Override

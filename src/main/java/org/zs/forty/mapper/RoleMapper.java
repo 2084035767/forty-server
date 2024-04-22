@@ -21,8 +21,7 @@ public interface RoleMapper {
   List<RoleVO> selectByName(String roleName);
   
   List<RoleVO> selectAllRole(String roleName);
-  
-  RoleVO insert(RoleDTO roleDTO);
+   Long insert(RoleDTO roleDTO);
   
   int update(RoleDTO roleDTO);
   
