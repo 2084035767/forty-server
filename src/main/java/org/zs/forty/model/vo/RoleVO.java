@@ -1,12 +1,13 @@
 package org.zs.forty.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-
@@ -23,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "角色响应")
 public class RoleVO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
-  private Long id;
+  private Long roleId;
   @Schema(description = "角色名称")
   private String roleName;
   @Schema(description = "角色描述")

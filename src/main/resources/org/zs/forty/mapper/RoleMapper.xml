@@ -25,7 +25,7 @@
     menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
   </sql>
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Role"
-      keyProperty="id">
+      keyProperty="roleId">
     INSERT INTO t_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">

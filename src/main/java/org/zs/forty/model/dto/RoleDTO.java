@@ -20,8 +20,7 @@ import java.io.Serializable;
 @Schema(description = "角色参数")
 public class RoleDTO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
-  
-  private Long id;
+  private Long roleId;
   @Schema(description = "角色名称")
   private String roleName;
   @Schema(description = "角色描述")

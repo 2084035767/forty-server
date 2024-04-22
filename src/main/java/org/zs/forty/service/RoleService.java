@@ -17,7 +17,7 @@ public interface RoleService {
   
   RoleVO insert(RoleDTO roleDTO);
   
-  Boolean deleteById(Long id);
+  Boolean deleteById(Long roleId);
   
   Boolean update(RoleDTO roleDTO);
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
   
-  RoleVO selectRoleById(Long id);
+  RoleVO selectRoleById(Long roleId);
   
   List<RoleVO> selectByName(String roleName);
   
@@ -25,5 +25,5 @@ public interface RoleMapper {
   
   int update(RoleDTO roleDTO);
   
-  int deleteById(Long id);
+  int deleteById(Long roleId);
 }
