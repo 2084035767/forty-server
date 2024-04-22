@@ -14,36 +14,21 @@ import java.io.Serializable;
 @Schema(description = "排行榜参数")
 public class RankDTO implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
-    /**
-     * 商品ID
-     */
     @Schema(description = "商品id")
     @NotNull(message = "商品id不能为空")
-    private long productid;
+    private Long productId;
     @Schema(description = "排行榜id")
-    private long rankid;
-    /**
-     * 排行名
-     */
+    private Long rankId;
     @Schema(description = "排行名")
     @NotNull(message = "排行名不能为空")
     private String rankName;
-    /**
-     * 排名
-     */
     @Schema(description = "排名")
     @NotNull(message = "排名不能为空")
-    private long rankPosition;
-    /**
-     * 分数
-     */
+    private Long rankPosition;
     @Schema(description = "分数")
     @NotNull(message = "分数不能为空")
-    private long rankScore;
-    /**
-     * 用户ID
-     */
+    private Long rankScore;
     @Schema(description = "用户ID")
     @NotNull(message = "用户ID不能为空")
-    private long userid;
+    private Long userId;
 }

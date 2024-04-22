@@ -51,7 +51,7 @@ class CommentMapperTest {
   
   @Test
   void update() {
-    // Long test = (long) commentMapper.update(
+    // int test = commentMapper.update(
     //
     //    CommentDTO.builder()
     //         .id(1L)

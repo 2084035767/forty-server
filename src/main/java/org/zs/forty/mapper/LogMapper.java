@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.LogDTO;
 import org.zs.forty.model.entity.Log;
+import org.zs.forty.model.vo.LogVO;
+
 @Mapper
 public interface LogMapper extends BaseMapper<Log> {
-    Log selectByLogId(Long logid);
+    LogVO selectByLogId(Long logId);
     Long add(LogDTO logDTO);
     int update(LogDTO logDTO);
-    int delete(Long logid);
+    int delete(Long logId);
 
 
 
