@@ -1,12 +1,12 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.entity.Product;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -24,7 +24,7 @@ class ProductMapperTest {
   void selectById() {
     Product product = productMapper.selectById(1L);
     System.out.println(product);
-
+    assert product != null;
   }
   
   @Test
@@ -53,19 +53,36 @@ class ProductMapperTest {
   
   @Test
   void selectByStatusAndCategory() {
-    List<Product> products = productMapper.selectByStatusAndCategory(0, "分类1");
+    List<Product> products = productMapper.selectByStatusAndCategory(0, "数码");
     assert !products.isEmpty();
   }
   
   @Test
   void insert() {
+    Long test = productMapper.insert(
+            ProductDTO.builder()
+                    .productName("555")
+                    .productPrice(111L)
+                    .productInfo("444")
+                    .productImg("img4")
+                    .category("55")
+                    .status(0)
+                    .build()
+    );
   }
   
   @Test
   void update() {
+    productMapper.update(
+            ProductDTO.builder()
+                    .id(11L)
+                    .productPrice(1000L)
+                    .build()
+    );
   }
   
   @Test
   void deleteById() {
+    productMapper.deleteById(11L);
   }
 }

@@ -28,7 +28,7 @@ public interface UserMapper {
   List<User> selectList();
   
   // todo；条件查询
-  List<User> selectListByCondition(UserDTO userDTO);
+  // List<User> selectListByCondition(UserDTO userDTO);
   
   Long insert(SignupDTO signupDTO);
   

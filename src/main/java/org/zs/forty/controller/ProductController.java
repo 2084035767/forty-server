@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.service.ProductService;
 
 /**
@@ -55,13 +56,13 @@ public class ProductController {
   
   @Operation(summary = "更新商品")
   @PutMapping
-  public Boolean UpdateProduct(@Valid @RequestBody ProductDTO productDTO) {
-    return productService.update(productDTO);
+  public ResultVO UpdateProduct(@Valid @RequestBody ProductDTO productDTO) {
+    return productService.update(productDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除商品")
   @DeleteMapping
-  public Boolean DeleteProduct(@Valid @NotNull @RequestParam Long id) {
-    return productService.deleteById(id);
+  public ResultVO DeleteProduct(@Valid @NotNull @RequestParam Long id) {
+    return productService.deleteById(id) ? ResultVO.success() : ResultVO.error();
   }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
+import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.StoryService;
 
@@ -60,14 +61,14 @@ public class StoryController {
   
   @Operation(summary = "删除故事")
   @DeleteMapping
-  public Boolean DeleteStory(@RequestParam Long createUser,
+  public ResultVO DeleteStory(@RequestParam Long createUser,
       @RequestParam Long storyId) {
-    return storyService.deleteStory(createUser, storyId);
+    return storyService.deleteStory(createUser, storyId) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "更新故事")
   @PutMapping
-  public Boolean UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
-    return storyService.updateStory(storyDTO);
+  public ResultVO UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
+    return storyService.updateStory(storyDTO) ? ResultVO.success() : ResultVO.error();
   }
 }
