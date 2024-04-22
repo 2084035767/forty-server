@@ -16,9 +16,8 @@ import static org.zs.forty.config.AmqpConfig.EMAIL_QUEUE;
  * @date: 2024/4/1
  * @description:
  **/
-
-@Component
 @Slf4j
+@Component
 public class EmailConsumer {
   @Resource private MailService mailService;
   
