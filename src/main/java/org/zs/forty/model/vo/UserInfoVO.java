@@ -26,15 +26,15 @@ public class UserInfoVO implements Serializable {
   @Schema(description = "用户id")
   private Long userId;
   @Schema(description = "地址")
-  private String addr;
+  private String userAdd;
   @Schema(description = "电话")
-  private String phone;
+  private String userPhone;
   @Schema(description = "邮箱")
-  private String email;
+  private String userEmail;
   @Schema(description = "性别")
-  private Integer sex;
+  private Integer userSex;
   @Schema(description = "年龄")
-  private Integer age;
+  private Integer userAge;
   @Schema(description = "头像")
   private String userImg;
 }

@@ -1,9 +1,7 @@
 package org.zs.forty.model.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -26,20 +24,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
-  @TableId(value = "id", type = IdType.AUTO)
-  protected Long id;
+  private Long id;
   private String username;
   private String nickname;
   private String password;
   private String email;
   private Integer status;
-  public Boolean isDelete;
-  @TableField(exist = false)
-  private List<Role> roles;// 用户与角色
+  private Boolean isDelete;
   @TableField(value = "create_time", fill = FieldFill.INSERT)
-  protected LocalDateTime createTime;
+  private LocalDateTime createTime;
   @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-  protected LocalDateTime updateTime;
+  private LocalDateTime updateTime;
+  @TableField(exist = false)
+  private List<Role> roles;
+  @TableField(exist = false)
   private Collection<? extends GrantedAuthority> authorities;
   
   @Override public Collection<? extends GrantedAuthority> getAuthorities() {

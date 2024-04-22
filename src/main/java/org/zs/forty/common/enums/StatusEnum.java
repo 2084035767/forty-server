@@ -21,6 +21,7 @@ public enum StatusEnum {
   /* 用户错误：401 Unauthorized */
   USER_NOT_LOGGED_IN(401, "用户未登录"),
   USER_LOGIN_ERROR(401, "账号不存在或密码错误"),
+  PERMISSION_NO_ACCESS(403, "无访问权限"),
   USER_ACCOUNT_FORBIDDEN(403, "账号已被禁用"),
   USER_NOT_EXIST(404, "用户不存在"),
   USER_HAS_EXISTED(409, "用户已存在"),
@@ -38,9 +39,8 @@ public enum StatusEnum {
   INTERFACE_FORBID_VISIT(403, "该接口禁止访问"),
   INTERFACE_ADDRESS_INVALID(404, "接口地址无效"),
   INTERFACE_REQUEST_TIMEOUT(408, "接口请求超时"),
-  INTERFACE_EXCEED_LOAD(503, "接口负载过高"),
+  INTERFACE_EXCEED_LOAD(503, "接口负载过高");
   /* 权限错误：403 Forbidden */
-  PERMISSION_NO_ACCESS(403, "无访问权限");
   
   public final Integer code;
   

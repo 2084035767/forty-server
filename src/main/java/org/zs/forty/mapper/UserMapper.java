@@ -27,9 +27,12 @@ public interface UserMapper {
   
   List<User> selectList();
   
-  int deleteById(Long id);
-  
-  int updateById(UserDTO userDTO, Long id);
+  // todo；条件查询
+  List<User> selectListByCondition(UserDTO userDTO);
   
   Long insert(SignupDTO signupDTO);
+  
+  int updateById(UserDTO userDTO);
+  
+  int deleteById(Long id);
 }

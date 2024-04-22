@@ -8,9 +8,9 @@ import org.zs.forty.model.dto.EmailDTO;
 /**
  * -*- coding: utf-8 -*-
  *
- * @Author: 子十
- * @Date: 2024/3/27
- * @Description:
+ * @author: 子十
+ * @date: 2024/3/27
+ * @description:
  **/
 @SpringBootTest
 class MailServiceTest {
