@@ -7,11 +7,10 @@ import org.zs.forty.model.vo.LikeVO;
 import java.util.List;
 
 public interface LikeService {
-    List<LikeVO> findByLikeId (Long likeId, PageDTO pageDTO);
+    List<LikeVO> findByLikeId ( PageDTO pageDTO);
     LikeVO insert(LikeDTO likeDTO);
-    LikeVO findByUserID(Long userid);
+    LikeVO findByUserId(Long userId);
     LikeVO findByStoryId(Long storyId);
-    Boolean deleteById(Long isDelete);
-    LikeVO delete(Long likeId);
-    LikeVO update(LikeDTO likeDTO);
+    Boolean deleteById(Long likeId);
+    Boolean update(LikeDTO likeDTO);
 }

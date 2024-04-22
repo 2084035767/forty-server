@@ -7,12 +7,12 @@ import org.zs.forty.model.vo.UserInfoVO;
 import java.util.List;
 
 public interface UserInfoService {
-    List<UserInfoVO> findAll(PageDTO pageDTO,Long id);
+    List<UserInfoVO> findAll(PageDTO pageDTO);
 
     UserInfoVO insert(UserInfoDTO userInfoDTO);
 
-    UserInfoVO update(UserInfoDTO userInfoDTO);
+    Boolean update(UserInfoDTO userInfoDTO);
 
-    Boolean delete(Long id);
+    Boolean deleteById(Long id);
 
 }
