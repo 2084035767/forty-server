@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public Boolean deleteById(Long id) {
-    return roleMapper.delete(id);
+    return roleMapper.deleteById(id);
   }
 
   @Override

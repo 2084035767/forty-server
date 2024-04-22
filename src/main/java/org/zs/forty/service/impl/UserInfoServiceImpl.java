@@ -30,6 +30,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public Boolean deleteById(Long id) {
-        return userInfoMapper.delete(id);
+        return userInfoMapper.deleteById(id);
     }
 }
