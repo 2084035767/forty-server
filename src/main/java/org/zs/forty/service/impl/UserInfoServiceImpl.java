@@ -1,9 +1,7 @@
 package org.zs.forty.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
 import org.zs.forty.mapper.UserInfoMapper;
-import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.UserInfoDTO;
 import org.zs.forty.model.vo.UserInfoVO;
 import org.zs.forty.service.UserInfoService;
@@ -14,10 +12,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Resource private UserInfoMapper userInfoMapper;
 
+
     @Override
-    public List<UserInfoVO> findAll(PageDTO pageDTO) {
-        PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
-        return userInfoMapper.selectById(pageDTO);
+    public List<UserInfoVO> findByUserInfo(Long id) {
+        return userInfoMapper.selectById(id);
     }
 
     @Override

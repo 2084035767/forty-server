@@ -70,17 +70,13 @@
       </if>
    </set>
   </update>
-  <delete id="delete">
+  <update id="deleteById">
     DELETE FROM t_role WHERE role_id = #{roleId}
-  </delete>
+  </update>
   <select id="selectByName" resultType="org.zs.forty.model.vo.RoleVO">
     select  * from role where role_name = #{roleName} and is_delete = 0;
-
-  </select>
-  <select id="selectByDesc" resultType="org.zs.forty.model.vo.RoleVO">
-    select  * from role where role_desc = #{roleDesc} and is_delete = 0;
   </select>
   <select id="selectRoleById" resultType="org.zs.forty.model.vo.RoleVO">
-    select *     select * from role where role_id = #{roleId} and is_delete = 0;
+   select * from role where role_id = #{roleId} and is_delete = 0;
   </select>
 </mapper>

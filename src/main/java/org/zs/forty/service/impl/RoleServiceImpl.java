@@ -1,12 +1,10 @@
 package org.zs.forty.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.RoleMapper;
-import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.RoleDTO;
 import org.zs.forty.model.vo.RoleVO;
 import org.zs.forty.service.RoleService;
@@ -26,29 +24,12 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
   @Resource
   private RoleMapper roleMapper;
-  @Override public void addRole() {
-  
-  }
-  
-  @Override public void deleteRole() {
-  
-  }
-  
-  @Override public void updateRole() {
-  
-  }
-
 
   @Override
-  public List<RoleVO> findAllRoles(PageDTO pageDTO) {
-    PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
-    return roleMapper.selectRoleById(pageDTO);
+  public List<RoleVO> findRoleId(Long roleId) {
+    return roleMapper.selectRoleById(roleId);
   }
 
-  @Override
-  public List<RoleVO> getRoleList(PageDTO pageDTO,Long id) {
-    return roleMapper.selectRoleById(id);
-  }
 
   @Override
   public RoleVO insert(RoleDTO roleDTO) {

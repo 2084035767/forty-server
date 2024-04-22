@@ -1,6 +1,5 @@
 package org.zs.forty.service;
 
-import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.RoleDTO;
 import org.zs.forty.model.vo.RoleVO;
 
@@ -15,16 +14,9 @@ import java.util.List;
  **/
 
 public interface RoleService {
-  void addRole();
-  
-  void deleteRole();
-  
-  void updateRole();
-  
-  //Role findRole(String name);
-  List<RoleVO> findAllRoles(PageDTO pageDTO);
 
-  List<RoleVO> getRoleList(PageDTO pageDTO,Long roleId);
+
+  List<RoleVO> findRoleId(Long roleId );
 
   RoleVO insert(RoleDTO roleDTO);
 
