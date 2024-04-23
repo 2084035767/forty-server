@@ -30,21 +30,21 @@
   </insert>
   <update id="update">
     UPDATE t_like
-    <trim prefix="(" suffix=")" suffixOverrides=",">
+    <set>
       <if test="userId !=null">
         user_id = #{userId},
       </if>
       <if test="storyId !=null">
         story_id = #{storyId},
       </if>
-    </trim>
+    </set>
     WHERE like_id = #{likeId}
     AND is_delete = 0
   </update>
   <update id="deleteById">
     UPDATE t_like
     SET is_delete = 1
-    WHERE id = #{id}
+    WHERE like_id = #{likeId}
     AND is_delete = 0
   </update>
   <!-- 查询操作 -->

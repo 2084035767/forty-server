@@ -3,7 +3,6 @@ package org.zs.forty.mapper;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import org.zs.forty.model.dto.LogDTO;
 import org.zs.forty.model.vo.LogVO;
 
@@ -23,7 +22,6 @@ class LogMapperTest {
 
     }
     @Test
-    @Transactional
     void add(){
         Long log = logMapper.add(
                 LogDTO.builder()

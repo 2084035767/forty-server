@@ -2,12 +2,15 @@ package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import java.io.Serial;
-import java.io.Serializable;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
+@Builder
 @Setter
 @Schema(description = "点赞参数")
 public class LikeDTO implements Serializable {

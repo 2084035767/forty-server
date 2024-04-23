@@ -1,7 +1,6 @@
 package org.zs.forty.service.impl;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
@@ -9,6 +8,8 @@ import org.zs.forty.mapper.LikeMapper;
 import org.zs.forty.model.dto.LikeDTO;
 import org.zs.forty.model.vo.LikeVO;
 import org.zs.forty.service.LikeService;
+
+import java.util.List;
 
 @Slf4j
 @Service
