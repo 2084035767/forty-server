@@ -6,7 +6,10 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import java.util.Collections;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,30 +51,28 @@ public class OpenApiConfig {
   
   /**
    * GroupedOpenApi 是对接口文档分组，类似于 swagger 的 Docket
-   *
-   * @return
    */
-  // @Bean
-  // public GroupedOpenApi authApi() {
-  //   return GroupedOpenApi.builder()
-  //       // 组名
-  //       .group("认证接口")
-  //       // 扫描的路径，支持通配符
-  //       // .pathsToMatch("/login")
-  //       // 扫描的包
-  //       .packagesToScan("org.zs.forty.controller")
-  //       .build();
-  // }
+  @Bean
+  public GroupedOpenApi authApi() {
+    return GroupedOpenApi.builder()
+        // 组名
+        .group("认证接口")
+        // 扫描的路径，支持通配符
+        // .pathsToMatch("/login")
+        // 扫描的包
+        .packagesToScan("org.zs.forty.controller")
+        .build();
+  }
   
-  // @Bean
-  // public GroupedOpenApi sysApi() {
-  //   return GroupedOpenApi.builder()
-  //       .group("系统接口")
-  //       .pathsToMatch("/sys/**")
-  //       // 添加自定义配置，这里添加了一个用户认证的 header，否则 knife4j 里会没有 header
-  //       .addOperationCustomizer((operation, handlerMethod) -> operation.security(
-  //           Collections.singletonList(new SecurityRequirement().addList(TOKEN_HEADER)))
-  //       )
-  //       .build();
-  // }
+  @Bean
+  public GroupedOpenApi sysApi() {
+    return GroupedOpenApi.builder()
+        .group("系统接口")
+        .pathsToMatch("/sys/**")
+        // 添加自定义配置，这里添加了一个用户认证的 header，否则 knife4j 里会没有 header
+        .addOperationCustomizer((operation, handlerMethod) -> operation.security(
+            Collections.singletonList(new SecurityRequirement().addList(TOKEN_HEADER)))
+        )
+        .build();
+  }
 }

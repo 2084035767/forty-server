@@ -1,8 +1,10 @@
 package org.zs.forty.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,8 +21,11 @@ import org.zs.forty.common.utils.AmqpUtil;
 import org.zs.forty.common.utils.JwtUtil;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.UserMapper;
+import org.zs.forty.model.dto.ForgetDTO;
 import org.zs.forty.model.dto.SignupDTO;
+import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
+import org.zs.forty.model.vo.LoginUserVO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
 
@@ -42,8 +47,10 @@ public class AuthServiceImpl implements AuthService {
   private final UserMapper userMapper;
   private final MainMapper mainMapper;
   private final JwtUtil jwtUtil;
+  private String userCode = null;
   
-  @Override public String login(String email, String password) {
+  @Override public LoginUserVO login(String email, String password) {
+    LoginUserVO loginUser = userMapper.selectLoginUser(email);
     UsernamePasswordAuthenticationToken auth =
         new UsernamePasswordAuthenticationToken(email, password);
     Authentication authentication;
@@ -55,7 +62,8 @@ public class AuthServiceImpl implements AuthService {
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     Map<String, Object> claims = new HashMap<>();
     claims.put("email", userDetails.getUsername());
-    return jwtUtil.createToken(claims);
+    loginUser.setToken(jwtUtil.createToken(claims));
+    return loginUser;
   }
   
   @Transactional
@@ -65,7 +73,6 @@ public class AuthServiceImpl implements AuthService {
       signupDTO.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
       userMapper.insert(signupDTO);
       UserVO userVO = mainMapper.user2VO(userMapper.selectById(signupDTO.getId()));
-      log.info("注册成功{}", userVO);
       amqpUtil.emailSend(mainMapper.email2DTO(signupDTO));
       return userVO;
     } else {
@@ -75,5 +82,32 @@ public class AuthServiceImpl implements AuthService {
   
   @Override public Boolean logout() {
     return null;
+  }
+  
+  @Transactional
+  @Override public Boolean getUserCode(String email) {
+    try {
+      User user = userMapper.selectByEmail(email);
+      Optional.ofNullable(user).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
+      String code = RandomUtil.randomNumbers(6);
+      amqpUtil.codeEmailSend(email, code);
+      userCode = code;
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+  
+  @Override public Boolean forget(ForgetDTO forgetDTO) {
+    User user = userMapper.selectByEmail(forgetDTO.getEmail());
+    Optional.ofNullable(user).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
+    if (userCode.equals(forgetDTO.getCode())) {
+      user.setPassword(passwordEncoder.encode(forgetDTO.getPassword()));
+      UserDTO userDTO = mainMapper.user2DTO(user);
+      userMapper.updateById(userDTO);
+      return userMapper.updateById(userDTO) > 0;
+    } else {
+      return false;
+    }
   }
 }

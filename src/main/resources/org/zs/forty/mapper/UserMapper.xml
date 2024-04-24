@@ -82,6 +82,22 @@
   <update id="deleteById">
     UPDATE t_user SET is_delete = 1 WHERE id = #{id} AND is_delete = 0
   </update>
+  <update id="updateByEmail">
+    UPDATE t_user
+    <set>
+      <if test="password != null">
+        password = #{password},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+    </set>
+    WHERE email = #{email}
+    AND is_delete = 0
+  </update>
   <select id="selectRoleByEmail" resultMap="BaseUserMap">
     SELECT
     u.id, u.username, u.password, u.nickname, u.email, u.status,
@@ -94,7 +110,6 @@
     WHERE u.is_delete = 0
     AND r.is_delete = 0
     AND u.email = #{email}
-
   </select>
   <select id="selectById" resultType="org.zs.forty.model.entity.User">
     SELECT
@@ -142,5 +157,16 @@
         AND email like #{email}
       </if>
     </where>
+  </select>
+  <select id="selectLoginUser" resultType="org.zs.forty.model.vo.LoginUserVO">
+    SELECT
+    u.id,u.username,u.nickname,u.email,
+    ui.user_age,ui.user_add,ui.user_phone,ui.user_sex,ui.user_img
+    FROM t_user u
+    LEFT JOIN t_user_info ui
+    ON u.id = ui.user_id
+    WHERE u.email = #{email}
+    AND u.is_delete = 0
+    AND u.status = 0
   </select>
 </mapper>

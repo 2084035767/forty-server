@@ -10,7 +10,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -74,6 +73,18 @@ public class SecurityConfig {
       throws Exception {
     // 设置白名单
     httpSecurity.authorizeHttpRequests(auth -> auth
+        .requestMatchers(HttpMethod.GET, // Swagger的资源路径需要允许访问
+            "/doc.html",
+            "/doc.html/**",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/authenticate",
+            "swagger-ui/index.html/**",
+            "/swagger-ui.html/**",
+            "/swagger-resources",
+            "/swagger-resources/**"
+        ).permitAll()
         .requestMatchers(HttpMethod.POST, API_AUTH).permitAll() // 登录放行
         .anyRequest().access(jwtAuthorizationManager)
     );
@@ -102,21 +113,19 @@ public class SecurityConfig {
     return httpSecurity.build();
   }
   
-  @Bean
-  public WebSecurityCustomizer webSecurityCustomizer() {
-    return (web) -> web.ignoring().requestMatchers(
-        "/doc.html",
-        "/doc.html/**",
-        "/v3/api-docs",
-        "/v3/api-docs/**",
-        "/webjars/**",
-        "/authenticate",
-        "/swagger-ui.html/**",
-        "/swagger-resources",
-        "/swagger-resources/**",
-        "/*.html",
-        "/*.css",
-        "/*.js"
-    );
-  }
+  // @Bean
+  // public WebSecurityCustomizer webSecurityCustomizer() {
+  //   return (web) -> web.ignoring().requestMatchers(
+  //       "/doc.html",
+  //       "/doc.html/**",
+  //       "/v3/api-docs",
+  //       "/v3/api-docs/**",
+  //       "/webjars/**",
+  //       "/authenticate",
+  //       "swagger-ui/index.html/**",
+  //       "/swagger-ui.html/**",
+  //       "/swagger-resources",
+  //       "/swagger-resources/**"
+  //   );
+  // }
 }

@@ -1,13 +1,14 @@
 package org.zs.forty.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-
@@ -30,11 +31,13 @@ public class UserDTO implements Serializable {
   private String username;
   @Schema(description = "昵称")
   private String nickname;
-  
-  // @Size(min = 12, max = 20, message = "字符长度在 12 -20 之间")
+  @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$", message = "必须是包含大小写字母和数字的组合，长度在 8-16 之间")
   @NotBlank(message = "密码为必传参数")
   @Schema(description = "密码")
   private String password;
+  @Email
   @Schema(description = "邮箱")
   private String email;
+  @Schema(description = "状态")
+  private String status;
 }

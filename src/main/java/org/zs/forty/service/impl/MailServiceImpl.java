@@ -60,11 +60,30 @@ public class MailServiceImpl implements MailService {
    *
    * @param to      收件人
    * @param subject 主题
-   * @param content 内容
+   * @param code    验证码
    */
   @Override
-  public void sendHtmlMail(String to, String subject, String content) {
+  public void sendHtmlMail(String to, String subject, String code) {
     MimeMessage message = mailSender.createMimeMessage();
+    String html = """
+        <!DOCTYPE html>
+        <html lang="zh">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>验证码</title>
+        </head>
+        <body>
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+                <h2 style="text-align: center;">验证码邮件</h2>
+                <p>尊敬的用户，您的验证码是：<strong style="font-size: 20px; color: #007bff;">123456</strong></p>
+                <p>请使用上述验证码完成您的操作。</p>
+                <p style="margin-top: 20px;">感谢您的使用！</p>
+            </div>
+        </body>
+        </html>""";
+    String content = html.replace("123456", code);
     try {
       MimeMessageHelper helper = new MimeMessageHelper(message, true);
       helper.setFrom(from);
