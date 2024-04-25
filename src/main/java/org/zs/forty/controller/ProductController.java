@@ -56,13 +56,13 @@ public class ProductController {
   
   @Operation(summary = "更新商品")
   @PutMapping
-  public ResultVO UpdateProduct(@Valid @RequestBody ProductDTO productDTO) {
+  public ResultVO<Object> UpdateProduct(@Valid @RequestBody ProductDTO productDTO) {
     return productService.update(productDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除商品")
   @DeleteMapping
-  public ResultVO DeleteProduct(@Valid @NotNull @RequestParam Long id) {
+  public ResultVO<Object> DeleteProduct(@Valid @NotNull @RequestParam Long id) {
     return productService.deleteById(id) ? ResultVO.success() : ResultVO.error();
   }
 }

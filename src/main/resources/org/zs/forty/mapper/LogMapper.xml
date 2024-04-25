@@ -3,20 +3,29 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.LogMapper">
-  <resultMap id="LogBaseMap" type="org.zs.forty.model.entity.Log">
-    <result column="log_id" property="logId"/>
-    <result column="log_level" property="logLevel"/>
-    <result column="log_name" property="logName"/>
-    <result column="message" property="message"/>
-    <result column="user_id" property="userId"/>
-    <result column="ip_add" property="ipAdd"/>
-    <result column="is_delete" property="isDelete"/>
-    <result column="create_time" property="createTime"/>
-    <result column="update_time" property="updateTime"/>
-  </resultMap>
-
-  <select id="selectByLogId" resultMap="LogBaseMap">
-    SELECT * from t_log
+  <!--  <resultMap id="LogBaseMap" type="org.zs.forty.model.entity.Log">-->
+  <!--    <result column="log_id" property="logId"/>-->
+  <!--    <result column="log_level" property="logLevel"/>-->
+  <!--    <result column="log_name" property="logName"/>-->
+  <!--    <result column="message" property="message"/>-->
+  <!--    <result column="user_id" property="userId"/>-->
+  <!--    <result column="ip_add" property="ipAdd"/>-->
+  <!--    <result column="is_delete" property="isDelete"/>-->
+  <!--    <result column="create_time" property="createTime"/>-->
+  <!--    <result column="update_time" property="updateTime"/>-->
+  <!--  </resultMap>-->
+  <sql id="BaseLog">
+    log_id
+    log_level
+    log_name,
+    message,
+    user_id,
+    ip_add
+  </sql>
+  <select id="selectByLogId" resultType="org.zs.forty.model.vo.LogVO">
+    SELECT
+    <include refid="BaseLog"/>
+    FROM t_log
     WHERE log_id =#{logId}
     AND is_delete=0
   </select>
@@ -56,7 +65,7 @@
         #{userId},
       </if>
       <if test="ipAdd != null">
-        ipAdd,
+        #{ipAdd},
       </if>
     </trim>
   </insert>
@@ -77,7 +86,7 @@
         user_id=#{userId},
       </if>
       <if test="ipAdd != null">
-        ip_add = #{ipAdd},
+        ip_add =#{ipAdd},
       </if>
     </set>
     WHERE log_id = #{logId}

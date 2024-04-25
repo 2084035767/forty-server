@@ -38,13 +38,13 @@ public class LogController {
   
   @Operation(summary = "更新日志信息")
   @PutMapping
-  public ResultVO updateLog(@Valid @RequestBody LogDTO logDTO) {
+  public ResultVO<Object> updateLog(@Valid @RequestBody LogDTO logDTO) {
     return logService.updateLog(logDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除日志信息")
   @DeleteMapping("/{logId}")
-  public ResultVO deleteLog(@Valid @NotNull @PathVariable Long logId) {
-    return logService.deletelog(logId) ? ResultVO.success() : ResultVO.error();
+  public ResultVO<Object> deleteLog(@Valid @NotNull @PathVariable Long logId) {
+    return logService.deleteLogByLogId(logId) ? ResultVO.success() : ResultVO.error();
   }
 }

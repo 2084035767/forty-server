@@ -22,6 +22,7 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return Order
    */
   Order selectById(Long id);
+  
   /**
    * 根据产品id查询
    *
@@ -29,6 +30,7 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return List<Order>
    */
   List<Order> selectByProductId(Long productId);
+  
   /**
    * 根据故事id查询
    *
@@ -36,6 +38,7 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return Order
    */
   Order selectByStoryId(Long storyId);
+  
   /**
    * 根据创建人查询
    *
@@ -46,10 +49,9 @@ public interface OrderMapper extends BaseMapper<Order> {
   
   /**
    * 插入
-   * @param relationDTO
-   * @return
    */
-  Long insert(OrderDTO relationDTO);
+  Long insert(OrderDTO orderDTO);
+  
   /**
    * 根据id删除
    *
@@ -57,6 +59,7 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return int
    */
   int deleteById(Long id);
+  
   /**
    * 根据创建人删除
    *
@@ -64,11 +67,11 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return int
    */
   int deleteByCreateUser(Long UserId);
+  
   /**
    * 根据id更新
    *
-   * @param relationDTO OrderDTO
    * @return int
    */
-  int updateById(OrderDTO relationDTO);
+  int updateById(OrderDTO orderDTO);
 }

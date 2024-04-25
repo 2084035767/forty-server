@@ -24,35 +24,35 @@ import org.zs.forty.service.OrderService;
 @Service // 注册 service 类
 @MappingIgnore
 public class OrderServiceImpl implements OrderService {
-  @Resource private OrderMapper relationMapper;
+  @Resource private OrderMapper orderMapper;
   @Resource private MainMapper mainMapper;
   
   @Override public List<OrderVO> findByProductId(Long productId) {
-    return mainMapper.relationList2VO(relationMapper.selectByProductId(productId));
+    return mainMapper.orderList2VO(orderMapper.selectByProductId(productId));
   }
   
   @Override public OrderVO findByStoryId(Long storyId) {
-    return mainMapper.relation2VO(relationMapper.selectByStoryId(storyId));
+    return mainMapper.order2VO(orderMapper.selectByStoryId(storyId));
   }
   
   @Override public List<OrderVO> findByCreateUser(Long createUser, PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
-    return mainMapper.relationList2VO(relationMapper.selectByCreateUser(createUser));
+    return mainMapper.orderList2VO(orderMapper.selectByCreateUser(createUser));
   }
   
-  @Override public OrderVO insert(OrderDTO relationDTO) {
-    return mainMapper.relation2VO(relationMapper.selectById(relationMapper.insert(relationDTO)));
+  @Override public OrderVO insert(OrderDTO orderDTO) {
+    return mainMapper.order2VO(orderMapper.selectById(orderMapper.insert(orderDTO)));
   }
   
   @Override public Boolean deleteById(Long id) {
-    return relationMapper.deleteById(id) > 0;
+    return orderMapper.deleteById(id) > 0;
   }
   
   @Override public Boolean deleteByUserId(Long createUser) {
-    return relationMapper.deleteByCreateUser(createUser) > 0;
+    return orderMapper.deleteByCreateUser(createUser) > 0;
   }
   
-  @Override public Boolean updateById(OrderDTO relationDTO) {
-    return relationMapper.updateById(relationDTO) > 0;
+  @Override public Boolean updateById(OrderDTO orderDTO) {
+    return orderMapper.updateById(orderDTO) > 0;
   }
 }

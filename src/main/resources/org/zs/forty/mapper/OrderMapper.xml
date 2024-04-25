@@ -3,6 +3,13 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.OrderMapper">
 
+  <sql id="BaseOrder">
+    id,
+    story_id,
+    product_id,
+    status,
+    create_user
+  </sql>
 
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.dto.UserDTO"
       keyProperty="id">
@@ -20,12 +27,6 @@
       <if test="createUser != null">
         create_user,
       </if>
-      <!--      <if test="createTime != null">-->
-      <!--        create_time,-->
-      <!--      </if>-->
-      <!--      <if test="updateTime != null">-->
-      <!--        update_time,-->
-      <!--      </if>-->
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="storyId != null">
@@ -40,16 +41,10 @@
       <if test="createUser != null">
         #{createUser},
       </if>
-      <!--      <if test="createTime != null">-->
-      <!--        #{createTime},-->
-      <!--      </if>-->
-      <!--      <if test="updateTime != null">-->
-      <!--        #{updateTime},-->
-      <!--      </if>-->
     </trim>
   </insert>
   <update id="updateById">
-    update t_order
+    UPDATE t_order
     <set>
       <if test="storyId != null">
         story_id = #{storyId},
@@ -60,47 +55,55 @@
       <if test="status != null">
         status = #{status},
       </if>
-      <!--      <if test="createTime != null">-->
-      <!--        create_time = #{createTime},-->
-      <!--      </if>-->
-      <!--      <if test="UpdateTime != null">-->
-      <!--        update_time = #{UpdateTime},-->
-      <!--      </if>-->
       <if test="createUser != null">
         create_user = #{createUser},
       </if>
     </set>
     WHERE id = #{id}
+    AND status = 1
+    AND is_delete = 0
   </update>
   <update id="deleteById">
     UPDATE t_order
     SET status = 0
     WHERE id = #{id}
+    AND status = 1
+    AND is_delete = 0
   </update>
-  <delete id="deleteByCreateUser">
-
-    <!--    delete FROM t_relation WHERE create_user = #{createUser}-->
-    <!-- todo-->
-  </delete>
+  <update id="deleteByCreateUser">
+    UPDATE t_order
+    SET status = 0
+    WHERE create_user = #{createUser}
+    AND status = 1
+    AND is_delete = 0
+  </update>
   <select id="selectById" resultType="org.zs.forty.model.entity.Order">
-    SELECT *
+    SELECT
+    <include refid="BaseOrder"/>
     FROM t_order
     WHERE id = #{id}
+    AND is_delete = 0
   </select>
   <select id="selectByProductId" resultType="org.zs.forty.model.entity.Order">
-    SELECT *
+    SELECT
+    <include refid="BaseOrder"/>
     FROM t_order
     WHERE product_id = #{productId}
+    AND is_delete = 0
   </select>
   <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Order">
-    SELECT *
+    SELECT
+    <include refid="BaseOrder"/>
     FROM t_order
     WHERE story_id = #{storyId}
+    AND is_delete = 0
   </select>
   <select id="selectByCreateUser" resultType="org.zs.forty.model.entity.Order">
-    SELECT *
+    SELECT
+    <include refid="BaseOrder"/>
     FROM t_order
     WHERE create_user = #{createUser}
+    AND is_delete = 0
   </select>
 
 

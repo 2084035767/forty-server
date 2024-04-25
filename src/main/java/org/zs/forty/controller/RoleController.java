@@ -30,7 +30,7 @@ public class RoleController {
   
   @Operation(summary = "添加角色")
   @PostMapping()
-  public RoleVO insert(@Valid @RequestBody RoleDTO roleDTO) {
+  public RoleVO AddRole(@Valid @RequestBody RoleDTO roleDTO) {
     return roleService.insert(roleDTO);
   }
   

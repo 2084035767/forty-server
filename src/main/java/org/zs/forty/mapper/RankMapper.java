@@ -8,11 +8,11 @@ import org.zs.forty.model.vo.RankVO;
 
 @Mapper
 public interface RankMapper extends BaseMapper<Rank> {
-    int delete(Long rankId);
-    int update(RankDTO rankDTO);
-    Long insert(RankDTO rankDTO);
-
-    RankVO selectByRankId(Long rankId);
-
-
+  int delete(Long rankId);
+  
+  int update(RankDTO rankDTO);
+  
+  Long insert(RankDTO rankDTO);
+  
+  RankVO selectByRankId(Long rankId);
 }

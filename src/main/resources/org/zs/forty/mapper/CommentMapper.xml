@@ -82,7 +82,9 @@
     UPDATE t_comment SET is_deleted = 1 WHERE story_id = #{storyId}
   </delete>
   <delete id="deleteByFromUid">
-    UPDATE t_comment SET is_deleted = 1 WHERE from_uid = #{fromUid}
+    UPDATE t_comment
+    SET is_deleted = 1
+    WHERE from_uid = #{fromUid}
   </delete>
   <select id="selectById" resultMap="BaseResultMap">
     SELECT

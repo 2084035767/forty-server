@@ -3,34 +3,44 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.MsgMapper">
+
+  <sql id="BaseMsg">
+    msg_id,
+    sender_id,
+    receiver_id,
+    msg_content,
+    msg_type,
+    is_read,
+    is_archive
+  </sql>
   <insert id="add" useGeneratedKeys="true" keyProperty="msgId"
       parameterType="org.zs.forty.model.entity.Msg">
     INSERT INTO t_msg
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="senderId != null and senderId != ''">
+      <if test="senderId != null">
         sender_id,
       </if>
-      <if test="receiverId != null and receiverId != ''">
+      <if test="receiverId != null">
         receiver_id,
       </if>
       <if test="msgContent != null and msgContent != ''">
         msg_content,
       </if>
-      <if test="msgType != null and msgType != ''">
+      <if test="msgType != null">
         msg_type,
       </if>
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-      <if test="senderId != null and senderId != ''">
+      <if test="senderId != null">
         #{senderId},
       </if>
-      <if test="receiverId != null and receiverId != ''">
+      <if test="receiverId != null">
         #{receiverId},
       </if>
       <if test="msgContent != null and msgContent != ''">
         #{msgContent},
       </if>
-      <if test="msgType != null and msgType != ''">
+      <if test="msgType != null">
         #{msgType},
       </if>
     </trim>
@@ -55,13 +65,15 @@
     AND is_delete= 0
   </update>
   <update id="deleteMsgById">
-    UPDATE t_msg SET is_delete = 1
+    UPDATE t_msg
+    SET is_delete = 1
     WHERE msg_id = #{msgId}
     AND is_delete = 0
   </update>
 
   <select id="selectMsgById" resultType="org.zs.forty.model.vo.MsgVO">
-    SELECT *
+    SELECT
+    <include refid="BaseMsg"/>
     FROM t_msg
     WHERE msg_id = #{msgId}
     AND is_delete = 0
