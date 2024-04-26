@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +9,8 @@ import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.LoginUserVO;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -66,8 +67,8 @@ class UserMapperTest {
   void updateById() {
     userMapper.updateById(
         UserDTO.builder()
-            .id(1L)
-            .password(passwordEncoder.encode("Zs555666"))
+            .id(2L)
+            .password(passwordEncoder.encode("Xx123456"))
             .build());
   }
   

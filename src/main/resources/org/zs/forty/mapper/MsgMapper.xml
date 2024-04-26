@@ -78,5 +78,12 @@
     WHERE msg_id = #{msgId}
     AND is_delete = 0
   </select>
+    <select id="selectAllMsgs" resultType="org.zs.forty.model.vo.MsgVO">
+      SELECT
+      <include refid="BaseMsg"/>
+      FROM t_msg
+      WHERE 0 = 0
+      AND is_delete = 0
+    </select>
 
 </mapper>

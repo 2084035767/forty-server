@@ -1,9 +1,10 @@
 package org.zs.forty.service;
 
-import java.util.List;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -28,6 +29,8 @@ public interface ProductService {
   Boolean update(ProductDTO productDTO);
   
   Boolean deleteById(Long id);
+  List<ProductVO> sortByStroyLike(Long id);
+  List<ProductVO> sortByStroyView(Long id);
   
   // Boolean deleteByUserId(Long createUser);
 }

@@ -97,4 +97,15 @@
     select id,title,context,story_view,story_like from t_story where is_delete = 0 and
     is_open = 1
   </select>
+<!--  <select id="sortByStory" resultType="org.zs.forty.model.vo.StoryVO">-->
+<!--    select s.id,s.title,s.context,s.story_view,s.story_like,-->
+<!--    p.id,p.product_name,p.product_info,p.product_img,p.category,p.status-->
+<!--    from t_story s-->
+<!--    LEFT JOIN t_order r ON s.id = r.story_id-->
+<!--    LEFT JOIN t_product p ON r.product_id = p.id-->
+<!--      AND s.is_delete = 0-->
+<!--      AND p.is_delete = 0-->
+<!--      AND s.is_open = 1-->
+<!--    ORDER BY story_like ASC-->
+<!--  </select>-->
 </mapper>

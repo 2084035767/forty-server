@@ -1,9 +1,10 @@
 package org.zs.forty.mapper;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.entity.Product;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -32,4 +33,6 @@ public interface ProductMapper {
   int update(ProductDTO productDTO);
   
   int deleteById(Long id);
+  List<Product> sortByStoryLike(Long id);
+  List<Product> sortByStoryView(Long id);
 }

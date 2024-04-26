@@ -4,11 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import java.io.Serial;
-import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-
@@ -39,5 +40,5 @@ public class UserDTO implements Serializable {
   @Schema(description = "邮箱")
   private String email;
   @Schema(description = "状态")
-  private String status;
+  private Integer status;
 }

@@ -19,7 +19,7 @@ import org.zs.forty.service.UserInfoService;
 
 @Tag(name = "用户信息管理")
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping("/api/userInfo")
 public class UserInfoController {
   @Resource private UserInfoService userInfoService;
   

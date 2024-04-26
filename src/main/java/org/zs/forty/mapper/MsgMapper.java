@@ -6,8 +6,11 @@ import org.zs.forty.model.dto.MsgDTO;
 import org.zs.forty.model.entity.Msg;
 import org.zs.forty.model.vo.MsgVO;
 
+import java.util.List;
+
 @Mapper
 public interface MsgMapper extends BaseMapper<Msg> {
+    List<MsgVO> selectAllMsgs();
     MsgVO selectMsgById(Long msgId);
     Long add(MsgDTO msgDTO);
     int update(MsgDTO msgDTO);
