@@ -28,33 +28,32 @@ import org.zs.forty.service.OrderService;
  **/
 @Tag(name = "订单管理")
 @RestController
-
-@RequestMapping("/api/relation")
+@RequestMapping("/api/order")
 public class OrderController {
-  @Resource private OrderService relationService;
+  @Resource private OrderService orderService;
   
   @Operation(summary = "获取用户订单列表")
   @PostMapping("/user/{createUser}/list")
   public PageInfo<OrderVO> userOrder(@Valid @PathVariable Long createUser,
       @Valid @RequestBody PageDTO pageDTO) {
-    return new PageInfo<>(relationService.findByCreateUser(createUser, pageDTO));
+    return new PageInfo<>(orderService.findByCreateUser(createUser, pageDTO));
   }
   
   @Operation(summary = "添加订单")
   @PostMapping
-  public OrderVO insert(@Valid @RequestBody OrderDTO relationDTO) {
-    return relationService.insert(relationDTO);
+  public OrderVO insert(@Valid @RequestBody OrderDTO orderDTO) {
+    return orderService.insert(orderDTO);
   }
   
   @Operation(summary = "更新订单")
   @PutMapping
-  public ResultVO<Object> update(@Valid @RequestBody OrderDTO relationDTO) {
-    return relationService.updateById(relationDTO) ? ResultVO.success() : ResultVO.error();
+  public ResultVO<Object> update(@Valid @RequestBody OrderDTO orderDTO) {
+    return orderService.updateById(orderDTO) ? ResultVO.success() : ResultVO.error();
   }
   
   @Operation(summary = "删除订单")
   @DeleteMapping
   public ResultVO<Object> delete(@Valid @RequestParam Long createUser) {
-    return relationService.deleteById(createUser) ? ResultVO.success() : ResultVO.error();
+    return orderService.deleteById(createUser) ? ResultVO.success() : ResultVO.error();
   }
 }

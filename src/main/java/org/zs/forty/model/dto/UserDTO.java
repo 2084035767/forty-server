@@ -39,5 +39,5 @@ public class UserDTO implements Serializable {
   @Schema(description = "邮箱")
   private String email;
   @Schema(description = "状态")
-  private String status;
+  private Integer status;
 }

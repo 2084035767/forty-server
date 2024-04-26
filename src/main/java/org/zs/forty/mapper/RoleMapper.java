@@ -1,11 +1,9 @@
 package org.zs.forty.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 import org.zs.forty.model.dto.RoleDTO;
 import org.zs.forty.model.entity.Role;
 import org.zs.forty.model.vo.RoleVO;
-
-import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -14,7 +12,7 @@ import java.util.List;
  * @date: 2024/3/5
  * @description:
  **/
-@Mapper
+
 public interface RoleMapper {
   
   Role selectRoleById(Long id);

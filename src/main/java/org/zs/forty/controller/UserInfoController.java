@@ -19,7 +19,7 @@ import org.zs.forty.service.UserInfoService;
 
 @Tag(name = "用户信息管理")
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping("/api/userinfo")
 public class UserInfoController {
   @Resource private UserInfoService userInfoService;
   
@@ -30,7 +30,7 @@ public class UserInfoController {
   //
   // }
   @Operation(summary = "添加用户信息")
-  @PostMapping()
+  @PostMapping
   public UserInfoVO addUserInfo(@Valid @RequestBody UserInfoDTO userInfoDTO) {
     return userInfoService.insert(userInfoDTO);
   }
@@ -42,7 +42,7 @@ public class UserInfoController {
   }
   
   @Operation(summary = "更新用户信息")
-  @PutMapping()
+  @PutMapping
   public ResultVO<Object> updateUserInfo(@Valid @RequestBody UserInfoDTO userInfoDTO) {
     return userInfoService.update(userInfoDTO) ? ResultVO.success() : ResultVO.error();
   }

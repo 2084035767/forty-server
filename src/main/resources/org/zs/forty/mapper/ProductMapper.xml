@@ -156,4 +156,12 @@
     AND category = #{category}
     AND is_delete = 0
   </select>
+  <select id="selectListToWeb" resultType="org.zs.forty.model.entity.Product">
+    SELECT
+    <include refid="BaseProduct"/>
+    category
+    FROM t_product
+    WHERE is_delete = 0
+    AND status = 0
+  </select>
 </mapper>

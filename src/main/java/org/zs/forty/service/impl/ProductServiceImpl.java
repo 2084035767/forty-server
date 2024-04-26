@@ -38,6 +38,10 @@ public class ProductServiceImpl implements ProductService {
     return mainMapper.productList2VO(productMapper.selectList());
   }
   
+  @Override public List<ProductVO> findAllProduct() {
+    return mainMapper.productList2VO(productMapper.selectListToWeb());
+  }
+  
   @Override public ProductVO insert(ProductDTO productDTO) {
     return mainMapper.product2VO(productMapper.selectById(productMapper.insert(productDTO)));
   }

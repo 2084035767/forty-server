@@ -2,7 +2,6 @@ package org.zs.forty.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.OrderDTO;
 import org.zs.forty.model.entity.Order;
 
@@ -13,7 +12,7 @@ import org.zs.forty.model.entity.Order;
  * @date: 2024/1/14
  * @description:
  **/
-@Mapper // 注册 mapper 类
+// 注册 mapper 类
 public interface OrderMapper extends BaseMapper<Order> {
   /**
    * 根据id查询

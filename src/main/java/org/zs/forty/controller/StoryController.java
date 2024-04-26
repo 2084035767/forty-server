@@ -29,7 +29,6 @@ import org.zs.forty.service.StoryService;
  **/
 @Tag(name = "故事管理")
 @RestController
-
 @RequestMapping("/api/story")
 public class StoryController {
   @Resource private StoryService storyService;

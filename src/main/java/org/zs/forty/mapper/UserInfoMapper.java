@@ -1,12 +1,9 @@
 package org.zs.forty.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 import org.zs.forty.model.dto.UserInfoDTO;
 import org.zs.forty.model.vo.UserInfoVO;
 
-import java.util.List;
-
-@Mapper
 public interface UserInfoMapper {
   
   UserInfoVO selectById(Long id);

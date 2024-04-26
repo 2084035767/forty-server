@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.entity.Story;
 
@@ -12,7 +11,7 @@ import org.zs.forty.model.entity.Story;
  * @date: 2024/1/14
  * @description:
  **/
-@Mapper
+
 public interface StoryMapper {
   /**
    * 根据用户id查询故事

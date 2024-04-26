@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,8 +35,8 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
   private UserDetailsService userDetailsService;
   
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-      FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response,
+      @NonNull FilterChain filterChain) throws ServletException, IOException {
     // 登录或者注册放行
     if (request.getRequestURI().contains("/api/auth")) {
       filterChain.doFilter(request, response);
