@@ -2,8 +2,11 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.MainMapper;
@@ -13,6 +16,8 @@ import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.UserService;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -24,29 +29,39 @@ import org.zs.forty.service.UserService;
 @Slf4j
 @Service
 @MappingIgnore
+@CacheConfig(cacheNames = "UserServiceImpl")
 public class UserServiceImpl implements UserService {
   
   @Resource private UserMapper userMapper;
   @Resource private MainMapper mainMapper;
   
-  @Override public UserVO findByUsername(String username) {
+  @Override
+  @Cacheable(key = "#username")
+  public UserVO findByUsername(String username) {
     return mainMapper.user2VO(userMapper.selectByUsername(username));
   }
   
-  @Override public UserVO findUserById(Long id) {
+  @Override
+  @Cacheable(key = "#id")
+  public UserVO findUserById(Long id) {
     User user = userMapper.selectById(id);
     return mainMapper.user2VO(user);
   }
   
-  @Override public Boolean updateUser(UserDTO userDTO) {
+  @Override
+  @CachePut(key = "#userDTO.id")
+  public Boolean updateUser(UserDTO userDTO) {
     return userMapper.updateById(userDTO) > 0;
   }
   
-  @Override public Boolean deleteUser(Long id) {
+  @Override
+  @CacheEvict(key = "#id")
+  public Boolean deleteUser(Long id) {
     return userMapper.deleteById(id) > 0;
   }
   
-  @Override public UserVO addUser(UserDTO userDTO) {
+  @Override
+  public UserVO addUser(UserDTO userDTO) {
     return null;
   }
   
@@ -54,7 +69,9 @@ public class UserServiceImpl implements UserService {
   //   return mainMapper.user2VO(userMapper.selectById(userMapper.insert(SignupDTO)));
   // }
   
-  @Override public List<UserVO> allUserByList(PageDTO pageDTO) {
+  @Override
+  @Cacheable(key = "pageDTO")
+  public List<UserVO> allUserByList(PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.UserList2VO(userMapper.selectList());
   }

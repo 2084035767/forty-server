@@ -24,7 +24,7 @@ public class LikeController {
   @Resource private LikeService likeService;
   
   @Operation(summary = "获取点赞列表")
-  @PostMapping("/{likeId}/list")
+  @PostMapping("/list/{likeId}")
   public LikeVO selectLike(@Valid @PathVariable @NotNull Long likeId) {
     return likeService.findById(likeId);
   }

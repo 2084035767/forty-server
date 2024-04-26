@@ -20,7 +20,7 @@
     </collection>
   </resultMap>
   <sql id="BaseRoleMap">
-    id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId,
+    role_id, role_name, role_desc, is_delete, create_time, update_time, menus.menu_id as menuId,
     menus.menu_name as menuName, menus.menu_path as menuPath, menus.menu_mark as menuMark,
     menus.is_delete as isDelete, menus.create_time as createTime, menus.update_time as updateTime
   </sql>
@@ -31,14 +31,14 @@
   <insert id="insert" useGeneratedKeys="true" parameterType="org.zs.forty.model.entity.Role"
       keyProperty="roleId">
     INSERT INTO t_role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
+    <set>
       <if test="roleName !=null">
         role_name,
       </if>
       <if test="roleDesc !=null">
         role_desc,
       </if>
-    </trim>
+  </set>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="roleName !=null">
         #{roleName},
@@ -58,31 +58,33 @@
         role_desc = #{roleDesc},
       </if>
     </set>
+    WHERE role_id = #{roleId}
+    AND is_delete= 0
   </update>
   <update id="deleteById">
     UPDATE t_role
     SET is_delete = 1
-    WHERE id = #{id}
+    WHERE roleId = #{roleId}
     AND is_delete = 0
   </update>
   <select id="selectByName" resultType="org.zs.forty.model.vo.RoleVO">
     SELECT
     <include refid="BadeRole"/>
-    FROM role
+    FROM t_role
     WHERE role_name = #{roleName}
     AND is_delete = 0;
   </select>
   <select id="selectRoleById" resultType="org.zs.forty.model.vo.RoleVO">
     SELECT
     <include refid="BadeRole"/>
-    FROM role
+    FROM r_role
     WHERE role_id = #{roleId}
     AND is_delete = 0;
   </select>
   <select id="selectAllRole" resultType="org.zs.forty.model.vo.RoleVO">
     SELECT
     <include refid="BadeRole"/>
-    FROM role
+    FROM r_role
     WHERE is_delete = 0;
   </select>
 

@@ -3,8 +3,6 @@ package org.zs.forty.service.impl;
 import jakarta.annotation.Resource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -18,6 +16,9 @@ import org.thymeleaf.context.Context;
 import org.zs.forty.model.dto.EmailDTO;
 import org.zs.forty.service.MailService;
 
+import java.io.IOException;
+import java.util.Objects;
+
 /**
  * -*- coding: utf-8 -*-
  *
@@ -27,6 +28,7 @@ import org.zs.forty.service.MailService;
  **/
 @Slf4j
 @Service
+
 public class MailServiceImpl implements MailService {
   @Resource
   private JavaMailSender mailSender;
@@ -45,6 +47,7 @@ public class MailServiceImpl implements MailService {
    * @param content 内容
    */
   @Override
+
   public void sendSimpleMail(String to, String subject, String content) {
     SimpleMailMessage message = new SimpleMailMessage();
     message.setFrom(from); // 邮件发送人

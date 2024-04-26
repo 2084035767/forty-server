@@ -14,7 +14,7 @@ public interface UserInfoMapper {
   
   List<UserInfoVO> selectByUseradd(String useradd);
   
-  UserInfoVO insert(UserInfoDTO userInfoDTO);
+  Long insert(UserInfoDTO userInfoDTO);
   
   int update(UserInfoDTO userInfoDTO);
   

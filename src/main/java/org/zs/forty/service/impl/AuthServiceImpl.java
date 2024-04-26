@@ -1,10 +1,9 @@
 package org.zs.forty.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +23,10 @@ import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * -*- coding: utf-8 -*-
  *
@@ -35,6 +38,7 @@ import org.zs.forty.service.AuthService;
 @Service
 @MappingIgnore
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "AuthServiceImpl")
 public class AuthServiceImpl implements AuthService {
   private final AuthenticationManager authenticationManager;
   private final PasswordEncoder passwordEncoder;
@@ -43,7 +47,9 @@ public class AuthServiceImpl implements AuthService {
   private final MainMapper mainMapper;
   private final JwtUtil jwtUtil;
   
-  @Override public String login(String email, String password) {
+  @Override
+  @Cacheable(key = "#email")
+  public String login(String email, String password) {
     UsernamePasswordAuthenticationToken auth =
         new UsernamePasswordAuthenticationToken(email, password);
     Authentication authentication;
@@ -59,7 +65,9 @@ public class AuthServiceImpl implements AuthService {
   }
   
   @Transactional
-  @Override public UserVO register(SignupDTO signupDTO) {
+  @Override
+  @Cacheable(key = "#signupDTO.id")
+  public UserVO register(SignupDTO signupDTO) {
     User user = userMapper.selectByEmail(signupDTO.getEmail());
     if (Objects.isNull(user)) {
       signupDTO.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
