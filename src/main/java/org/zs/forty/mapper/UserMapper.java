@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
@@ -15,7 +14,6 @@ import org.zs.forty.model.vo.LoginUserVO;
  * @description: UserMapper
  **/
 
-@Mapper
 public interface UserMapper {
   
   User selectById(Long id);

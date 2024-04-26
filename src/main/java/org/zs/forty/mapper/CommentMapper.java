@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.CommentDTO;
 import org.zs.forty.model.entity.Comment;
 
@@ -12,7 +11,7 @@ import org.zs.forty.model.entity.Comment;
  * @date: 2024/1/14
  * @description:
  **/
-@Mapper
+
 public interface CommentMapper {
   
   Comment selectById(Long id);

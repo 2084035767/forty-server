@@ -22,7 +22,7 @@ public interface ProductService {
   
   List<ProductVO> findAll(PageDTO pageDTO);
   
-  // List<Product> findAllProduct(Integer pageNum, Integer pageSize);
+  List<ProductVO> findAllProduct();
   
   ProductVO insert(ProductDTO productDTO);
   

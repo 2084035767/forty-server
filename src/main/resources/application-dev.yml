@@ -6,6 +6,7 @@ spring:
     type: redis
   main:
     banner-mode: off
+
   ########### 数据库配置 ################
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -73,7 +74,7 @@ spring:
 
 ############## MP 配置 #####################
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:org.zs.forty.mapper/*.xml
   configuration:
     #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
@@ -108,20 +109,19 @@ jwt:
   # 为JWT基础信息加密和解密的密钥，长度需要大于等于43
   secret: oQZSeguYloAPAmKwvKqqnifiQatxMEPNOvtwPsCLasd
   # JWT令牌的有效时间，单位秒，默认2周
-  expiration: 72000
+  expiration: 720000
 
+
+#springdoc:
+#  default-flat-param-object: true
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    # 是否开启swagger-ui
+#    enabled: true
+#    # 持久化认证数据，如果设置为 true，它会保留授权数据并且不会在浏览器关闭/刷新时丢失
+##    persistAuthorization: true
 # knife4j的增强配置，不需要增强可以不配
-springdoc:
-  default-flat-param-object: true
-  api-docs:
-    # 是否开启接口文档
-    enabled: true
-  swagger-ui:
-    # 默认的接口文档地址
-    path: /swagger-ui.html
-    # 持久化认证数据，如果设置为 true，它会保留授权数据并且不会在浏览器关闭/刷新时丢失
-    persistAuthorization: true
-
 knife4j:
   enable: true
   setting:

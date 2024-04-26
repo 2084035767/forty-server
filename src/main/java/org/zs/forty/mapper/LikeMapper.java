@@ -1,12 +1,9 @@
 package org.zs.forty.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 import org.zs.forty.model.dto.LikeDTO;
 import org.zs.forty.model.vo.LikeVO;
 
-import java.util.List;
-
-@Mapper
 public interface LikeMapper {
   
   LikeVO selectByLikeId(Long likeId);
