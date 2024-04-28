@@ -29,10 +29,16 @@ public class StoryVO implements Serializable {
   private String title;
   @Schema(description = "内容")
   private String context;
+  @Schema(description = "图片")
+  private Integer storyImg;
   @Schema(description = "浏览量")
   private Integer storyView;
   @Schema(description = "点赞量")
   private Integer storyLike;
+  @Schema(description = "评论量")
+  private Integer storyComments;
+  @Schema(description = "分享量")
+  private Integer storyShare;
   @Schema(description = "是否公开")
   private Boolean isOpen;
 }

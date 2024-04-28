@@ -22,6 +22,8 @@ public interface ProductMapper {
   
   List<Product> selectList();
   
+  List<Product> selectListSort();
+  
   List<Product> selectListToWeb();
   
   List<Product> selectByStatus(int status);

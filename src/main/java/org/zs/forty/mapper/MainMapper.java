@@ -43,6 +43,8 @@ public interface MainMapper {
    */
   UserVO user2VO(User po);
   
+  UserDTO user2DTO(User po);
+  
   List<UserVO> UserList2VO(List<User> vo);
   
   CommentVO comment2VO(Comment po);
@@ -88,6 +90,4 @@ public interface MainMapper {
   RankVO rank2VO(Rank po);
   
   List<RankVO> rankList2VO(List<Rank> vo);
-  
-  UserDTO user2DTO(User user);
 }

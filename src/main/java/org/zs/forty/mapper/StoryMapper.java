@@ -30,6 +30,8 @@ public interface StoryMapper {
   
   List<Story> selectList();
   
+  List<Story> selectListSort();
+  
   List<Story> selectOpenByList();
   
   // @Select("select id,title,context,storyView,storyLike from t_story where id in (select story_id from t_relation where product_id =\n"

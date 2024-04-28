@@ -158,10 +158,21 @@
   </select>
   <select id="selectListToWeb" resultType="org.zs.forty.model.entity.Product">
     SELECT
-    <include refid="BaseProduct"/>
-    category
+    <include refid="BaseProduct"/>,category
     FROM t_product
     WHERE is_delete = 0
     AND status = 0
+  </select>
+  <select id="selectListSort" resultType="org.zs.forty.model.entity.Product">
+    SELECT p.id, p.product_name, p.product_info, p.product_img, p.product_price, p.create_time,
+    p.update_time,
+    COUNT( r.id ) AS order_count
+    FROM t_product p
+    LEFT JOIN t_order r ON p.id = r.product_id
+    WHERE p.is_delete = 0
+    AND p.`status` = 0
+    AND r.`status` = 0
+    GROUP BY r.product_id
+    ORDER BY order_count DESC
   </select>
 </mapper>

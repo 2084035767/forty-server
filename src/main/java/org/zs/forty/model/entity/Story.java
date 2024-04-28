@@ -24,8 +24,11 @@ public class Story {
   private Long createUser;
   private String title;
   private String context;
+  private Integer storyImg;
   private Integer storyView;
   private Integer storyLike;
+  private Integer storyComments;
+  private Integer storyShare;
   private Boolean isOpen;
   private Boolean isDelete;
   @TableField(value = "create_time", fill = FieldFill.INSERT)
