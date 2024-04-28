@@ -22,7 +22,7 @@ public interface ProductService {
   
   List<ProductVO> findAll(PageDTO pageDTO);
   
-  List<ProductVO> findAllProduct();
+//  List<ProductVO> findAllProduct();
   
   ProductVO insert(ProductDTO productDTO);
   
@@ -31,6 +31,10 @@ public interface ProductService {
   Boolean deleteById(Long id);
   List<ProductVO> sortByStroyLike(Long id);
   List<ProductVO> sortByStroyView(Long id);
+  List<ProductVO> selectProductByUser(Long userId);
+  List<ProductVO> selectStoryByUser(Long userId);
+  List<ProductVO> selectAll();
+  List<ProductVO> selectStoryByPId(Long pId);
   
   // Boolean deleteByUserId(Long createUser);
 }

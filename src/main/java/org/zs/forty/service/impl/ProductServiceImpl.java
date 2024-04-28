@@ -39,9 +39,9 @@ public class ProductServiceImpl implements ProductService {
     return mainMapper.productList2VO(productMapper.selectList());
   }
   
-  @Override public List<ProductVO> findAllProduct() {
-    return mainMapper.productList2VO(productMapper.selectListToWeb());
-  }
+////  @Override public List<ProductVO> findAllProduct() {
+//    return mainMapper.productList2VO(productMapper.selectListToWeb());
+//  }
   
   @Override public ProductVO insert(ProductDTO productDTO) {
     return mainMapper.product2VO(productMapper.selectById(productMapper.insert(productDTO)));
@@ -64,4 +64,26 @@ public class ProductServiceImpl implements ProductService {
   public List<ProductVO> sortByStroyView(Long id) {
     return mainMapper.productList2VO(productMapper.sortByStoryView(id));
   }
+
+  @Override
+  public List<ProductVO> selectProductByUser(Long userId) {
+    return mainMapper.productList2VO(productMapper.selectProductByUser(userId));
+  }
+
+  @Override
+  public List<ProductVO> selectStoryByUser(Long userId) {
+    return mainMapper.productList2VO(productMapper.selectStoryByUser(userId));
+  }
+
+  @Override
+  public List<ProductVO> selectAll() {
+    return mainMapper.productList2VO(productMapper.selectAll());
+  }
+
+  @Override
+  public List<ProductVO> selectStoryByPId(Long pId) {
+    return mainMapper.productList2VO(productMapper.selectStoryByPId(pId));
+  }
+
+
 }

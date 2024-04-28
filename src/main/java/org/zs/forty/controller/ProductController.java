@@ -71,4 +71,26 @@ public class ProductController {
   public List<ProductVO> sortByStroyView(@PathVariable Long id){
     return productService.sortByStroyView(id);
   }
+  @Operation(summary = "根据用户id获取商品")
+  @GetMapping("/orderP/{userId}")
+  public List<ProductVO> selectOrderByUser(@PathVariable Long userId) {
+    return  productService.selectProductByUser(userId);
+  }
+  @Operation(summary = "根据用户id获取故事")
+  @GetMapping("/orderS/{userId}")
+  public List<ProductVO> selectStoryByUser(@PathVariable Long userId) {
+    return productService.selectStoryByUser(userId);
+
+  }
+  @Operation(summary = "获取所有商品")
+  @GetMapping
+  public List<ProductVO> selectAll() {
+    return productService.selectAll();
+  }
+  @Operation(summary = "根据商品id获取故事")
+  @GetMapping("/story/{pId}")
+  public List<ProductVO> selectStoryByPId(@PathVariable Long pId) {
+    return productService.selectStoryByPId(pId);
+  }
+
 }

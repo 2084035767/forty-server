@@ -1,9 +1,10 @@
 package org.zs.forty.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import java.util.List;
 import org.zs.forty.model.dto.OrderDTO;
 import org.zs.forty.model.entity.Order;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -73,4 +74,6 @@ public interface OrderMapper extends BaseMapper<Order> {
    * @return int
    */
   int updateById(OrderDTO orderDTO);
+
+
 }

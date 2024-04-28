@@ -169,4 +169,17 @@
     AND u.is_delete = 0
     AND u.status = 0
   </select>
+<!--  <select id="selectOrderByUser" resultType="org.zs.forty.model.entity.User">-->
+<!--    SELECT p.id, p.product_name, p.product_info, p.product_img, p.category,-->
+<!--           s.title, s.context, s.story_view, s.story_like,o.id-->
+<!--    FROM t_user u-->
+<!--           LEFT JOIN t_order o ON u.id = o.create_user-->
+<!--           LEFT JOIN t_story s ON s.id = o.story_id AND s.create_user = u.id-->
+<!--           LEFT JOIN t_product p ON p.id = o.product_id-->
+<!--    WHERE u.id = 2-->
+<!--      AND p.is_delete = 0-->
+<!--      AND s.is_delete = 0-->
+<!--      AND s.is_open = 1;-->
+<!--  </select>-->
+
 </mapper>

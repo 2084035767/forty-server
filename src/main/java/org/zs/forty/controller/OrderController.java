@@ -33,7 +33,7 @@ public class OrderController {
   @Resource private OrderService orderService;
   
   @Operation(summary = "获取用户订单列表")
-  @PostMapping("/user/{createUser}/list")
+  @PostMapping("/user/list/{createUser}")
   public PageInfo<OrderVO> userOrder(@Valid @PathVariable Long createUser,
       @Valid @RequestBody PageDTO pageDTO) {
     return new PageInfo<>(orderService.findByCreateUser(createUser, pageDTO));

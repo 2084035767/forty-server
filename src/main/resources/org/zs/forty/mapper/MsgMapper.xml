@@ -85,5 +85,13 @@
       WHERE 0 = 0
       AND is_delete = 0
     </select>
+  <select id="selectMsgByUId" resultType="org.zs.forty.model.entity.Msg">
+    SELECT
+    <include refid="BaseMsg"/>
+    FROM t_msg
+    WHERE receiver_id = #{receiverId}
+    AND msg_type = #{msgType}
+    AND is_delete = 0
+  </select>
 
 </mapper>

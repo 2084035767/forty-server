@@ -35,4 +35,8 @@ public interface ProductMapper {
   int deleteById(Long id);
   List<Product> sortByStoryLike(Long id);
   List<Product> sortByStoryView(Long id);
+  List<Product> selectProductByUser(Long userId);
+  List<Product> selectStoryByUser(Long userId);
+  List<Product> selectAll();
+  List<Product> selectStoryByPId(Long id);
 }

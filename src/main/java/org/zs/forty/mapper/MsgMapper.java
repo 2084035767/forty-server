@@ -12,6 +12,8 @@ import java.util.List;
 public interface MsgMapper extends BaseMapper<Msg> {
     List<MsgVO> selectAllMsgs();
     MsgVO selectMsgById(Long msgId);
+    List<Msg> selectMsgByUId(Long receiverId, int msgType);
+
     Long add(MsgDTO msgDTO);
     int update(MsgDTO msgDTO);
     int deleteMsgById(Long msgId);
