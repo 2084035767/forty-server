@@ -2,7 +2,6 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
@@ -12,6 +11,8 @@ import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
 import org.zs.forty.service.ProductService;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -38,9 +39,9 @@ public class ProductServiceImpl implements ProductService {
     return mainMapper.productList2VO(productMapper.selectList());
   }
   
-  @Override public List<ProductVO> findAllProduct() {
-    return mainMapper.productList2VO(productMapper.selectListToWeb());
-  }
+////  @Override public List<ProductVO> findAllProduct() {
+//    return mainMapper.productList2VO(productMapper.selectListToWeb());
+//  }
   
   @Override public ProductVO insert(ProductDTO productDTO) {
     return mainMapper.product2VO(productMapper.selectById(productMapper.insert(productDTO)));
@@ -53,4 +54,36 @@ public class ProductServiceImpl implements ProductService {
   @Override public Boolean deleteById(Long id) {
     return productMapper.deleteById(id) > 0;
   }
+
+  @Override
+  public List<ProductVO> sortByStroyLike(Long id) {
+    return mainMapper.productList2VO(productMapper.sortByStoryLike(id));
+  }
+
+  @Override
+  public List<ProductVO> sortByStroyView(Long id) {
+    return mainMapper.productList2VO(productMapper.sortByStoryView(id));
+  }
+
+  @Override
+  public List<ProductVO> selectProductByUser(Long userId) {
+    return mainMapper.productList2VO(productMapper.selectProductByUser(userId));
+  }
+
+  @Override
+  public List<ProductVO> selectStoryByUser(Long userId) {
+    return mainMapper.productList2VO(productMapper.selectStoryByUser(userId));
+  }
+
+  @Override
+  public List<ProductVO> selectAll() {
+    return mainMapper.productList2VO(productMapper.selectAll());
+  }
+
+  @Override
+  public List<ProductVO> selectStoryByPId(Long pId) {
+    return mainMapper.productList2VO(productMapper.selectStoryByPId(pId));
+  }
+
+
 }

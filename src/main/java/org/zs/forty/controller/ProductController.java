@@ -6,20 +6,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
 import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.service.ProductService;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -32,13 +26,14 @@ import org.zs.forty.service.ProductService;
 @Tag(name = "商品管理")
 @RequestMapping("/api/product")
 @RestController
+
 public class ProductController {
   @Resource private ProductService productService;
   
   @Operation(summary = "获取商品列表")
-  @GetMapping("/list")
-  public PageInfo<ProductVO> AllProduct() {
-    return new PageInfo<>(productService.findAllProduct());
+  @PostMapping("/list")
+  public PageInfo<ProductVO> AllProduct(@Valid @RequestBody PageDTO pageDTO) {
+    return new PageInfo<>(productService.findAll(pageDTO));
   }
   
   @Operation(summary = "获取商品分类")
@@ -65,4 +60,37 @@ public class ProductController {
   public ResultVO<Object> DeleteProduct(@Valid @NotNull @RequestParam Long id) {
     return productService.deleteById(id) ? ResultVO.success() : ResultVO.error();
   }
+  @Operation(summary = "根据点赞排序")
+  @GetMapping("/like/{id}")
+  public List<ProductVO> sortByStroyLike(@PathVariable Long id){
+    return productService.sortByStroyLike(id);
+  }
+
+  @Operation(summary = "根据浏览量排序")
+  @GetMapping("/view/{id}")
+  public List<ProductVO> sortByStroyView(@PathVariable Long id){
+    return productService.sortByStroyView(id);
+  }
+  @Operation(summary = "根据用户id获取商品")
+  @GetMapping("/orderP/{userId}")
+  public List<ProductVO> selectOrderByUser(@PathVariable Long userId) {
+    return  productService.selectProductByUser(userId);
+  }
+  @Operation(summary = "根据用户id获取故事")
+  @GetMapping("/orderS/{userId}")
+  public List<ProductVO> selectStoryByUser(@PathVariable Long userId) {
+    return productService.selectStoryByUser(userId);
+
+  }
+  @Operation(summary = "获取所有商品")
+  @GetMapping
+  public List<ProductVO> selectAll() {
+    return productService.selectAll();
+  }
+  @Operation(summary = "根据商品id获取故事")
+  @GetMapping("/story/{pId}")
+  public List<ProductVO> selectStoryByPId(@PathVariable Long pId) {
+    return productService.selectStoryByPId(pId);
+  }
+
 }

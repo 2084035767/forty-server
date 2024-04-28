@@ -1,8 +1,10 @@
 package org.zs.forty.mapper;
 
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.entity.Story;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -11,7 +13,7 @@ import org.zs.forty.model.entity.Story;
  * @date: 2024/1/14
  * @description:
  **/
-
+@Mapper
 public interface StoryMapper {
   /**
    * 根据用户id查询故事
@@ -51,4 +53,5 @@ public interface StoryMapper {
   Long insert(StoryDTO storyDTO);
   
   int deleteById(Long id);
+//  List<StoryVO> sortByStory();
 }

@@ -73,4 +73,8 @@ class StoryMapperTest {
   void deleteById() {
     storyMapper.deleteById(11L);
   }
+//  @Test
+//  void sortByStory(){
+//    storyMapper.sortByStory();
+//  }
 }

@@ -1,9 +1,10 @@
 package org.zs.forty.service;
 
-import java.util.List;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.vo.StoryVO;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -15,7 +16,8 @@ import org.zs.forty.model.vo.StoryVO;
 
 public interface StoryService {
   List<StoryVO> findAllStoryByList(PageDTO pageDTO);
-  
+  List<StoryVO> findAllStoryByOpenList();
+
   List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO);
   
   // List<Story> findStoryByProductId(Long productId);
