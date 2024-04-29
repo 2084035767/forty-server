@@ -1,10 +1,10 @@
 package org.zs.forty.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import cn.hutool.core.util.RandomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,10 +19,18 @@ import org.zs.forty.common.utils.AmqpUtil;
 import org.zs.forty.common.utils.JwtUtil;
 import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.UserMapper;
+import org.zs.forty.model.dto.ForgetDTO;
 import org.zs.forty.model.dto.SignupDTO;
+import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
+import org.zs.forty.model.vo.LoginUserVO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * -*- coding: utf-8 -*-
@@ -45,9 +53,7 @@ public class AuthServiceImpl implements AuthService {
   private final JwtUtil jwtUtil;
   private String userCode = null;
 
-  @Override
   @Cacheable(key = "#email")
-  public String login(String email, String password) {
   @Override public LoginUserVO login(String email, String password) {
     LoginUserVO loginUser = userMapper.selectLoginUser(email);
     UsernamePasswordAuthenticationToken auth =
