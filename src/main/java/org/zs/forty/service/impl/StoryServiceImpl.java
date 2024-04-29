@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
@@ -11,8 +12,6 @@ import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.StoryService;
-
-import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -32,12 +31,16 @@ public class StoryServiceImpl implements StoryService {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.storyList2VO(storyMapper.selectList());
   }
-
+  
   @Override
   public List<StoryVO> findAllStoryByOpenList() {
     return mainMapper.storyList2VO(storyMapper.selectOpenByList());
   }
-
+  
+  @Override public List<StoryVO> sort() {
+    return mainMapper.storyList2VO(storyMapper.selectListSort());
+  }
+  
   @Override public List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.storyList2VO(storyMapper.selectListByCreateUser(createUser));

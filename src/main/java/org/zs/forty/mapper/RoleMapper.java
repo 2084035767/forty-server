@@ -19,7 +19,7 @@ public interface RoleMapper {
   
   RoleVO selectRoleByRoleId(Long roleId);
   
-  List<RoleVO> selectByName(String roleName);
+  // List<RoleVO> selectByName(String roleName);
   
   List<RoleVO> selectAllRole();
   

@@ -6,14 +6,21 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.StoryService;
-
-import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -65,10 +72,16 @@ public class StoryController {
   public ResultVO<Object> UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
     return storyService.updateStory(storyDTO) ? ResultVO.success() : ResultVO.error();
   }
-
+  
   @Operation(summary = "获取所有故事")
   @GetMapping
-  public List<StoryVO> findAllStoryByOpenList(){
+  public List<StoryVO> findAllStoryByOpenList() {
     return storyService.findAllStoryByOpenList();
+  }
+  
+  @Operation(summary = "故事排序")
+  @GetMapping("/sort")
+  public List<StoryVO> findSort() {
+    return storyService.sort();
   }
 }
