@@ -21,13 +21,27 @@ public interface ProductService {
   
   List<ProductVO> findAll(PageDTO pageDTO);
   
-  // List<Product> findAllProduct(Integer pageNum, Integer pageSize);
+  //  List<ProductVO> findAllProduct();
   
   ProductVO insert(ProductDTO productDTO);
   
   Boolean update(ProductDTO productDTO);
   
   Boolean deleteById(Long id);
+  
+  List<ProductVO> sort();
+  
+  List<ProductVO> sortByStoryLike(Long id);
+  
+  List<ProductVO> sortByStoryView(Long id);
+  
+  List<ProductVO> selectProductByUser(Long userId);
+  
+  List<ProductVO> selectStoryByUser(Long userId);
+  
+  List<ProductVO> selectAll();
+  
+  List<ProductVO> selectStoryByPId(Long pId);
   
   // Boolean deleteByUserId(Long createUser);
 }

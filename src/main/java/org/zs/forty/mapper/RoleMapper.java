@@ -13,16 +13,22 @@ import java.util.List;
  * @date: 2024/3/5
  * @description:
  **/
-@Mapper
+
 public interface RoleMapper {
   
   RoleVO selectRoleById(Long roleId);
-  
-  List<RoleVO> selectByName(String roleName);
+  Role selectRoleById(Long id);
+
+  RoleVO selectRoleByRoleId(Long roleId);
   
   List<RoleVO> selectAllRole(String roleName);
    Long insert(RoleDTO roleDTO);
-  
+  // List<RoleVO> selectByName(String roleName);
+
+  List<RoleVO> selectAllRole();
+
+  Long insert(RoleDTO roleDTO);
+
   int update(RoleDTO roleDTO);
   
   int deleteById(Long roleId);

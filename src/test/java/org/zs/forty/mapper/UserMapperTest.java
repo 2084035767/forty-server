@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
+import org.zs.forty.model.vo.LoginUserVO;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -26,13 +28,20 @@ class UserMapperTest {
   
   @Test
   void selectById() {
-    User user = userMapper.selectById(1L);
-    System.out.println(passwordEncoder.encode(user.getPassword()));
+    // User user = userMapper.selectById(1L);
+    System.out.println(passwordEncoder.encode("Zs555666"));
   }
   
   @Test
   void selectByUsername() {
     User user1 = userMapper.selectByUsername("2452730037");
+    System.out.println(user1);
+    assert user1 != null;
+  }
+  
+  @Test
+  void selectByEmail() {
+    LoginUserVO user1 = userMapper.selectLoginUser("2084035767@qq.com");
     System.out.println(user1);
     assert user1 != null;
   }
@@ -58,11 +67,8 @@ class UserMapperTest {
   void updateById() {
     userMapper.updateById(
         UserDTO.builder()
-            .id(1L)
-            .nickname("hao")
-            .email("555")
-            .username("sss")
-            .password(passwordEncoder.encode("566"))
+            .id(2L)
+            .password(passwordEncoder.encode("Xx123456"))
             .build());
   }
   

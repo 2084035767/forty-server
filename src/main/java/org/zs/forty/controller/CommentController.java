@@ -29,7 +29,6 @@ import org.zs.forty.service.CommentService;
 @Tag(name = "评论管理")
 @RequestMapping("/api/comment")
 @RestController
-
 public class CommentController {
   @Resource
   private CommentService commentService;

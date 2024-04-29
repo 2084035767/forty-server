@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -40,6 +41,16 @@ public class StoryServiceImpl implements StoryService {
     return mainMapper.storyList2VO(storyMapper.selectList());
   }
   
+  @Override
+  public List<StoryVO> findAllStoryByOpenList() {
+    return mainMapper.storyList2VO(storyMapper.selectOpenByList());
+  }
+
+  @Override public List<StoryVO> sort() {
+    return mainMapper.storyList2VO(storyMapper.selectListSort());
+  }
+
+  @Override public List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO) {
   @Override
   @Cacheable(key = "#createUser")
   public List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO) {

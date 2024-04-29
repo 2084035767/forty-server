@@ -1,10 +1,11 @@
 package org.zs.forty.mapper;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
 import org.zs.forty.model.entity.User;
+import org.zs.forty.model.vo.LoginUserVO;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -14,7 +15,6 @@ import org.zs.forty.model.entity.User;
  * @description: UserMapper
  **/
 
-@Mapper
 public interface UserMapper {
   
   User selectById(Long id);
@@ -22,6 +22,8 @@ public interface UserMapper {
   User selectByUsername(String username);
   
   User selectByEmail(String email);
+  
+  LoginUserVO selectLoginUser(String email);
   
   User selectRoleByEmail(String email);
   
@@ -34,5 +36,8 @@ public interface UserMapper {
   
   int updateById(UserDTO userDTO);
   
+  int updateByEmail(UserDTO userDTO);
+  
   int deleteById(Long id);
+//  List<User> selectOrderByUser(Long id);
 }

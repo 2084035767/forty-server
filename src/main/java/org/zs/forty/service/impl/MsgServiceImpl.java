@@ -14,6 +14,8 @@ import org.zs.forty.model.dto.MsgDTO;
 import org.zs.forty.model.vo.MsgVO;
 import org.zs.forty.service.MsgService;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @MappingIgnore
@@ -43,5 +45,10 @@ public class MsgServiceImpl implements MsgService {
     @CacheEvict(key = "#msgId")
     public Boolean deleteMsgById(Long msgId) {
         return msgMapper.deleteMsgById(msgId) > 0;
+    }
+
+    @Override
+    public List<MsgVO> selectMsgByUId(Long receiverId, int msgType) {
+        return mainMapper.msgList2VO(msgMapper.selectMsgByUId(receiverId,msgType));
     }
 }

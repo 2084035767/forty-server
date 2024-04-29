@@ -16,6 +16,10 @@ import org.zs.forty.model.vo.StoryVO;
 public interface StoryService {
   List<StoryVO> findAllStoryByList(PageDTO pageDTO);
   
+  List<StoryVO> findAllStoryByOpenList();
+  
+  List<StoryVO> sort();
+  
   List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO);
   
   // List<Story> findStoryByProductId(Long productId);

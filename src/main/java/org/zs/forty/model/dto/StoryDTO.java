@@ -4,12 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * -*- coding: utf-8 -*-
@@ -34,12 +33,21 @@ public class StoryDTO implements Serializable {
   @Schema(description = "内容")
   @NotBlank(message = "context 不能为空")
   private String context;
+  @Schema(description = "图片地址")
+  @PositiveOrZero(message = "storyImg 不能为空或负数")
+  private Integer storyImg;
   @Schema(description = "浏览量")
   @PositiveOrZero(message = "storyView 不能为空或负数")
   private Integer storyView;
   @Schema(description = "点赞量")
   @PositiveOrZero(message = "storyLike 不能为空或负数")
   private Integer storyLike;
+  @Schema(description = "评论量")
+  @PositiveOrZero(message = "storyComments 不能为空或负数")
+  private Integer storyComments;
+  @Schema(description = "分类量")
+  @PositiveOrZero(message = "storyShare 不能为空或负数")
+  private Integer storyShare;
   @Schema(description = "是否公开")
   @NotNull(message = "isOpen 不能为空")
   private Boolean isOpen;

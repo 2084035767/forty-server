@@ -17,6 +17,9 @@ import org.zs.forty.common.enums.StatusEnum;
 @Schema(description = "统一响应结果")
 public class ResultVO<T> implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
+  
+  @Schema(description = "响应状态")
+  private Boolean success;
   @Schema(description = "响应状态码")
   private Integer code;
   @Schema(description = "响应信息")
@@ -25,17 +28,20 @@ public class ResultVO<T> implements Serializable {
   private T data;
   
   public ResultVO(StatusEnum statusEnum) {
+    this.success = statusEnum.code == 200;
     this.code = statusEnum.code;
     this.msg = statusEnum.msg;
   }
   
   public ResultVO(StatusEnum statusEnum, T data) {
+    this.success = statusEnum.code == 200;
     this.code = statusEnum.code;
     this.msg = statusEnum.msg;
     this.data = data;
   }
   
   public ResultVO(Integer code, String msg) {
+    this.success = code == 200;
     this.code = code;
     this.msg = msg;
   }

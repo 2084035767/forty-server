@@ -2,10 +2,6 @@ package org.zs.forty.service.impl;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
 import org.zs.forty.mapper.RoleMapper;
@@ -31,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
   @Override
   @Cacheable(key = "#roleId")
   public RoleVO findRoleId(Long roleId) {
-    return roleMapper.selectRoleById(roleId);
+    return roleMapper.selectRoleByRoleId(roleId);
   }
   
   @Override
@@ -39,6 +35,7 @@ public class RoleServiceImpl implements RoleService {
   public RoleVO insert(RoleDTO roleDTO) {
 
     return roleMapper.selectRoleById(roleMapper.insert(roleDTO));
+    return roleMapper.selectRoleByRoleId(roleMapper.insert(roleDTO));
   }
   
   @Override
@@ -50,6 +47,6 @@ public class RoleServiceImpl implements RoleService {
   @Override
   @CachePut(key = "#roleDTO.roleId")
   public Boolean update(RoleDTO roleDTO) {
-    return roleMapper.update(roleDTO) >0;
+    return roleMapper.update(roleDTO) > 0;
   }
 }

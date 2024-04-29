@@ -1,12 +1,9 @@
 package org.zs.forty.config;
 
-import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.media.StringSchema;
-import io.swagger.v3.oas.models.parameters.Parameter;
-import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,24 +16,24 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class OpenApiConfig {
-  private static final String TOKEN_HEADER = "Authorization";
+  // private static final String TOKEN_HEADER = "Authorization";
   
   @Bean
   public OpenAPI openApi() {
     return new OpenAPI()
-        .components(
-            new Components().addSecuritySchemes(TOKEN_HEADER,
-                new SecurityScheme()
-                    .type(SecurityScheme.Type.APIKEY)
-                    // 这里配置 bearer 后，你的请求里会自动在 token 前加上 Bearer
-                    .scheme("bearer")
-                    .bearerFormat("JWT")
-            ).addParameters(TOKEN_HEADER,
-                new Parameter()
-                    .in("header")
-                    .schema(new StringSchema())
-                    .name(TOKEN_HEADER)
-            ))
+        // .components(
+        //     new Components().addSecuritySchemes(TOKEN_HEADER,
+        //         new SecurityScheme()
+        //             .type(SecurityScheme.Type.APIKEY)
+        //             // 这里配置 bearer 后，你的请求里会自动在 token 前加上 Bearer
+        //             .scheme("bearer")
+        //             .bearerFormat("JWT")
+        //     ).addParameters(TOKEN_HEADER,
+        //         new Parameter()
+        //             .in("header")
+        //             .schema(new StringSchema())
+        //             .name(TOKEN_HEADER)
+        //     ))
         .info(
             new Info()
                 .title("Forty API 文档")
@@ -48,20 +45,18 @@ public class OpenApiConfig {
   
   /**
    * GroupedOpenApi 是对接口文档分组，类似于 swagger 的 Docket
-   *
-   * @return
    */
-  // @Bean
-  // public GroupedOpenApi authApi() {
-  //   return GroupedOpenApi.builder()
-  //       // 组名
-  //       .group("认证接口")
-  //       // 扫描的路径，支持通配符
-  //       // .pathsToMatch("/login")
-  //       // 扫描的包
-  //       .packagesToScan("org.zs.forty.controller")
-  //       .build();
-  // }
+  @Bean
+  public GroupedOpenApi authApi() {
+    return GroupedOpenApi.builder()
+        // 组名
+        .group("认证接口")
+        // 扫描的路径，支持通配符
+        // .pathsToMatch("/login")
+        // 扫描的包
+        .packagesToScan("org.zs.forty.controller")
+        .build();
+  }
   
   // @Bean
   // public GroupedOpenApi sysApi() {

@@ -1,5 +1,6 @@
 package org.zs.forty.service;
 
+import cn.hutool.core.util.RandomUtil;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,7 @@ class MailServiceTest {
   
   @Test
   void sendSimpleMail() {
+    System.out.println(RandomUtil.randomNumbers(6));
   }
   
   @Test

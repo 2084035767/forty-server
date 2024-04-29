@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,7 +44,7 @@ public class ProductController {
   }
   
   @Operation(summary = "获取商品分类")
-  @PostMapping("/{category}/list")
+  @PostMapping("/list/{category}")
   public PageInfo<ProductVO> ProductCategory(@Valid @NotNull @PathVariable String category,
       @Valid @RequestBody PageDTO pageDTO) {
     return new PageInfo<>(productService.findByCategory(category, pageDTO));
@@ -64,5 +66,41 @@ public class ProductController {
   @DeleteMapping
   public ResultVO<Object> DeleteProduct(@Valid @NotNull @RequestParam Long id) {
     return productService.deleteById(id) ? ResultVO.success() : ResultVO.error();
+  }
+  
+  @Operation(summary = "根据点赞排序")
+  @GetMapping("/like/{id}")
+  public List<ProductVO> sortByStoryLike(@PathVariable Long id) {
+    return productService.sortByStoryLike(id);
+  }
+  
+  @Operation(summary = "根据浏览量排序")
+  @GetMapping("/view/{id}")
+  public List<ProductVO> sortByStoryView(@PathVariable Long id) {
+    return productService.sortByStoryView(id);
+  }
+  
+  @Operation(summary = "根据用户id获取商品")
+  @GetMapping("/orderP/{userId}")
+  public List<ProductVO> selectOrderByUser(@PathVariable Long userId) {
+    return productService.selectProductByUser(userId);
+  }
+  
+  @Operation(summary = "根据用户id获取故事")
+  @GetMapping("/orderS/{userId}")
+  public List<ProductVO> selectStoryByUser(@PathVariable Long userId) {
+    return productService.selectStoryByUser(userId);
+  }
+  
+  @Operation(summary = "获取所有商品")
+  @GetMapping
+  public List<ProductVO> selectAll() {
+    return productService.selectAll();
+  }
+  
+  @Operation(summary = "商品排序")
+  @GetMapping("/sort")
+  public List<ProductVO> selectSort() {
+    return productService.sort();
   }
 }

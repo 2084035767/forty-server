@@ -29,9 +29,14 @@
     WHERE log_id =#{logId}
     AND is_delete=0
   </select>
-
-
-  <insert id="add" keyProperty="logId" parameterType="org.zs.forty.model.dto.LogDTO"
+    <select id="selectAllLogs" resultType="org.zs.forty.model.vo.LogVO">
+      SELECT
+      <include refid="BaseLog"/>
+      FROM t_log
+      WHERE 0 = 0
+      AND is_delete = 0
+    </select>
+    <insert id="add" keyProperty="logId" parameterType="org.zs.forty.model.dto.LogDTO"
       useGeneratedKeys="true">
     INSERT INTO t_log
     <trim prefix="(" suffix=")" suffixOverrides=",">

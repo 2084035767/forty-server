@@ -117,7 +117,6 @@
     AND p.is_delete = 0
     AND s.is_delete = 0
     AND s.is_open = 1
-
   </select>
   <select id="selectByName" resultType="org.zs.forty.model.entity.Product">
     SELECT
@@ -143,7 +142,7 @@
   <select id="selectByStatus" resultType="org.zs.forty.model.entity.Product">
     SELECT
     <include refid="BaseProduct"/>
-    category,status
+    category
     FROM t_product
     WHERE status =#{status}
     AND is_delete = 0
@@ -156,4 +155,82 @@
     AND category = #{category}
     AND is_delete = 0
   </select>
+  <select id="sortByStoryLike" resultType="org.zs.forty.model.entity.Product">
+    SELECT p.id, p.product_name, p.product_info, p.product_img, p.category,
+           s.id,s.create_user, s.title, s.context, s.story_view, s.story_like
+    FROM t_product p
+           LEFT JOIN t_order r ON p.id = r.product_id
+           LEFT JOIN t_story s ON s.id = r.story_id
+    where p.id = #{id}
+      AND p.is_delete = 0
+      AND s.is_delete = 0
+      AND s.is_open = 1
+    ORDER BY story_like ASC
+  </select>
+  <select id="sortByStoryView" resultType="org.zs.forty.model.entity.Product">
+    SELECT p.id, p.product_name, p.product_info, p.product_img, p.category,
+           s.id,s.create_user, s.title, s.context, s.story_view, s.story_like
+    FROM t_product p
+           LEFT JOIN t_order r ON p.id = r.product_id
+           LEFT JOIN t_story s ON s.id = r.story_id
+    where p.id = #{id}
+      AND p.is_delete = 0
+      AND s.is_delete = 0
+      AND s.is_open = 1
+    ORDER BY story_view ASC
+  </select>
+  <select id="selectProductByUser" resultType="org.zs.forty.model.entity.Product">
+    SELECT
+        p.id, p.product_name, p.product_info, p.product_img, p.category
+    FROM t_user u
+           LEFT JOIN t_order o ON u.id = o.create_user
+           LEFT JOIN t_story s ON s.id = o.story_id AND s.create_user = u.id
+           LEFT JOIN t_product p ON p.id = o.product_id
+    WHERE u.id = #{id}
+      AND p.is_delete = 0
+      AND s.is_delete = 0
+      AND s.is_open = 1;
+  </select>
+  <select id="selectAll" resultType="org.zs.forty.model.entity.Product">
+    SELECT
+    <include refid="BaseProduct"/>,category
+    FROM t_product
+    WHERE is_delete = 0
+    AND status = 0
+  </select>
+  <select id="selectListSort" resultType="org.zs.forty.model.entity.Product">
+    SELECT p.id, p.product_name, p.product_info, p.product_img, p.product_price, p.create_time,
+    p.update_time,
+    COUNT( r.id ) AS order_count
+    FROM t_product p
+    LEFT JOIN t_order r ON p.id = r.product_id
+    WHERE p.is_delete = 0
+    AND p.`status` = 0
+    AND r.`status` = 0
+    GROUP BY r.product_id
+    ORDER BY order_count DESC
+  </select>
+  <select id="selectStoryByPId" resultType="org.zs.forty.model.entity.Product">
+    SELECT s.id,s.create_user, s.title, s.context, s.story_view, s.story_like
+    FROM t_product p
+           LEFT JOIN t_order r ON p.id = r.product_id
+           LEFT JOIN t_story s ON s.id = r.story_id
+    where p.id = #{id}
+      AND p.is_delete = 0
+      AND s.is_delete = 0
+      AND s.is_open = 1
+  </select>
+  <select id="selectStoryByUser" resultType="org.zs.forty.model.entity.Product">
+    SELECT
+      s.id,s.create_user, s.title, s.context, s.story_view, s.story_like
+    FROM t_user u
+           LEFT JOIN t_order o ON u.id = o.create_user
+           LEFT JOIN t_story s ON s.id = o.story_id AND s.create_user = u.id
+           LEFT JOIN t_product p ON p.id = o.product_id
+    WHERE u.id = #{id}
+      AND p.is_delete = 0
+      AND s.is_delete = 0
+      AND s.is_open = 1;
+  </select>
+
 </mapper>

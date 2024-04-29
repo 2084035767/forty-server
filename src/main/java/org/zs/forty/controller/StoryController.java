@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,7 +31,6 @@ import org.zs.forty.service.StoryService;
  **/
 @Tag(name = "故事管理")
 @RestController
-
 @RequestMapping("/api/story")
 public class StoryController {
   @Resource private StoryService storyService;
@@ -70,5 +71,17 @@ public class StoryController {
   @PutMapping
   public ResultVO<Object> UpdateStory(@Valid @RequestBody StoryDTO storyDTO) {
     return storyService.updateStory(storyDTO) ? ResultVO.success() : ResultVO.error();
+  }
+  
+  @Operation(summary = "获取所有故事")
+  @GetMapping
+  public List<StoryVO> findAllStoryByOpenList() {
+    return storyService.findAllStoryByOpenList();
+  }
+  
+  @Operation(summary = "故事排序")
+  @GetMapping("/sort")
+  public List<StoryVO> findSort() {
+    return storyService.sort();
   }
 }

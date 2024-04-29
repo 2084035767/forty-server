@@ -1,9 +1,10 @@
 package org.zs.forty.mapper;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.entity.Story;
+
+import java.util.List;
 
 /**
  * -*- coding: utf-8 -*-
@@ -31,6 +32,8 @@ public interface StoryMapper {
   
   List<Story> selectList();
   
+  List<Story> selectListSort();
+  
   List<Story> selectOpenByList();
   
   // @Select("select id,title,context,storyView,storyLike from t_story where id in (select story_id from t_relation where product_id =\n"
@@ -50,4 +53,5 @@ public interface StoryMapper {
   Long insert(StoryDTO storyDTO);
   
   int deleteById(Long id);
+//  List<StoryVO> sortByStory();
 }

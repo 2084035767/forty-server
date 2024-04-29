@@ -1,7 +1,6 @@
 package org.zs.forty.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.entity.Product;
 
@@ -12,7 +11,7 @@ import org.zs.forty.model.entity.Product;
  * @date: 2024/1/14
  * @description:
  **/
-@Mapper
+
 public interface ProductMapper {
   
   Product selectById(Long id);
@@ -23,6 +22,10 @@ public interface ProductMapper {
   
   List<Product> selectList();
   
+  List<Product> selectListSort();
+  
+  List<Product> selectListToWeb();
+  
   List<Product> selectByStatus(int status);
   
   List<Product> selectByStatusAndCategory(int status, String category);
@@ -32,4 +35,10 @@ public interface ProductMapper {
   int update(ProductDTO productDTO);
   
   int deleteById(Long id);
+  List<Product> sortByStoryLike(Long id);
+  List<Product> sortByStoryView(Long id);
+  List<Product> selectProductByUser(Long userId);
+  List<Product> selectStoryByUser(Long userId);
+  List<Product> selectAll();
+  List<Product> selectStoryByPId(Long id);
 }
