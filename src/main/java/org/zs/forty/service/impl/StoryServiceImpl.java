@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,8 +17,6 @@ import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.StoryService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -28,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "StoryServiceImpl")
+@CacheConfig(cacheNames = "StoryService")
 public class StoryServiceImpl implements StoryService {
   @Resource private StoryMapper storyMapper;
   @Resource private MainMapper mainMapper;
@@ -40,16 +39,19 @@ public class StoryServiceImpl implements StoryService {
     return mainMapper.storyList2VO(storyMapper.selectList());
   }
   
+  @Cacheable()
   @Override
   public List<StoryVO> findAllStoryByOpenList() {
     return mainMapper.storyList2VO(storyMapper.selectOpenByList());
   }
-
+  
+  @Cacheable()
   @Override public List<StoryVO> sort() {
     return mainMapper.storyList2VO(storyMapper.selectListSort());
   }
-
-  @Override @Cacheable(key = "#createUser")
+  
+  @Override
+  @Cacheable(key = "#createUser")
   public List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.storyList2VO(storyMapper.selectListByCreateUser(createUser));
@@ -66,7 +68,7 @@ public class StoryServiceImpl implements StoryService {
   }
   
   @Override
-  @CacheEvict(key = "#createUser.storyId")
+  @CacheEvict(key = "#createUser")
   public Boolean deleteStory(Long createUser, Long storyId) {
     return storyMapper.deleteById(storyId) > 0;
   }

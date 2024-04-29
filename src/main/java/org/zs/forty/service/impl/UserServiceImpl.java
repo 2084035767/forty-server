@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,8 +18,6 @@ import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.UserService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -29,7 +28,7 @@ import java.util.List;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "UserServiceImpl")
+@CacheConfig(cacheNames = "UserService")
 public class UserServiceImpl implements UserService {
   
   @Resource private UserMapper userMapper;

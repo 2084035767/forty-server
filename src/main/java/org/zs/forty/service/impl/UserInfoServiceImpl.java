@@ -12,7 +12,7 @@ import org.zs.forty.model.vo.UserInfoVO;
 import org.zs.forty.service.UserInfoService;
 
 @Service
-@CacheConfig(cacheNames = "UserInfoServiceImpl")
+@CacheConfig(cacheNames = "UserInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
   
   @Resource private UserInfoMapper userInfoMapper;
@@ -32,12 +32,12 @@ public class UserInfoServiceImpl implements UserInfoService {
   @Override
   @CachePut(key = "#userInfoDTO.id")
   public Boolean update(UserInfoDTO userInfoDTO) {
-    return userInfoMapper.update(userInfoDTO) >0;
+    return userInfoMapper.update(userInfoDTO) > 0;
   }
   
   @Override
   @CacheEvict(key = "#id")
   public Boolean deleteById(Long id) {
-    return userInfoMapper.deleteById(id)>0;
+    return userInfoMapper.deleteById(id) > 0;
   }
 }

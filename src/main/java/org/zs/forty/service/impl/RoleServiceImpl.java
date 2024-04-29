@@ -23,7 +23,7 @@ import org.zs.forty.service.RoleService;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "RoleServiceImpl")
+@CacheConfig(cacheNames = "RoleService")
 public class RoleServiceImpl implements RoleService {
   @Resource
   private RoleMapper roleMapper;
@@ -43,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
   @Override
   @CacheEvict(key = "#roleId")
   public Boolean deleteById(Long roleId) {
-    return roleMapper.deleteById(roleId) >0;
+    return roleMapper.deleteById(roleId) > 0;
   }
   
   @Override

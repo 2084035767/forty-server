@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,8 +17,6 @@ import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.CommentVO;
 import org.zs.forty.service.CommentService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -28,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "CommentServiceImpl")
+@CacheConfig(cacheNames = "CommentService")
 public class CommentServiceImpl implements CommentService {
   @Resource private CommentMapper commentMapper;
   @Resource private MainMapper mainMapper;

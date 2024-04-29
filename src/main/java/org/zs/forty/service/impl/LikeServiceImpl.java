@@ -1,6 +1,7 @@
 package org.zs.forty.service.impl;
 
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -12,12 +13,10 @@ import org.zs.forty.model.dto.LikeDTO;
 import org.zs.forty.model.vo.LikeVO;
 import org.zs.forty.service.LikeService;
 
-import java.util.List;
-
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "LikeServiceImpl")
+@CacheConfig(cacheNames = "LikeService")
 public class LikeServiceImpl implements LikeService {
   
   @Resource private LikeMapper likeMapper;

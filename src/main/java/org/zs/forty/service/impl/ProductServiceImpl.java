@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,8 +17,6 @@ import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
 import org.zs.forty.service.ProductService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -28,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "ProductServiceImpl")
+@CacheConfig(cacheNames = "ProductService")
 public class ProductServiceImpl implements ProductService {
   @Resource private ProductMapper productMapper;
   @Resource private MainMapper mainMapper;
@@ -62,36 +61,43 @@ public class ProductServiceImpl implements ProductService {
   public Boolean deleteById(Long id) {
     return productMapper.deleteById(id) > 0;
   }
-
+  
+  @Cacheable()
   @Override public List<ProductVO> sort() {
     return mainMapper.productList2VO(productMapper.selectListSort());
   }
-
+  
+  @Cacheable(key = "#id")
   @Override
   public List<ProductVO> sortByStoryLike(Long id) {
     return mainMapper.productList2VO(productMapper.sortByStoryLike(id));
   }
-
+  
+  @Cacheable(key = "#id")
   @Override
   public List<ProductVO> sortByStoryView(Long id) {
     return mainMapper.productList2VO(productMapper.sortByStoryView(id));
   }
-
+  
+  @Cacheable(key = "#userId")
   @Override
   public List<ProductVO> selectProductByUser(Long userId) {
     return mainMapper.productList2VO(productMapper.selectProductByUser(userId));
   }
-
+  
+  @Cacheable(key = "#userId")
   @Override
   public List<ProductVO> selectStoryByUser(Long userId) {
     return mainMapper.productList2VO(productMapper.selectStoryByUser(userId));
   }
-
+  
+  @Cacheable()
   @Override
   public List<ProductVO> selectAll() {
     return mainMapper.productList2VO(productMapper.selectAll());
   }
-
+  
+  @Cacheable(key = "#pId")
   @Override
   public List<ProductVO> selectStoryByPId(Long pId) {
     return mainMapper.productList2VO(productMapper.selectStoryByPId(pId));

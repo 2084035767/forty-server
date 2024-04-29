@@ -14,7 +14,7 @@ import org.zs.forty.service.LogService;
 
 @Slf4j
 @Service
-@CacheConfig(cacheNames = "LogServiceImpl")
+@CacheConfig(cacheNames = "LogService")
 public class LogServiceImpl implements LogService {
   @Resource private LogMapper logMapper;
   

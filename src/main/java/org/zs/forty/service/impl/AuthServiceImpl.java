@@ -1,6 +1,10 @@
 package org.zs.forty.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
@@ -27,11 +31,6 @@ import org.zs.forty.model.vo.LoginUserVO;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.AuthService;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -43,7 +42,7 @@ import java.util.Optional;
 @Service
 @MappingIgnore
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "AuthServiceImpl")
+@CacheConfig(cacheNames = "AuthService")
 public class AuthServiceImpl implements AuthService {
   private final AuthenticationManager authenticationManager;
   private final PasswordEncoder passwordEncoder;
@@ -52,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
   private final MainMapper mainMapper;
   private final JwtUtil jwtUtil;
   private String userCode = null;
-
+  
   @Cacheable(key = "#email")
   @Override public LoginUserVO login(String email, String password) {
     LoginUserVO loginUser = userMapper.selectLoginUser(email);
@@ -91,7 +90,7 @@ public class AuthServiceImpl implements AuthService {
   @Override public Boolean logout() {
     return null;
   }
-
+  
   @Transactional
   @Override public Boolean getUserCode(String email) {
     try {
@@ -105,7 +104,7 @@ public class AuthServiceImpl implements AuthService {
       return false;
     }
   }
-
+  
   @Override public Boolean forget(ForgetDTO forgetDTO) {
     User user = userMapper.selectByEmail(forgetDTO.getEmail());
     Optional.ofNullable(user).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));

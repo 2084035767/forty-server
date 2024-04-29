@@ -2,6 +2,7 @@ package org.zs.forty.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import jakarta.annotation.Resource;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,8 +17,6 @@ import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.OrderVO;
 import org.zs.forty.service.OrderService;
 
-import java.util.List;
-
 /**
  * -*- coding: utf-8 -*-
  *
@@ -28,7 +27,7 @@ import java.util.List;
 @Slf4j //  log 日志
 @Service // 注册 service 类
 @MappingIgnore
-@CacheConfig(cacheNames = "OrderServiceImpl")
+@CacheConfig(cacheNames = "OrderService")
 public class OrderServiceImpl implements OrderService {
   @Resource private OrderMapper orderMapper;
   @Resource private MainMapper mainMapper;

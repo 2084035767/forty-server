@@ -17,29 +17,29 @@ import org.zs.forty.service.RankService;
 @Slf4j
 @Service
 @MappingIgnore
-@CacheConfig(cacheNames = "RankServiceImpl")
+@CacheConfig(cacheNames = "RankService")
 public class RankServiceImpl implements RankService {
     @Resource private MainMapper mainMapper;
     @Resource private RankMapper rankMapper;
-
+    
     @Override
     @CacheEvict(key = "#rankId")
     public Boolean delete(Long rankId) {
-        return rankMapper.delete(rankId) >0;
+        return rankMapper.delete(rankId) > 0;
     }
-
+    
     @Override
     @CachePut(key = "#rankDTO")
     public Boolean update(RankDTO rankDTO) {
         return rankMapper.update(rankDTO) > 0;
     }
-
+    
     @Override
     @Cacheable(key = "#rankDTO.rankId")
     public RankVO insert(RankDTO rankDTO) {
         return mainMapper.rank2VO(rankMapper.selectById(rankMapper.insert(rankDTO)));
     }
-
+    
     @Override
     @Cacheable(key = "#rankId")
     public RankVO selectByRankId(Long rankId) {
