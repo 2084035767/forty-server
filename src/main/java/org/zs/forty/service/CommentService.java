@@ -15,7 +15,7 @@ import org.zs.forty.model.vo.CommentVO;
 public interface CommentService {
   // CommentDTO findCommentById(Integer id);
   
-  List<CommentVO> findCommentByStoryId(Long storyId, PageDTO pageDTO);
+  List<CommentVO> findCommentByStoryId(Long storyId);
   
   List<CommentVO> findCommentByFromUid(Long fromUid, PageDTO pageDTO);
   

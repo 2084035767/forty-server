@@ -22,11 +22,16 @@ public interface StoryService {
   
   List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO);
   
+  List<StoryVO> findByCreateUser(Long createUser);
+  
   // List<Story> findStoryByProductId(Long productId);
+  List<StoryVO> selectStoryByPId(Long pId);
   
   StoryVO addStory(StoryDTO storyDTO);
   
   Boolean deleteStory(Long createUser, Long storyId);
   
   Boolean updateStory(StoryDTO storyDTO);
+  
+  StoryVO findById(Long id);
 }

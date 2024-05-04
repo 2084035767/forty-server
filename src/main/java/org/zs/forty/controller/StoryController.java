@@ -41,13 +41,17 @@ public class StoryController {
     return new PageInfo<>(storyService.findAllStoryByList(pageDTO));
   }
   
-  @Operation(summary = "获取用户故事列表")
-  @PostMapping("/user/{createUser}/list")
-  public PageInfo<StoryVO> UserStory(@Valid @NotNull @PathVariable Long createUser,
-      @Valid @RequestBody PageDTO pageDTO) {
-    return new PageInfo<>(storyService.findUserStoryByCreateUser(createUser, pageDTO));
+  @Operation(summary = "获取故事列表")
+  @GetMapping("/{id}")
+  public StoryVO getStory(@Valid @NotNull @PathVariable Long id) {
+    return storyService.findById(id);
   }
   
+  @Operation(summary = "获取故事列表")
+  @GetMapping("user/{userId}")
+  public List<StoryVO> getUserStory(@Valid @NotNull @PathVariable Long userId) {
+    return storyService.findByCreateUser(userId);
+  }
   // @Operation(value = "获取商品故事列表", notes = "获取商品故事列表")
   // @GetMapping("/product/{productId}")
   // public ResultVO ProductStory(@Valid @NotNull @PathVariable Integer productId) {

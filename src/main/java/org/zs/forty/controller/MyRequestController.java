@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zs.forty.model.dto.AiReqDTO;
 import org.zs.forty.service.MyRequestService;
 
 @Tag(name = "第三方请求")
@@ -17,12 +18,12 @@ public class MyRequestController {
   private MyRequestService myRequestService;
   
   @PostMapping(value = "/ai")
-  public String getAiRequest(@RequestBody String content) {
-    return myRequestService.getAiRequest(content);
+  public String getAiRequest(@RequestBody AiReqDTO aiReqDTO) {
+    return myRequestService.getAiRequest(aiReqDTO.getContent()).replace("\"", "");
   }
   
   @GetMapping(value = "/yan")
   public String getYanRequest() {
-    return myRequestService.getYanRequest();
+    return myRequestService.getYanRequest().replace("\"", "");
   }
 }

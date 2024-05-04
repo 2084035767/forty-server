@@ -10,8 +10,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.mapper.CommentMapper;
-import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.model.dto.CommentDTO;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.vo.CommentVO;
@@ -34,9 +34,9 @@ public class CommentServiceImpl implements CommentService {
   
   @Override
   @Cacheable(key = "#storyId")
-  public List<CommentVO> findCommentByStoryId(Long storyId, PageDTO pageDTO) {
-    PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
-    return mainMapper.commentList2VO(commentMapper.selectByStoryId(storyId));
+  public List<CommentVO> findCommentByStoryId(Long storyId) {
+    // PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
+    return commentMapper.selectByStoryId(storyId);
   }
   
   @Override

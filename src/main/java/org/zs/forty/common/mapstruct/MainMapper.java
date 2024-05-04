@@ -1,7 +1,8 @@
-package org.zs.forty.mapper;
+package org.zs.forty.common.mapstruct;
 
 import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.zs.forty.model.dto.EmailDTO;
 import org.zs.forty.model.dto.SignupDTO;
 import org.zs.forty.model.dto.UserDTO;
@@ -57,15 +58,16 @@ public interface MainMapper {
   
   RoleVO role2VO(Role po);
   
-  List<RoleVO> roleList2VO(List<Role> vo);
+  // List<RoleVO> roleList2VO(List<Role> vo);
   
   StoryVO story2VO(Story po);
   
+  @Mapping(target = "createUser", ignore = true)
   List<StoryVO> storyList2VO(List<Story> vo);
   
   UserInfoVO userInfo2VO(UserInfo po);
   
-  List<UserInfoVO> userInfoList2VO(List<UserInfo> vo);
+  // List<UserInfoVO> userInfoList2VO(List<UserInfo> vo);
   
   OrderVO order2VO(Order po);
   
@@ -73,21 +75,21 @@ public interface MainMapper {
   
   MenuVO menu2VO(Menu po);
   
-  List<MenuVO> menuList2VO(List<Menu> vo);
+  // List<MenuVO> menuList2VO(List<Menu> vo);
   
-  UserDTO Signup2DTO(SignupDTO dto);
+  // UserDTO Signup2DTO(SignupDTO dto);
   
   EmailDTO email2DTO(SignupDTO dto);
   
   LogVO log2VO(Log po);
   
-  List<LogVO> logList2VO(List<Log> vo);
+  // List<LogVO> logList2VO(List<Log> vo);
   
   MsgVO msg2VO(Msg po);
   
-  List<MsgVO> msgList2VO(List<Msg> vo);
+  // List<MsgVO> msgList2VO(List<Msg> vo);
   
   RankVO rank2VO(Rank po);
   
-  List<RankVO> rankList2VO(List<Rank> vo);
+  // List<RankVO> rankList2VO(List<Rank> vo);
 }

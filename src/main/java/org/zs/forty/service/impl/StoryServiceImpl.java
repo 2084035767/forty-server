@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
-import org.zs.forty.mapper.MainMapper;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.mapper.StoryMapper;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.StoryDTO;
@@ -39,21 +39,26 @@ public class StoryServiceImpl implements StoryService {
     return mainMapper.storyList2VO(storyMapper.selectList());
   }
   
-  @Cacheable()
+  @Cacheable(key = "#root.methodName")
   @Override
   public List<StoryVO> findAllStoryByOpenList() {
-    return mainMapper.storyList2VO(storyMapper.selectOpenByList());
+    return storyMapper.selectOpenByList();
   }
   
-  @Cacheable()
+  @Cacheable(key = "#root.methodName")
   @Override public List<StoryVO> sort() {
-    return mainMapper.storyList2VO(storyMapper.selectListSort());
+    return storyMapper.selectListSort();
   }
   
   @Override
   @Cacheable(key = "#createUser")
   public List<StoryVO> findUserStoryByCreateUser(Long createUser, PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
+    return mainMapper.storyList2VO(storyMapper.selectListByCreateUser(createUser));
+  }
+  
+  @Cacheable(key = "#createUser")
+  @Override public List<StoryVO> findByCreateUser(Long createUser) {
     return mainMapper.storyList2VO(storyMapper.selectListByCreateUser(createUser));
   }
   
@@ -73,9 +78,19 @@ public class StoryServiceImpl implements StoryService {
     return storyMapper.deleteById(storyId) > 0;
   }
   
+  @Cacheable(key = "#pId")
+  @Override
+  public List<StoryVO> selectStoryByPId(Long pId) {
+    return storyMapper.selectStoryByPId(pId);
+  }
+  
   @Override
   @CachePut(key = "#storyDTO.id")
   public Boolean updateStory(StoryDTO storyDTO) {
     return storyMapper.updateById(storyDTO) > 0;
+  }
+  
+  @Override public StoryVO findById(Long id) {
+    return storyMapper.selectByIdTwo(id);
   }
 }

@@ -3,6 +3,8 @@ package org.zs.forty.mapper;
 import java.util.List;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.entity.Product;
+import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.StoryVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -16,15 +18,17 @@ public interface ProductMapper {
   
   Product selectById(Long id);
   
+  ProductVO selectByIdTwo(Long id);
+  
   List<Product> selectByName(String productName);
   
   List<Product> selectByCategory(String category);
   
   List<Product> selectList();
   
-  List<Product> selectListSort();
+  List<ProductVO> selectListSort();
   
-  List<Product> selectListToWeb();
+  // List<Product> selectListToWeb();
   
   List<Product> selectByStatus(int status);
   
@@ -35,10 +39,16 @@ public interface ProductMapper {
   int update(ProductDTO productDTO);
   
   int deleteById(Long id);
+  
   List<Product> sortByStoryLike(Long id);
+  
   List<Product> sortByStoryView(Long id);
-  List<Product> selectProductByUser(Long userId);
-  List<Product> selectStoryByUser(Long userId);
-  List<Product> selectAll();
-  List<Product> selectStoryByPId(Long id);
+  
+  List<ProductVO> selectProductByUser(Long userId);
+  
+  List<StoryVO> selectStoryByUser(Long userId);
+  
+  List<ProductVO> selectAll();
+  
+  List<ProductVO> selectByUserId(Long userId);
 }

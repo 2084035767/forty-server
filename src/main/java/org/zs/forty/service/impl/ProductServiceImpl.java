@@ -10,11 +10,12 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
-import org.zs.forty.mapper.MainMapper;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.mapper.ProductMapper;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.ProductService;
 
 /**
@@ -62,9 +63,9 @@ public class ProductServiceImpl implements ProductService {
     return productMapper.deleteById(id) > 0;
   }
   
-  @Cacheable()
+  @Cacheable(key = "#root.methodName")
   @Override public List<ProductVO> sort() {
-    return mainMapper.productList2VO(productMapper.selectListSort());
+    return productMapper.selectListSort();
   }
   
   @Cacheable(key = "#id")
@@ -82,24 +83,27 @@ public class ProductServiceImpl implements ProductService {
   @Cacheable(key = "#userId")
   @Override
   public List<ProductVO> selectProductByUser(Long userId) {
-    return mainMapper.productList2VO(productMapper.selectProductByUser(userId));
+    return productMapper.selectProductByUser(userId);
   }
   
   @Cacheable(key = "#userId")
   @Override
-  public List<ProductVO> selectStoryByUser(Long userId) {
-    return mainMapper.productList2VO(productMapper.selectStoryByUser(userId));
+  public List<StoryVO> selectStoryByUser(Long userId) {
+    return productMapper.selectStoryByUser(userId);
   }
   
-  @Cacheable()
+  @Cacheable(key = "#root.methodName")
   @Override
   public List<ProductVO> selectAll() {
-    return mainMapper.productList2VO(productMapper.selectAll());
+    return productMapper.selectAll();
   }
   
-  @Cacheable(key = "#pId")
-  @Override
-  public List<ProductVO> selectStoryByPId(Long pId) {
-    return mainMapper.productList2VO(productMapper.selectStoryByPId(pId));
+  @Cacheable(key = "#id")
+  @Override public ProductVO findById(Long id) {
+    return productMapper.selectByIdTwo(id);
+  }
+  
+  @Override public List<ProductVO> findUserProduct(Long userId) {
+    return productMapper.selectByUserId(userId);
   }
 }

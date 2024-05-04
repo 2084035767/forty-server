@@ -35,7 +35,7 @@ public class StoryDTO implements Serializable {
   private String context;
   @Schema(description = "图片地址")
   @PositiveOrZero(message = "storyImg 不能为空或负数")
-  private Integer storyImg;
+  private String storyImg;
   @Schema(description = "浏览量")
   @PositiveOrZero(message = "storyView 不能为空或负数")
   private Integer storyView;

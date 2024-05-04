@@ -5,13 +5,20 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.zs.forty.model.dto.MsgConditionDTO;
 import org.zs.forty.model.dto.MsgDTO;
 import org.zs.forty.model.vo.MsgVO;
 import org.zs.forty.model.vo.ResultVO;
 import org.zs.forty.service.MsgService;
-
-import java.util.List;
 
 @Tag(name = "通知管理")
 @RequestMapping("/api/msg")
@@ -42,9 +49,10 @@ public class MsgController {
   public ResultVO<Object> deleteMsgById(@Valid @NotNull @PathVariable Long msgId) {
     return msgService.deleteMsgById(msgId) ? ResultVO.success() : ResultVO.error();
   }
+  
   @Operation(summary = "查询通知信息")
-  @GetMapping("/user/{receiverId}")
-  public List<MsgVO> selectMsgByUId(@PathVariable Long receiverId,@RequestParam int msgType) {
-    return msgService.selectMsgByUId(receiverId,msgType);
+  @PostMapping("/user")
+  public List<MsgVO> selectMsgByUId(@RequestBody MsgConditionDTO msgCondition) {
+    return msgService.selectMsgByUId(msgCondition);
   }
 }

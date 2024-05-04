@@ -20,9 +20,11 @@ public class MsgVO implements Serializable {
   private String msgContent;
   @Schema(description = "消息类型")
   private int msgType;
-  @Schema(description = "接收者")
+  @Schema(description = "接收者ID")
   private Long receiverId;
   @Schema(description = "发送者")
+  private UserInfoVO sender;
+  @Schema(description = "发送者ID")
   private Long senderId;
   @Schema(description = "是否归档")
   private Boolean isArchive;

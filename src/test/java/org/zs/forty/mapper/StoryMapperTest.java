@@ -1,12 +1,12 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zs.forty.model.dto.StoryDTO;
 import org.zs.forty.model.entity.Story;
-
-import java.util.List;
+import org.zs.forty.model.vo.StoryVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -34,7 +34,7 @@ class StoryMapperTest {
   
   @Test
   void selectOpenByList() {
-    List<Story> stories = storyMapper.selectOpenByList();
+    List<StoryVO> stories = storyMapper.selectOpenByList();
     assert !stories.isEmpty();
   }
   
@@ -47,25 +47,25 @@ class StoryMapperTest {
   @Test
   void updateById() {
     storyMapper.updateById(
-            StoryDTO.builder()
-                    .id(11L)
-                    .title("测试标题")
-                    .context("测试内容")
-                    .build()
+        StoryDTO.builder()
+            .id(11L)
+            .title("测试标题")
+            .context("测试内容")
+            .build()
     );
   }
   
   @Test
   void insert() {
-    Long test = storyMapper.insert(
-            StoryDTO.builder()
-                    .storyLike(1)
-                    .storyView(2)
-                    .context("haohaohao")
-                    .title("good")
-                    .createUser(9L)
-                    .isOpen(true)
-                    .build()
+    storyMapper.insert(
+        StoryDTO.builder()
+            .storyLike(1)
+            .storyView(2)
+            .context("haohaohao")
+            .title("good")
+            .createUser(9L)
+            .isOpen(true)
+            .build()
     );
   }
   
@@ -73,8 +73,8 @@ class StoryMapperTest {
   void deleteById() {
     storyMapper.deleteById(11L);
   }
-//  @Test
-//  void sortByStory(){
-//    storyMapper.sortByStory();
-//  }
+  //  @Test
+  //  void sortByStory(){
+  //    storyMapper.sortByStory();
+  //  }
 }

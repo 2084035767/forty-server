@@ -31,4 +31,6 @@ public interface UserService {
   UserVO addUser(UserDTO userDTO);
   
   List<UserVO> allUserByList(PageDTO pageDTO);
+  
+  int findUserCount();
 }

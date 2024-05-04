@@ -3,6 +3,7 @@ package org.zs.forty.mapper;
 import java.util.List;
 import org.zs.forty.model.dto.CommentDTO;
 import org.zs.forty.model.entity.Comment;
+import org.zs.forty.model.vo.CommentVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -16,7 +17,7 @@ public interface CommentMapper {
   
   Comment selectById(Long id);
   
-  List<Comment> selectByStoryId(Long storyId);
+  List<CommentVO> selectByStoryId(Long storyId);
   
   List<Comment> selectByFromUid(Long fromUid);
   

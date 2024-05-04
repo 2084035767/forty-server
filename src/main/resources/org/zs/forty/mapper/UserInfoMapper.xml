@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.UserInfoMapper">
   <sql id="BaseUserinfo">
-    id, user_id, user_age, user_sex, user_phone, user_email, user_add, user_img
+    id, user_id, nickname, user_age, user_sex, user_phone, user_email, user_add, user_img
   </sql>
   <resultMap id="UserinfoResultMap" type="org.zs.forty.mapper.UserInfoMapper">
   </resultMap>
@@ -12,6 +12,7 @@
     INSERT INTO t_user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">user_id,</if>
+      <if test="nickname != null">nickname,</if>
       <if test="userAge != null">user_age,</if>
       <if test="userSex != null">user_sex,</if>
       <if test="userPhone != null">user_phone,</if>
@@ -21,6 +22,7 @@
     </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
       <if test="userId != null">#{userId},</if>
+      <if test="nickname != null">#{nickname},</if>
       <if test="userAge != null">#{userAge},</if>
       <if test="userSex != null">#{userSex},</if>
       <if test="userPhone != null">#{userPhone},</if>
@@ -34,6 +36,7 @@
     UPDATE t_user_info
     <set>
       <if test="userId != null">user_id=#{userId},</if>
+      <if test="nickname != null">user_age=#{nickname},</if>
       <if test="userAge != null">user_age=#{userAge},</if>
       <if test="userSex != null">user_sex=#{userSex},</if>
       <if test="userPhone != null">user_phone=#{userPhone},</if>

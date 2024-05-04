@@ -10,11 +10,10 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
-import org.zs.forty.mapper.MainMapper;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.mapper.UserMapper;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.UserDTO;
-import org.zs.forty.model.entity.User;
 import org.zs.forty.model.vo.UserVO;
 import org.zs.forty.service.UserService;
 
@@ -43,8 +42,7 @@ public class UserServiceImpl implements UserService {
   @Override
   @Cacheable(key = "#id")
   public UserVO findUserById(Long id) {
-    User user = userMapper.selectById(id);
-    return mainMapper.user2VO(user);
+    return mainMapper.user2VO(userMapper.selectById(id));
   }
   
   @Override
@@ -73,5 +71,9 @@ public class UserServiceImpl implements UserService {
   public List<UserVO> allUserByList(PageDTO pageDTO) {
     PageHelper.startPage(pageDTO.getPage(), pageDTO.getSize());
     return mainMapper.UserList2VO(userMapper.selectList());
+  }
+  
+  @Override public int findUserCount() {
+    return userMapper.selectList().size();
   }
 }

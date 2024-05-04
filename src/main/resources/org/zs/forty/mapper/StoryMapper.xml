@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.zs.forty.mapper.StoryMapper">
+  <resultMap id="BaseStory" type="org.zs.forty.model.vo.StoryVO">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="context" property="context" jdbcType="VARCHAR"/>
+    <result column="story_img" property="storyImg" jdbcType="INTEGER"/>
+    <result column="story_view" property="storyView" jdbcType="INTEGER"/>
+    <result column="story_like" property="storyLike" jdbcType="INTEGER"/>
+    <result column="story_comments" property="storyComments" jdbcType="INTEGER"/>
+    <result column="story_share" property="storyShare" jdbcType="INTEGER"/>
+    <result column="is_open" property="isOpen" jdbcType="BIT"/>
+    <association property="createUser" autoMapping="true">
+      <id column="id" property="id" jdbcType="BIGINT"/>
+      <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+      <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
+      <result column="user_sex" property="userSex" jdbcType="INTEGER"/>
+      <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+      <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+      <result column="user_add" property="userAdd" jdbcType="VARCHAR"/>
+      <result column="user_age" property="userAge" jdbcType="INTEGER"/>
+    </association>
+  </resultMap>
   <sql id="BaseStory">
     id,title,context,story_img,story_view,story_like,story_comments,story_share,create_time,update_time
   </sql>
@@ -104,30 +125,41 @@
     WHERE id = #{id}
   </update>
   <update id="deleteById">
-    update t_story set is_delete = 1 where id = #{id} and is_delete = 0
+    UPDATE t_story
+    SET is_delete = 1
+    WHERE id = #{id}
+    AND is_delete = 0
   </update>
   <select id="selectListByCreateUser" resultType="org.zs.forty.model.entity.Story">
-    select<include refid="BaseStory"/>,is_open from t_story
-    where create_user = #{create_user} AND is_delete = 0
+    SELECT<include refid="BaseStory"/>,is_open
+    FROM t_story
+    WHERE create_user = #{createUser}
+    AND is_delete = 0
   </select>
   <select id="selectList" resultType="org.zs.forty.model.entity.Story">
-    select<include refid="BaseStory"/>,is_open from t_story
-    where is_delete = 0
+    SELECT<include refid="BaseStory"/>,is_open
+    FROM t_story
+    WHERE is_delete = 0
   </select>
   <select id="selectById" resultType="org.zs.forty.model.entity.Story">
-    select<include refid="BaseStory"/>,is_open from t_story
-    where id = #{id} AND
-    is_delete = 0
+    SELECT<include refid="BaseStory"/>,is_open
+    FROM t_story
+    WHERE id = #{id}
+    AND is_delete = 0
   </select>
-  <select id="selectOpenByList" resultType="org.zs.forty.model.entity.Story">
-    select
-    <include refid="BaseStory"/>
-    from t_story
-    where
-    is_delete = 0 and
-    is_open = 1
+  <select id="selectOpenByList" resultMap="BaseStory">
+    SELECT
+    s.id,s.title,s.context,s.story_img,s.story_view,s.story_like,s.story_comments,s.story_share,
+    ui.nickname,ui.user_img
+    FROM t_story s
+    LEFT JOIN t_user_info ui
+    on s.create_user = ui.user_id
+    WHERE
+    s.is_delete = 0
+    AND s.is_open = 1
+    AND ui.is_delete = 0
   </select>
-  <select id="selectListSort" resultType="org.zs.forty.model.entity.Story">
+  <select id="selectListSort" resultType="org.zs.forty.model.vo.StoryVO">
     SELECT<include refid="BaseStory"/>, (story_like * 0.3 + story_view * 0.1 +
     story_comments * 0.2+story_share * 0.4) AS score
     FROM t_story
@@ -135,15 +167,40 @@
     and is_open = 1
     ORDER BY score DESC;
   </select>
-<!--  <select id="sortByStory" resultType="org.zs.forty.model.vo.StoryVO">-->
-<!--    select s.id,s.title,s.context,s.story_view,s.story_like,-->
-<!--    p.id,p.product_name,p.product_info,p.product_img,p.category,p.status-->
-<!--    from t_story s-->
-<!--    LEFT JOIN t_order r ON s.id = r.story_id-->
-<!--    LEFT JOIN t_product p ON r.product_id = p.id-->
-<!--      AND s.is_delete = 0-->
-<!--      AND p.is_delete = 0-->
-<!--      AND s.is_open = 1-->
-<!--    ORDER BY story_like ASC-->
-<!--  </select>-->
+  <select id="selectByIdTwo" resultMap="BaseStory">
+    SELECT
+    s.id,s.title,s.context,s.story_img,s.story_view,s.story_like,s.story_comments,s.story_share,
+    ui.nickname,ui.user_img
+    FROM t_story s
+    LEFT JOIN t_user_info ui
+    on s.create_user = ui.user_id
+    WHERE s.id = #{id}
+    AND s.is_delete = 0
+    AND s.is_open = 1
+    AND ui.is_delete = 0
+
+  </select>
+  <select id="selectStoryByPId" resultMap="BaseStory">
+    SELECT s.id,s.create_user, s.title, s.context, s.story_view, s.story_like, s.story_comments,
+    s.story_share, ui.nickname,ui.user_img
+    FROM t_product p
+    LEFT JOIN t_order r ON p.id = r.product_id
+    LEFT JOIN t_story s ON s.id = r.story_id
+    LEFT JOIN t_user_info ui on s.create_user = ui.user_id
+    where p.id = #{id}
+    AND p.is_delete = 0
+    AND s.is_delete = 0
+    AND s.is_open = 1
+  </select>
+  <!--  <select id="sortByStory" resultType="org.zs.forty.model.vo.StoryVO">-->
+  <!--    select s.id,s.title,s.context,s.story_view,s.story_like,-->
+  <!--    p.id,p.product_name,p.product_info,p.product_img,p.category,p.status-->
+  <!--    from t_story s-->
+  <!--    LEFT JOIN t_order r ON s.id = r.story_id-->
+  <!--    LEFT JOIN t_product p ON r.product_id = p.id-->
+  <!--      AND s.is_delete = 0-->
+  <!--      AND p.is_delete = 0-->
+  <!--      AND s.is_open = 1-->
+  <!--    ORDER BY story_like ASC-->
+  <!--  </select>-->
 </mapper>

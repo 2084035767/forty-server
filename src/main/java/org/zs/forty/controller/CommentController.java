@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,10 +36,9 @@ public class CommentController {
   private CommentService commentService;
   
   @Operation(summary = "获取故事评论列表")
-  @PostMapping("/story/{storyId}")
-  public PageInfo<CommentVO> CommentStory(@Valid @NotNull @PathVariable Long storyId,
-      @Valid @RequestBody PageDTO pageDTO) {
-    return new PageInfo<>(commentService.findCommentByStoryId(storyId, pageDTO));
+  @GetMapping("/story/{storyId}")
+  public List<CommentVO> CommentStory(@Valid @NotNull @PathVariable Long storyId) {
+    return commentService.findCommentByStoryId(storyId);
   }
   
   @Operation(summary = "获取用户评论列表")

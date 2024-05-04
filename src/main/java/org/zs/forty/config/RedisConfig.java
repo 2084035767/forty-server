@@ -17,6 +17,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @EnableCaching
 @Configuration
 public class RedisConfig {
+  
   @Bean
   public RedisTemplate<String, Object> redisTemplate(
       LettuceConnectionFactory lettuceConnectionFactory) {

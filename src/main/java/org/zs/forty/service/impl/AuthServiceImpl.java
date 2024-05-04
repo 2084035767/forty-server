@@ -7,8 +7,6 @@ import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,9 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zs.forty.common.annotate.MappingIgnore;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.common.utils.AmqpUtil;
 import org.zs.forty.common.utils.JwtUtil;
-import org.zs.forty.mapper.MainMapper;
 import org.zs.forty.mapper.UserMapper;
 import org.zs.forty.model.dto.ForgetDTO;
 import org.zs.forty.model.dto.SignupDTO;
@@ -42,7 +40,6 @@ import org.zs.forty.service.AuthService;
 @Service
 @MappingIgnore
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "AuthService")
 public class AuthServiceImpl implements AuthService {
   private final AuthenticationManager authenticationManager;
   private final PasswordEncoder passwordEncoder;
@@ -52,7 +49,6 @@ public class AuthServiceImpl implements AuthService {
   private final JwtUtil jwtUtil;
   private String userCode = null;
   
-  @Cacheable(key = "#email")
   @Override public LoginUserVO login(String email, String password) {
     LoginUserVO loginUser = userMapper.selectLoginUser(email);
     UsernamePasswordAuthenticationToken auth =
@@ -72,14 +68,12 @@ public class AuthServiceImpl implements AuthService {
   
   @Transactional
   @Override
-  @Cacheable(key = "#signupDTO.id")
   public UserVO register(SignupDTO signupDTO) {
     User user = userMapper.selectByEmail(signupDTO.getEmail());
     if (Objects.isNull(user)) {
       signupDTO.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
       userMapper.insert(signupDTO);
       UserVO userVO = mainMapper.user2VO(userMapper.selectById(signupDTO.getId()));
-      log.info("注册成功{}", userVO);
       amqpUtil.emailSend(mainMapper.email2DTO(signupDTO));
       return userVO;
     } else {

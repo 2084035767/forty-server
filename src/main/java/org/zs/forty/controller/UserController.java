@@ -60,4 +60,10 @@ public class UserController {
   public PageInfo<UserVO> ALLUser(@RequestBody PageDTO pageDTO) {
     return new PageInfo<>(userService.allUserByList(pageDTO));
   }
+  
+  @GetMapping("/count")
+  @Operation(summary = "获取用户列表")
+  public int getUserCount() {
+    return (userService.findUserCount());
+  }
 }

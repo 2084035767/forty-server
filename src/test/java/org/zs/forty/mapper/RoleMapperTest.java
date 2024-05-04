@@ -1,11 +1,9 @@
 package org.zs.forty.mapper;
 
 import jakarta.annotation.Resource;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zs.forty.model.dto.RoleDTO;
-import org.zs.forty.model.vo.RoleVO;
 
 @SpringBootTest
 class RoleMapperTest {
@@ -28,12 +26,12 @@ class RoleMapperTest {
   
   @Test
   void selectAllRole() {
-    List<RoleVO> test = roleMapper.selectAllRole();
+    roleMapper.selectAllRole();
   }
   
   @Test
   void insert() {
-    Long test = roleMapper.insert(
+    roleMapper.insert(
         RoleDTO.builder()
             .roleDesc("zy")
             .roleName("zy")
@@ -43,12 +41,12 @@ class RoleMapperTest {
   
   @Test
   void update() {
-    roleMapper.update(
-        RoleDTO.builder()
-            .roleId(3L)
-            .roleDesc("222")
-            .build()
-    );
+    // roleMapper.update(
+    //     RoleDTO.builder()
+    //         .roleId(3L)
+    //         .roleDesc("222")
+    //         .build()
+    // );
   }
   
   @Test

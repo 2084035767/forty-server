@@ -20,7 +20,9 @@ import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
 import org.zs.forty.model.vo.ResultVO;
+import org.zs.forty.model.vo.StoryVO;
 import org.zs.forty.service.ProductService;
+import org.zs.forty.service.StoryService;
 
 /**
  * -*- coding: utf-8 -*-
@@ -36,11 +38,24 @@ import org.zs.forty.service.ProductService;
 
 public class ProductController {
   @Resource private ProductService productService;
+  @Resource private StoryService storyService;
   
   @Operation(summary = "获取商品列表")
   @PostMapping("/list")
   public PageInfo<ProductVO> AllProduct(@Valid @RequestBody PageDTO pageDTO) {
     return new PageInfo<>(productService.findAll(pageDTO));
+  }
+  
+  @Operation(summary = "获取订单商品列表")
+  @PostMapping("/user/list/{userId}")
+  public List<ProductVO> userProduct(@PathVariable Long userId) {
+    return productService.findUserProduct(userId);
+  }
+  
+  @Operation(summary = "id获取商品")
+  @GetMapping("/{id}")
+  public ProductVO getProduct(@Valid @PathVariable Long id) {
+    return productService.findById(id);
   }
   
   @Operation(summary = "获取商品分类")
@@ -80,15 +95,21 @@ public class ProductController {
     return productService.sortByStoryView(id);
   }
   
+  @Operation(summary = "根据浏览量排序")
+  @GetMapping("/story/{id}")
+  public List<StoryVO> getStoryById(@PathVariable Long id) {
+    return storyService.selectStoryByPId(id);
+  }
+  
   @Operation(summary = "根据用户id获取商品")
-  @GetMapping("/orderP/{userId}")
+  @GetMapping("/orderp/{userId}")
   public List<ProductVO> selectOrderByUser(@PathVariable Long userId) {
     return productService.selectProductByUser(userId);
   }
   
   @Operation(summary = "根据用户id获取故事")
-  @GetMapping("/orderS/{userId}")
-  public List<ProductVO> selectStoryByUser(@PathVariable Long userId) {
+  @GetMapping("/orders/{userId}")
+  public List<StoryVO> selectStoryByUser(@PathVariable Long userId) {
     return productService.selectStoryByUser(userId);
   }
   

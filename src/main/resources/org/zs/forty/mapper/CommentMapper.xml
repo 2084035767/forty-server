@@ -13,6 +13,24 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
   </resultMap>
 
+  <resultMap id="BaseMap" type="org.zs.forty.model.vo.CommentVO">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="from_uid" property="fromUid" jdbcType="BIGINT"/>
+    <result column="to_uid" property="toUid" jdbcType="BIGINT"/>
+    <result column="story_id" property="storyId" jdbcType="BIGINT"/>
+    <result column="context" property="context" javaType="String"/>
+    <association property="from" autoMapping="true">
+      <id column="id" property="id" jdbcType="BIGINT"/>
+      <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+      <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
+      <result column="user_sex" property="userSex" jdbcType="INTEGER"/>
+      <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+      <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+      <result column="user_add" property="userAdd" jdbcType="VARCHAR"/>
+      <result column="user_age" property="userAge" jdbcType="INTEGER"/>
+    </association>
+  </resultMap>
+
   <sql id="BaseComment">
     id, from_uid, to_uid, story_id, context, create_time, update_time
   </sql>
@@ -71,7 +89,6 @@
       <if test="fromUid != null">
         AND from_uid = #{fromUid}
       </if>
-
     </trim>
 
   </update>
@@ -92,11 +109,23 @@
     FROM t_comment
     WHERE id = #{id}
   </select>
-  <select id="selectByStoryId" resultType="org.zs.forty.model.entity.Comment">
+  <select id="selectByStoryId" resultMap="BaseMap">
     SELECT
-    <include refid="BaseComment"/>
-    FROM t_comment
-    WHERE story_id = #{storyId}
+    c.id,
+    c.from_uid,
+    c.to_uid,
+    c.story_id,
+    c.context,
+    ui.nickname,
+    ui.user_img
+    FROM
+    t_comment c
+    LEFT JOIN t_user_info ui
+    ON c.from_uid = ui.user_id
+    WHERE
+    c.story_id = #{storyId}
+    ORDER BY
+    c.create_time DESC
   </select>
   <select id="selectByFromUid" resultType="org.zs.forty.model.entity.Comment">
     SELECT

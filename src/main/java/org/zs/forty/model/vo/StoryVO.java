@@ -23,14 +23,16 @@ import lombok.NoArgsConstructor;
 public class StoryVO implements Serializable {
   @Serial private static final long serialVersionUID = 1L;
   private Long id;
+  
   @Schema(description = "创建人")
-  private Long createUser;
+  // @TableField(exist = false)
+  private UserInfoVO createUser;
   @Schema(description = "标题")
   private String title;
   @Schema(description = "内容")
   private String context;
   @Schema(description = "图片")
-  private Integer storyImg;
+  private String storyImg;
   @Schema(description = "浏览量")
   private Integer storyView;
   @Schema(description = "点赞量")

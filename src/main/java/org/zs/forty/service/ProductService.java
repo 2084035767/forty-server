@@ -4,6 +4,7 @@ import java.util.List;
 import org.zs.forty.model.dto.PageDTO;
 import org.zs.forty.model.dto.ProductDTO;
 import org.zs.forty.model.vo.ProductVO;
+import org.zs.forty.model.vo.StoryVO;
 
 /**
  * -*- coding: utf-8 -*-
@@ -37,11 +38,13 @@ public interface ProductService {
   
   List<ProductVO> selectProductByUser(Long userId);
   
-  List<ProductVO> selectStoryByUser(Long userId);
+  List<StoryVO> selectStoryByUser(Long userId);
   
   List<ProductVO> selectAll();
   
-  List<ProductVO> selectStoryByPId(Long pId);
+  ProductVO findById(Long id);
+  
+  List<ProductVO> findUserProduct(Long userId);
   
   // Boolean deleteByUserId(Long createUser);
 }

@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zs.forty.common.annotate.MappingIgnore;
-import org.zs.forty.mapper.MainMapper;
+import org.zs.forty.common.mapstruct.MainMapper;
 import org.zs.forty.mapper.OrderMapper;
 import org.zs.forty.model.dto.OrderDTO;
 import org.zs.forty.model.dto.PageDTO;

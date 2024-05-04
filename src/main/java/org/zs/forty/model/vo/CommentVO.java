@@ -1,5 +1,6 @@
 package org.zs.forty.model.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class CommentVO implements Serializable {
   private Long id;
   @Schema(description = "评论人id")
   private Long fromUid;
+  @TableField(exist = false)
+  @Schema(description = "评论人")
+  private UserInfoVO from;
   @Schema(description = "被评论人id")
   private Long toUid;
   @Schema(description = "故事id")

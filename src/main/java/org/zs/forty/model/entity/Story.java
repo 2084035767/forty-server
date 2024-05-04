@@ -21,10 +21,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Story {
   private Long id;
-  private Long createUser;
   private String title;
   private String context;
-  private Integer storyImg;
+  private String storyImg;
   private Integer storyView;
   private Integer storyLike;
   private Integer storyComments;

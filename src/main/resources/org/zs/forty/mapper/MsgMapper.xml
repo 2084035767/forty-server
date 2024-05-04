@@ -4,6 +4,28 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zs.forty.mapper.MsgMapper">
 
+  <resultMap id="BaseMsg" type="org.zs.forty.model.vo.MsgVO">
+    <id column="msg_id" property="msgId"/>
+    <result column="sender_id" property="senderId"/>
+    <result column="receiver_id" property="receiverId"/>
+    <result column="msg_content" property="msgContent"/>
+    <result column="msg_type" property="msgType"/>
+    <result column="is_read" property="isRead"/>
+    <result column="is_archive" property="isArchive"/>
+    <result column="is_delete" property="isDelete"/>
+    <association property="sender" autoMapping="true">
+      <id column="id" property="id" jdbcType="BIGINT"/>
+      <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+      <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
+      <result column="user_sex" property="userSex" jdbcType="INTEGER"/>
+      <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+      <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+      <result column="user_add" property="userAdd" jdbcType="VARCHAR"/>
+      <result column="user_age" property="userAge" jdbcType="INTEGER"/>
+    </association>
+  </resultMap>
+
+
   <sql id="BaseMsg">
     msg_id,
     sender_id,
@@ -78,20 +100,24 @@
     WHERE msg_id = #{msgId}
     AND is_delete = 0
   </select>
-    <select id="selectAllMsgs" resultType="org.zs.forty.model.vo.MsgVO">
-      SELECT
-      <include refid="BaseMsg"/>
-      FROM t_msg
-      WHERE 0 = 0
-      AND is_delete = 0
-    </select>
-  <select id="selectMsgByUId" resultType="org.zs.forty.model.entity.Msg">
+  <!--    <select id="selectAllMsgs" resultType="org.zs.forty.model.vo.MsgVO">-->
+  <!--      SELECT-->
+  <!--      <include refid="BaseMsg"/>-->
+  <!--      FROM t_msg-->
+  <!--      WHERE 0 = 0-->
+  <!--      AND is_delete = 0-->
+  <!--    </select>-->
+  <select id="selectMsgByUId" resultMap="BaseMsg">
     SELECT
-    <include refid="BaseMsg"/>
-    FROM t_msg
-    WHERE receiver_id = #{receiverId}
-    AND msg_type = #{msgType}
-    AND is_delete = 0
+    m.msg_id, m.sender_id, m.receiver_id,
+    m.msg_content, m.msg_type, m.is_read, m.is_archive,
+    ui.nickname, ui.user_img
+    FROM t_msg m
+    LEFT JOIN t_user_info ui
+    ON m.sender_id = ui.user_id
+    WHERE m.receiver_id = #{receiverId}
+    AND m.msg_type = #{msgType}
+    AND m.is_delete = 0
   </select>
 
 </mapper>

@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class UserInfo {
   private Long id;
   private Long userId;
+  private String nickname;
   private String userAdd;
   private String userPhone;
   private String userEmail;

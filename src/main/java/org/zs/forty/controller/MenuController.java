@@ -39,7 +39,7 @@ public class MenuController {
    * 查询所有菜单信息
    */
   @Operation(summary = "获取菜单信息")
-  @PostMapping("/selectAllMenus")
+  @PostMapping("/list")
   public List<MenuVO> selectAllMenus(@RequestBody PageDTO pageDTO) {
     return menuService.findAllMenus(pageDTO);
   }
